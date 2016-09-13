@@ -10,7 +10,7 @@ default_run_options[:pty] = true
 set :ssh_options, { :forward_agent => true }
 
 set :application, "webplanning" # Le nom de votre application
-set :user, "webplanning"
+set :user, "evasion"
 # Le nom d'utilisateur de la session (celui que l'on a créé au début
 
 set(:deploy_to) { "/home/#{user}/#{application}_#{rails_env}" }
@@ -21,7 +21,7 @@ set(:release_path)      { File.join(releases_path, release_name) }
 
 set :deploy_via, :remote_cache
 set :scm, :git
-set :repository,  "https://github.com/p0k3/webplanning.git" #Ici mettre votre repo GIT
+set :repository,  "git@bitbucket.org:p0k3/evasion-d-couverte.git" #Ici mettre votre repo GIT
 
 # number of releases we want to keep
 set :keep_releases, 1
@@ -111,7 +111,6 @@ end
 desc "Link database.yml and unicorn.rb"
 after 'deploy:assets:symlink', :roles => :app do
   run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-  run "ln -nfs #{shared_path}/config/system_pay.yml #{release_path}/config/system_pay.yml"
   run "ln -nfs #{shared_path}/config/secrets.yml #{release_path}/config/secrets.yml"
   run "ln -nfs #{shared_path}/config/unicorn.rb #{release_path}/config/unicorn.rb"
   run "ln -nfs /home/gemstatic/static #{release_path}/public" # serve static files
@@ -120,4 +119,12 @@ end
 desc "Migrate Database"
 before "deploy:assets:precompile", "deploy:migrate"
 
+desc "Tag the release in GIT"
+task :git_tags, :roles => :db do
+  tag_name = "#{rails_env.to_s[0,1].upcase}_#{Time.now.strftime('%y%m%d%H%M%S')}"
+  puts "Tagging : #{tag_name}"
+  run("cd #{release_path} && git tag #{tag_name}")
+  run("cd #{release_path} && git push --tags")
+end
+after "deploy:update_code", "git_tags"
 after "deploy:update_code", "deploy:cleanup"
