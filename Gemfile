@@ -25,7 +25,7 @@ gem 'momentjs-rails'
 gem 'will_paginate', '~> 3.0.6'
 gem "will_paginate-bootstrap"
 gem "rolify"
-gem "capistrano", "2.15.5"
+gem 'sprockets'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

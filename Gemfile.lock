@@ -308,6 +308,7 @@ DEPENDENCIES
   selenium-webdriver
   spring
   spring-commands-rspec
+  sprockets
   therubyracer
   toastr-rails
   turbolinks

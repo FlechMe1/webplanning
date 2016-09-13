@@ -10,7 +10,7 @@ default_run_options[:pty] = true
 set :ssh_options, { :forward_agent => true }
 
 set :application, "webplanning" # Le nom de votre application
-set :user, "evasion"
+set :user, "webplanning"
 # Le nom d'utilisateur de la session (celui que l'on a créé au début
 
 set(:deploy_to) { "/home/#{user}/#{application}_#{rails_env}" }
@@ -21,7 +21,7 @@ set(:release_path)      { File.join(releases_path, release_name) }
 
 set :deploy_via, :remote_cache
 set :scm, :git
-set :repository,  "git@bitbucket.org:p0k3/evasion-d-couverte.git" #Ici mettre votre repo GIT
+set :repository,  "https://github.com/p0k3/webplanning.git" #Ici mettre votre repo GIT
 
 # number of releases we want to keep
 set :keep_releases, 1
