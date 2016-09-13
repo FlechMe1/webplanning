@@ -1,0 +1,28 @@
+%section.content-header
+  %h1
+    Inviter un membre
+
+%section.content
+  .box
+    .box-body
+      = form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f|
+        = devise_error_messages!
+
+        %fieldset
+          .row
+            .col-md-6
+              .form-group
+                = f.label :firstname
+                = f.text_field :firstname, :autofocus => true, class: 'form-control'
+            .col-md-6
+              .form-group
+                = f.label :lastname
+                = f.text_field :lastname, :autofocus => true, class: 'form-control'
+
+        .form-group
+          = f.label :email
+          = f.email_field :email, class: 'form-control'
+
+        .form-actions
+          %button.btn.btn-success{type: :submit}
+            Inviter

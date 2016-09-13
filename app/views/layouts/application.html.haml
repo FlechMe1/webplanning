@@ -1,0 +1,34 @@
+%head
+  %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+  %title ADD Blois - Plannings
+
+  = stylesheet_link_tag 'application', media: 'all'
+  = csrf_meta_tags
+
+  %body.skin-blue.sidebar-mini
+    .wrapper
+      %header.main-header
+        = render "layouts/topbar"
+      / Left side column. contains the logo and sidebar
+      %aside.main-sidebar
+        / sidebar: style can be found in sidebar.less
+        = render "layouts/sidebar"
+        / /.sidebar
+      / Content Wrapper. Contains page content
+      .content-wrapper
+        = yield
+        .clearfix
+
+      %footer.main-footer
+        .pull-right.hidden-xs
+          %b Version
+          1.0
+        %strong
+          Copyright ©
+          = Date.today.year
+          = link_to "http://www.eglisedeblois.fr", target: "_blank", rel: :nofollow do
+            Eglise Evangélique de Blois
+        Tous droits réservés.
+
+    = javascript_include_tag 'application'
+    = custom_bootstrap_flash

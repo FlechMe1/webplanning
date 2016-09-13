@@ -1,0 +1,19 @@
+= form_for team do |f|
+  - if team.errors.any?
+    .callout.callout-danger
+      %h4= "#{pluralize(team.errors.count, "erreur")}"
+      %ul
+        - team.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    %label Nom de l'équipe
+    = f.text_field :label, class: "form-control"
+
+  .form-group
+    %label Description
+    = f.text_field :description, class: "form-control"
+
+  .form-group
+    %button.btn.btn-success{type: "submit"}
+      Enregistrer
