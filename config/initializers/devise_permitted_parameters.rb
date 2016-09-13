@@ -8,8 +8,10 @@ module DevisePermittedParameters
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) << :name
-    devise_parameter_sanitizer.for(:account_update) << :name
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:firstname, :lastname, :birthdate])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:firstname, :lastname, :birthdate])
+    devise_parameter_sanitizer.permit(:invite, keys: [:firstname, :lastname, :email])
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:firstname, :lastname, :password, :password_confirmation])
   end
 
 end

@@ -1,0 +1,45 @@
+%section.content-header
+  %h1
+    Equipes
+    %small Liste des équipes
+  .actions
+    = link_to new_team_path, class: "btn btn-flat btn-primary" do
+      = icon "plus"
+      Ajouter
+
+.row
+  .col-md-8
+    %section.content
+      .box
+        .box-body
+          %table.table.table-bordered.table-striped
+            %thead
+              %tr
+                %th Nom de l'équipe
+                %th Nombre de membres
+                %th
+
+            %tbody
+              - @teams.each do |team|
+                %tr
+                  %td= team.label
+                  %td= team.users.count
+                  %td
+                    = link_to [team, :memberships], class: "btn btn-flat btn-primary btn-xs" do
+                      = icon "gear"
+                      Gérer l'équipe
+                    = link_to edit_team_path(team), class: "btn btn-flat btn-success btn-xs" do
+                      = icon "edit"
+                      Modifier
+                    = link_to team, method: :delete, data:{confirm: "Êtes vous sûr de vouloir supprimer cette équipe ?"}, class: "btn btn-flat btn-danger btn-xs" do
+                      = icon "trash"
+                      Supprimer
+
+          = will_paginate @teams, renderer: BootstrapPagination::Rails, next_label: ">", previous_label: "<"
+
+  .col-md-4
+    %section.content
+      .box.box-default
+        .box-header.with-border Ajouter une équipe
+        .box-body
+          = render "form", team: @team

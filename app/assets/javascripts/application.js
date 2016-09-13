@@ -14,4 +14,16 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
-//= require_tree .
+//= require toastr
+//= require moment
+//= require fullcalendar
+//= require fullcalendar/lang-all
+//= require theme
+
+$(document).ready(function(){
+
+  $('#calendar').fullCalendar({
+    lang: 'fr'
+  });
+
+})

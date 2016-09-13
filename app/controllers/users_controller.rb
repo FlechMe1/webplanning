@@ -1,45 +1,51 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
-  before_action :admin_only, :except => :show
+  before_filter :authenticate_user!
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  # GET /users
+  # GET /users.json
   def index
-    @users = User.all
+    @users = User.order('firstname ASC').where('id <> ?', current_user.id).paginate(:page => params[:page], :per_page => 25)
   end
 
+  # GET /users/1
+  # GET /users/1.json
   def show
-    @user = User.find(params[:id])
-    unless current_user.admin?
-      unless @user == current_user
-        redirect_to :back, :alert => "Access denied."
-      end
-    end
   end
 
+  # GET /users/1/edit
+  def edit
+  end
+
+  # PATCH/PUT /users/1
+  # PATCH/PUT /users/1.json
   def update
-    @user = User.find(params[:id])
-    if @user.update_attributes(secure_params)
-      redirect_to users_path, :notice => "User updated."
+    if @user.update(user_params)
+      redirect_to users_url, notice: 'Membre mis à jour.'
     else
-      redirect_to users_path, :alert => "Unable to update user."
+      render :edit
     end
   end
 
+  # DELETE /users/1
+  # DELETE /users/1.json
   def destroy
-    user = User.find(params[:id])
-    user.destroy
-    redirect_to users_path, :notice => "User deleted."
+    @user.destroy
+    redirect_to users_url, notice: 'Membre supprimé'
   end
 
   private
-
-  def admin_only
-    unless current_user.admin?
-      redirect_to :back, :alert => "Access denied."
+    # Use callbacks to share common setup or constraints between actions.
+    def set_user
+      @user = User.find(params[:id])
     end
-  end
 
-  def secure_params
-    params.require(:user).permit(:role)
-  end
-
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def user_params
+      if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+        params[:user].delete(:password)
+        params[:user].delete(:password_confirmation)
+      end
+      params.required(:user).permit(:firstname, :lastname, :birthdate, :password, :password_confirmation, :email)
+    end
 end
