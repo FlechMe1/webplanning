@@ -126,5 +126,5 @@ task :git_tags, :roles => :db do
   run("cd #{release_path} && git tag #{tag_name}")
   run("cd #{release_path} && git push --tags")
 end
-after "deploy:update_code", "git_tags"
+# after "deploy:update_code", "git_tags"
 after "deploy:update_code", "deploy:cleanup"
