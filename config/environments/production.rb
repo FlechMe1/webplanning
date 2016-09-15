@@ -74,7 +74,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: "smtp-relay.sendinblue.com",
     port: 587,
-    domain: Rails.application.secrets.domain_name,
+    domain: "eglisedeblois.fr",
     authentication: "plain",
     enable_starttls_auto: true,
     user_name: "p.gruson+mi@gmail.com",
