@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount RailsEmailPreview::Engine, at: 'emails'
   resources :events
   root to: 'pages#home'
 

@@ -1,0 +1,27 @@
+%h3{style:"color:#1953bd; margin:none;"}
+  Bonjour
+  = @resource.name
+
+%p{style: "font-size:14px;line-height:18px;"}
+  Un membre de l'église Evangélique de Blois vient de vous ajouter à l'interface de gestion des plannings de l'église.
+
+%p{style: "font-size:14px;line-height:18px;"}
+  Pour vous permettre de consulter les plannings liés à vos services dans l'église, nous vous invitons à accepter l'invitation en cliquant sur le lien suivant :
+
+%p{style: "font-size:14px;line-height:18px;"}
+  %span{:style => "display:block;padding:10px 15px;background:#dedede;"}
+    = link_to accept_invitation_url(@resource, :invitation_token => @token), style:"text-decoration:none;color:#000" do
+      %strong Accepter l'invitation
+
+%p{style: "font-size:14px;line-height:18px;"}
+  Ou en copiant le lien ci-dessous :
+
+%p{style: "font-size:14px;line-height:18px;"}
+  %span{:style => "display:block;padding:10px 15px;background:#dedede;"}
+    = link_to accept_invitation_url(@resource, :invitation_token => @token), style:"text-decoration:none;color:#000" do
+      = accept_invitation_url(@resource, :invitation_token => @token)
+
+%p{style: "font-style:italic;font-size:14px;line-height:18px;"}
+  L'équipe Communication de
+  %strong
+    l'église évangélique de Blois

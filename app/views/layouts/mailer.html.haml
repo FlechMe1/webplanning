@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %title ADD Blois - Gestion des plannings
+  %body{:style => "background:#eaedf1;font-family:Helvetica"}
+    %table{:style => "width:60%;min-width:450px;max-width:700px;margin:0 auto;background:#eaedf1;"}
+      %tr
+        %td{style: "height:20px;"}
+      %tr
+        %td{:style => "background:#2857be;height:100px;border-bottom:solid 5px #93a0ea;"}
+          %table{style: "width:100%; height:100px;"}
+            %tr
+              %td{style: "width:120px; padding: 0 20px;"}
+                = link_to root_url, style: "color: #fff; font-size: 22px; font-weight:700; text-decoration: none;" do
+                  Eglise Evangélique  de Blois - Gestion des plannings
+
+      %tr
+        %td{:style => "background:#fff;padding:10px 20px;"}
+          = yield
+      %tr
+        %td{:style => "background:#2857be;text-align:left;height:35px; line-height:35px;border-top:solid 5px #93a0ea; padding:0 20px;"}
+          = link_to 'http://eglisedeblois.fr', :style => "font-size:12px;text-decoration:none; width:100%; line-height:15px; color:#fff; font-weight:700; padding: 0 5px 0 0" do
+            ADD Blois
