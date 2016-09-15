@@ -1,0 +1,11 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#team-planning').fullCalendar({
+      lang: 'fr',
+      eventSources: {
+        url: "<%= request.url %>.json",
+        color: "<%= @team.color %>"
+      }
+    });
+  })
+</script>

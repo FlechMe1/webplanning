@@ -11,19 +11,37 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require toastr
 //= require moment
 //= require fullcalendar
 //= require fullcalendar/lang-all
+//= require bootstrap-datetimepicker
+//= require jquery.minicolors
+//= require cocoon
 //= require theme
 
 $(document).ready(function(){
 
-  $('#calendar').fullCalendar({
-    lang: 'fr'
+  $('.colorpicker').minicolors({
+    theme: 'bootstrap'
+  });
+
+  $('.datetimepicker').datetimepicker({
+    locale: 'fr',
+    format: "DD/MM/YYYY hh:mm",
+    icons: {
+      time: 'fa fa-time',
+      date: 'fa fa-calendar',
+      up: 'fa fa-chevron-up',
+      down: 'fa fa-chevron-down',
+      previous: 'fa fa-chevron-left',
+      next: 'fa fa-chevron-right',
+      today: 'fa fa-crosshairs',
+      clear: 'fa fa-trash',
+      close: 'fa fa-remove'
+    }
   });
 
 })

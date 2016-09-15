@@ -11,7 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160913090111) do
+ActiveRecord::Schema.define(version: 20160915114053) do
+
+  create_table "assignments", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.integer  "event_id",    limit: 4
+    t.string   "description", limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "assignments", ["event_id"], name: "index_assignments_on_event_id", using: :btree
+  add_index "assignments", ["user_id"], name: "index_assignments_on_user_id", using: :btree
+
+  create_table "events", force: :cascade do |t|
+    t.string   "label",          limit: 255
+    t.datetime "begin_at"
+    t.datetime "end_at"
+    t.text     "description",    limit: 65535
+    t.string   "organizer_type", limit: 255
+    t.integer  "organizer_id",   limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "events", ["organizer_id", "organizer_type"], name: "index_events_on_organizer_id_and_organizer_type", using: :btree
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -40,6 +64,7 @@ ActiveRecord::Schema.define(version: 20160913090111) do
     t.string   "description", limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "color",       limit: 255
   end
 
   create_table "users", force: :cascade do |t|
@@ -86,6 +111,8 @@ ActiveRecord::Schema.define(version: 20160913090111) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
+  add_foreign_key "assignments", "events"
+  add_foreign_key "assignments", "users"
   add_foreign_key "memberships", "teams"
   add_foreign_key "memberships", "users"
 end

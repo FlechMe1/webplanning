@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :events
   root to: 'pages#home'
 
 
@@ -10,7 +11,10 @@ Rails.application.routes.draw do
 
   resources :teams do
     resources :memberships, controller: 'teams/memberships'
+    resources :events, controller: 'teams/events'
   end
-  resources :users
+  resources :users do
+    resources :events, controller: 'users/events'
+  end
 
 end

@@ -1,8 +1,28 @@
 %section.content-header
   %h1
-    Hello !
+    Mon planning
 
 %section.content
-  .box
-    .box-body
-      #calendar
+  .row
+    .col-md-8
+      .box
+        .box-body
+          #calendar
+    .col-md-4
+      .box.box-success
+        .box-header.with-border Ajouter un événement
+        .box-body
+          %p.alert.alert-info
+            En utilisant ce formulaire, vous ajouterez un événement à votre planning personnel.
+            %br
+            Il ne sera pas vu par les autres utilisateurs
+
+          %p.alert.alert-info
+            Pour ajouter un évenement à votre équipe,
+            = link_to teams_url do
+              consultez vos équipes
+            , puis cliquez sur "Gérer le planning"
+          = render "events/form", event: @event
+
+- content_for :scripts do
+  = render "pages/scripts"

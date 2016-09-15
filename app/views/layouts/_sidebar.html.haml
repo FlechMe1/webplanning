@@ -1,19 +1,21 @@
 %section.sidebar
   %ul.sidebar-menu
-    %li{class: "#{'active' if params[:controller].match(/dashboard/)}"}
+    %li{class: "#{'active' if params[:controller].match(/pages/)}"}
       = link_to root_url do
         = icon "dashboard"
         %span Mon planning
 
-    %li{class: "#{'active' if params[:controller].match(/teams/)}"}
-      = link_to teams_url do
-        = icon "users"
-        %span Mes équipes
+    - if can? :read, Team || current_user.is_leader?
+      %li{class: "#{'active' if params[:controller].match(/teams/)}"}
+        = link_to teams_url do
+          = icon "users"
+          %span Mes équipes
 
-    %li{class: "#{'active' if params[:controller].match(/users/)}"}
-      = link_to users_url do
-        = icon "user"
-        %span Membres
+    - if can? :read, User
+      %li{class: "#{'active' if params[:controller].match(/users/)}"}
+        = link_to users_url do
+          = icon "user"
+          %span Membres
 
     -# %li.treeview{class: "#{'active' if params[:controller].match(/continents|countries|towns/)}"}
     -#   %a{:href => "#"}

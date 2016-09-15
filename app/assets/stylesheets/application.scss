@@ -6,9 +6,11 @@
 @import "font-awesome";
 @import "toastr";
 @import "fullcalendar";
+@import 'bootstrap-datetimepicker';
+@import "jquery.minicolors";
 @import "theme";
 
-#calendar{
+.calendar{
   max-width: 860px;
   margin: 0 auto;
 }

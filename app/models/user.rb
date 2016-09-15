@@ -3,8 +3,13 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :teams, through: :memberships
+
+
+  has_many :events, as: :organizer, dependent: :destroy
+  has_many :assignments, dependent: :destroy
+  has_many :assigned_events, through: :assignments
 
   before_create :set_default_role
 
@@ -19,6 +24,10 @@ class User < ActiveRecord::Base
     else
       email
     end
+  end
+
+  def is_leader?
+    memberships.where(is_leader: true).any?
   end
 
   def set_default_role

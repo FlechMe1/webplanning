@@ -1,0 +1,31 @@
+%section.content-header
+  %h1
+    Equipes
+    %small
+      = icon "angle-right"
+      = link_to teams_url do
+        Mes équipes
+      = icon "angle-right"
+      = @team.label
+      = icon "angle-right"
+      Planning
+
+
+%section.content
+  .row
+    .col-md-8
+      .box
+        .box-content
+          #team-planning.calendar
+
+    - if can? :update, @team
+      .col-md-4
+        .box.box-success
+          .box-header.with-border
+            Ajouter un événement
+          .box-body
+            = render "form", event: @event, team: @team
+
+
+- content_for :scripts do
+  = render "teams/events/scripts"

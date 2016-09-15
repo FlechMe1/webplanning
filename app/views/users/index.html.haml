@@ -25,11 +25,13 @@
               %td= user.name
               %td= user.email
               %td
-                = link_to edit_user_path(user), class: "btn btn-flat btn-success btn-xs" do
-                  = icon "edit"
-                  Modifier
-                = link_to user, method: :delete, data:{confirm: "Êtes vous sûr de vouloir supprimer cette équipe ?"}, class: "btn btn-flat btn-danger btn-xs" do
-                  = icon "trash"
-                  Supprimer
+                - if can? :update, user
+                  = link_to edit_user_path(user), class: "btn btn-flat btn-success btn-xs" do
+                    = icon "edit"
+                    Modifier
+                - if can? :delete, user
+                  = link_to user, method: :delete, data:{confirm: "Êtes vous sûr de vouloir supprimer cette équipe ?"}, class: "btn btn-flat btn-danger btn-xs" do
+                    = icon "trash"
+                    Supprimer
 
       = will_paginate @users, renderer: BootstrapPagination::Rails, next_label: ">", previous_label: "<"

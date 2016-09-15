@@ -1,7 +1,9 @@
 class Team < ActiveRecord::Base
 
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :users, through: :memberships
+
+  has_many :events, as: :organizer, dependent: :destroy
 
   validates :label, presence: true
 

@@ -1,0 +1,16 @@
+%section.content-header
+  %h1
+    Equipes
+    %small
+      = icon "angle-right"
+      = link_to teams_url do
+        Mes équipes
+      = icon "angle-right"
+      = @team.label
+      = icon "angle-right"
+      Planning
+
+%section.content
+  .box
+    .box-body
+      = render 'form', event: @event, team: @team

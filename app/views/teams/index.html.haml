@@ -21,25 +21,35 @@
 
             %tbody
               - @teams.each do |team|
-                %tr
-                  %td= team.label
-                  %td= team.users.count
-                  %td
-                    = link_to [team, :memberships], class: "btn btn-flat btn-primary btn-xs" do
-                      = icon "gear"
-                      Gérer l'équipe
-                    = link_to edit_team_path(team), class: "btn btn-flat btn-success btn-xs" do
-                      = icon "edit"
-                      Modifier
-                    = link_to team, method: :delete, data:{confirm: "Êtes vous sûr de vouloir supprimer cette équipe ?"}, class: "btn btn-flat btn-danger btn-xs" do
-                      = icon "trash"
-                      Supprimer
+                - if can? :read, team
+                  %tr
+                    %td
+                      = icon "square", style: "color: #{team.color}"
+                      = team.label
+                    %td= team.users.count
+                    %td
+                      = link_to [team, :events], class: "btn btn-flat btn-info btn-xs" do
+                        = icon "calendar"
+                        Voir le planning
+                      - if can? :update, team
+                        = link_to [team, :memberships], class: "btn btn-flat btn-primary btn-xs" do
+                          = icon "gear"
+                          Gérer l'équipe
+
+                        = link_to edit_team_path(team), class: "btn btn-flat btn-success btn-xs" do
+                          = icon "edit"
+                          Modifier
+                      - if can? :delete, team
+                        = link_to team, method: :delete, data:{confirm: "Êtes vous sûr de vouloir supprimer cette équipe ?"}, class: "btn btn-flat btn-danger btn-xs" do
+                          = icon "trash"
+                          Supprimer
 
           = will_paginate @teams, renderer: BootstrapPagination::Rails, next_label: ">", previous_label: "<"
 
-  .col-md-4
-    %section.content
-      .box.box-default
-        .box-header.with-border Ajouter une équipe
-        .box-body
-          = render "form", team: @team
+  - if can? :add, Team
+    .col-md-4
+      %section.content
+        .box.box-default
+          .box-header.with-border Ajouter une équipe
+          .box-body
+            = render "form", team: @team

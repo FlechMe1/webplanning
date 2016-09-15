@@ -1,0 +1,11 @@
+.form-inline
+  .form-group
+    %label Membre
+    = f.select :user_id, options_from_collection_for_select(@members, :id, :name, f.object.user_id), {prompt: "-- Membres --"}, class: "form-control"
+
+  .form-group
+    = f.label :description
+    = f.text_field :description
+
+  .form-group
+    = link_to_remove_association "Supprimer affectation", f

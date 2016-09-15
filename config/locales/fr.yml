@@ -205,7 +205,7 @@ fr:
   time:
     am: am
     formats:
-      default: "%d %B %Y %Hh %Mmin %Ss"
+      default: "%d/%m/%Y %H:%M"
       long: "%A %d %B %Y %Hh%M"
       short: "%d %b %Hh%M"
     pm: pm
