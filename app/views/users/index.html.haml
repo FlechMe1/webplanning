@@ -17,6 +17,8 @@
           %tr
             %th Nom
             %th Email
+            - if can? :update, User
+              %th Invitation acceptée
             %th
 
         %tbody
@@ -24,6 +26,9 @@
             %tr
               %td= user.name
               %td= user.email
+              - if can? :update, User
+                %td
+                  = icon "#{(user.invitation_accepted_at.blank?) ? 'times' : 'check'}"
               %td
                 - if can? :update, user
                   = link_to edit_user_path(user), class: "btn btn-flat btn-success btn-xs" do
