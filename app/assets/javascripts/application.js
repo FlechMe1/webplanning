@@ -31,8 +31,9 @@ $(document).ready(function(){
   $('.datetimepicker').datetimepicker({
     locale: 'fr',
     format: "DD/MM/YYYY hh:mm",
+    sideBySide: true,
     icons: {
-      time: 'fa fa-time',
+      time: 'fa fa-clock-o',
       date: 'fa fa-calendar',
       up: 'fa fa-chevron-up',
       down: 'fa fa-chevron-down',
