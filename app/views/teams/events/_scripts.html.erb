@@ -2,6 +2,13 @@
   $(document).ready(function(){
     $('#team-planning').fullCalendar({
       lang: 'fr',
+      header: {
+        left: 'prev, next, today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay,listWeek'
+      },
+      navLinks: true,
+      eventLimit: true,
       eventSources: {
         url: "<%= request.url %>.json",
         color: "<%= @team.color %>"
