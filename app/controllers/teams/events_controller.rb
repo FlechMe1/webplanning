@@ -19,6 +19,7 @@ class Teams::EventsController < ApplicationController
 
   def create
     @event = @team.events.build(event_params)
+    @members = @team.users.order('firstname ASC')
 
     if @event.save
       redirect_to [@team, :events], notice: "Membre ajouté à l\'équipe"
