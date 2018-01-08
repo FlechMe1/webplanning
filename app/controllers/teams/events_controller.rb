@@ -34,6 +34,7 @@ class Teams::EventsController < ApplicationController
   end
 
   def update
+    @members = @team.users.order('firstname ASC')
     @event = Event.find(params[:id])
     if @event.update(event_params)
       redirect_to [@team, :events], notice: 'Evenement mis à jour'

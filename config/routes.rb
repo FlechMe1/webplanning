@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   resources :teams do
     resources :memberships, controller: 'teams/memberships'
     resources :events, controller: 'teams/events'
+
+    get '/teams/:team_id/membership/:id/promute', to: 'teams/memberships#promute', as: :promute_membership
+    get '/teams/:team_id/membership/:id/destitute', to: 'teams/memberships#destitute', as: :destitute_membership
   end
   resources :users do
     resources :events, controller: 'users/events'

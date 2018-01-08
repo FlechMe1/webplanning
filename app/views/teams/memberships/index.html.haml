@@ -30,11 +30,21 @@
                   %td= user.name
                   %td= user.email
                   %td
-                    = icon "#{(@team.is_leader?(user.id)) ? 'check' : 'times'}"
+                    = icon "#{(@team.is_leader?(user.id)) ? 'check text-success' : 'times text-danger'}"
                   %td
                     = link_to team_membership_path(@team, user), method: :delete, data:{confirm: "Êtes vous sûr de vouloir supprimer ce membre de l'équipe ?"}, class: "btn btn-flat btn-danger btn-xs" do
                       = icon "trash"
                       Supprimer
+
+                    - if @team.is_leader?(user.id)
+                      = link_to team_destitute_membership_path(@team, user), class: "btn btn-flat btn-xs btn-danger" do
+                        = icon "minus"
+                        Destituer
+                    - else
+                      = link_to team_promute_membership_path(@team, user), class: "btn btn-flat btn-xs btn-info" do
+                        = icon "plus"
+                        Promouvoir
+
 
           = will_paginate @members, renderer: BootstrapPagination::Rails, next_label: ">", previous_label: "<"
     .col-md-4

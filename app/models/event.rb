@@ -8,7 +8,7 @@ class Event < ActiveRecord::Base
   validate :is_date_valid?
 
   def is_date_valid?
-    if !begin_at.blank? && !end_at.blank? && end_at > begin_at
+    if !begin_at.blank? && !end_at.blank? && begin_at >= end_at
       errors.add(:period, "La période est invalide")
     end
   end

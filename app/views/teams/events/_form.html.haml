@@ -12,11 +12,11 @@
 
   .form-group
     %label Date et heure de début
-    = f.text_field :begin_at, class: "form-control datetimepicker", value: "#{l event.begin_at unless event.begin_at.blank? }"
+    = f.datetime_field :begin_at, class: "form-control datetimepicker", value: "#{l event.begin_at unless event.begin_at.blank? }"
 
   .form-group
     %label Date et heure de fin
-    = f.text_field :end_at, class: "form-control datetimepicker", value: "#{l event.end_at unless event.end_at.blank? }"
+    = f.datetime_field :end_at, class: "form-control datetimepicker", value: "#{l event.end_at unless event.end_at.blank? }"
 
   .form-group
     %label Description

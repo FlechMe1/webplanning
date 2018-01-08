@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require toastr
@@ -30,7 +31,7 @@ $(document).ready(function(){
 
   $('.datetimepicker').datetimepicker({
     locale: 'fr',
-    format: "DD/MM/YYYY hh:mm",
+    format: "DD/MM/YYYY hh:mm A",
     sideBySide: true,
     icons: {
       time: 'fa fa-clock-o',
