@@ -21,8 +21,6 @@ class Users::EventsController < ApplicationController
             e.description = ev.label
           end
         end
-        tz = TZInfo::Timezone.get tzid
-        cal.add_timezone tz.ical_timezone(Date.today)
         cal.publish
         render plain: cal.to_ical
       }
