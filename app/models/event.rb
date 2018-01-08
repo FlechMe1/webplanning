@@ -14,8 +14,12 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def self.get_personnal_events(user_id, begin_at, end_at)
-    assignments = Assignment.where(user_id: user_id).joins(:event).where('events.end_at BETWEEN ? AND ?', begin_at, end_at)
+  def self.get_personnal_events(user_id, begin_at = nil, end_at = nil)
+    if begin_at && end_at
+      assignments = Assignment.where(user_id: user_id).joins(:event).where('events.end_at BETWEEN ? AND ?', begin_at, end_at)
+    else
+      assignments = Assignment.where(user_id: user_id).joins(:event)
+    end
     events = []
     assignments.each do |a|
       a.event.label = a.event.label + " - " + a.description

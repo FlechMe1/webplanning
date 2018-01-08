@@ -10,7 +10,7 @@ class Users::EventsController < ApplicationController
         @events = @user.events
       }
       format.ics{
-        @events = Event.get_personnal_events(@user.id, params[:start], params[:end])
+        @events = Event.get_personnal_events(@user.id)
         cal = Icalendar::Calendar.new
         cal.x_wr_calname = 'EGLISE DE BLOIS - Mon Planning'
         @events.each do |ev|
