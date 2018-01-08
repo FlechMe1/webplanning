@@ -37,6 +37,6 @@ production:
   reconnect: false
   database: webplanning_production
   pool: 5
-  username: root
-  password: p@ssw0rd
+  username: egliseblois
+  password: 3nBs0z#5
   host: localhost
