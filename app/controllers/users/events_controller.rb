@@ -15,8 +15,8 @@ class Users::EventsController < ApplicationController
         cal.x_wr_calname = 'EGLISE DE BLOIS - Mon Planning'
         @events.each do |ev|
           cal.event do |e|
-            e.dtstart     = ev.begin_at
-            e.dtend       = ev.end_at
+            e.dtstart     = Icalendar::Values::DateTime.new ev.begin_at.utc, 'tzid' => 'Europe/Paris'
+            e.dtend       = Icalendar::Values::DateTime.new ev.end_at.utc, 'tzid' => 'Europe/Paris'
             e.summary     = ev.label
             e.description = ev.label
           end
