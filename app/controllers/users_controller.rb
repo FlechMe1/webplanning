@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -32,6 +31,12 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     redirect_to users_url, notice: 'Membre supprimé'
+  end
+
+  def invite
+    @user = User.find(params[:user_id])
+    @user.invite!
+    redirect_to users_url, notice: 'Membre invité'
   end
 
   private

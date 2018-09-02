@@ -43,6 +43,14 @@ class Teams::EventsController < ApplicationController
     end
   end
 
+  def destroy
+    @event = Event.find(params[:id])
+
+    @event.destroy
+    redirect_to [@team, :events], notice: "Evénement supprimé"
+  end
+
+
 
   private
     def set_team

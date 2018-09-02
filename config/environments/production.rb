@@ -78,7 +78,7 @@ Rails.application.configure do
     authentication: "plain",
     enable_starttls_auto: true,
     user_name: "p.gruson+mi@gmail.com",
-    password: "CMcLwOdQPn7bh80t"
+    password: "mdxspbLz1cCNMKVI"
   }
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => "http://planning.eglisedeblois.fr" }

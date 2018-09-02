@@ -1,0 +1,16 @@
+%section.content-header
+  %h1
+    Mon planning
+    %small
+      = icon "angle-right"
+      Planning
+
+%section.content
+  .box.box-primary
+    .box-header
+      .box-tools
+        = link_to @event, method: :delete, data:{confirm: "Voulez vous vraiment supprimer cet événement ?"}, class: "btn btn-sm btn-danger" do
+          = icon "trash"
+          Supprimer
+    .box-body
+      = render 'form', event: @event

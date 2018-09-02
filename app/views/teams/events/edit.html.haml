@@ -11,6 +11,11 @@
       Planning
 
 %section.content
-  .box
+  .box.box-primary
+    .box-header
+      .box-tools
+        = link_to [@team, @event], method: :delete, data:{confirm: "Voulez vous vraiment supprimer cet événement ?"}, class: "btn btn-sm btn-danger" do
+          = icon "trash"
+          Supprimer
     .box-body
       = render 'form', event: @event, team: @team
