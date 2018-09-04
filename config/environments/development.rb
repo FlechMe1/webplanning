@@ -33,8 +33,8 @@ Rails.application.configure do
     domain: "eglisedeblois.fr",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: "p.gruson+mi@gmail.com",
-    password: "mdxspbLz1cCNMKVI"
+    user_name: Rails.application.secrets[:smtp_user],
+    password: Rails.application.secrets[:smtp_password]
   }
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'lvh.me:3000' }

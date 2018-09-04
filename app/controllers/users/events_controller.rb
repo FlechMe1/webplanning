@@ -7,7 +7,7 @@ class Users::EventsController < ApplicationController
     respond_to do |format|
       format.html
       format.json{
-        @events = @user.events
+        @teams = @user.teams
       }
       format.ics{
         @events = Event.get_personnal_events(@user.id)
