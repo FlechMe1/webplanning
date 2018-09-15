@@ -11,7 +11,7 @@ class Teams::EventsController < ApplicationController
       format.json {
         @events = @team.events.where('end_at BETWEEN ? AND ?', params[:start], params[:end])
         unless params[:user_id].blank?
-          @events = Event.get_personnal_events(params[:user_id], params[:start], params[:end])
+          @events = Event.get_personnal_events(params[:user_id], params[:start], params[:end], @team.id)
         end
       }
     end
