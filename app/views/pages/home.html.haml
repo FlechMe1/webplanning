@@ -8,6 +8,10 @@
       .box
         .box-body
           #calendar
+
+          .form-group
+            %label Importer mon calendrier dans Google Agenda
+            = text_field_tag :import, :import, value: user_events_url(current_user.id, format: :ics), class: "form-control readonly"
     .col-md-4
       .box.box-success
         .box-header.with-border Ajouter un événement

@@ -4,13 +4,13 @@ class Users::EventsController < ApplicationController
   before_filter :set_user
 
   def index
+    @teams = @user.teams
     respond_to do |format|
       format.html
       format.json{
-        @teams = @user.teams
       }
       format.ics{
-        @events = Event.get_personnal_events(@user.id)
+        @events = Event.get_personnal_events(@user.id, DateTime.now)
         cal = Icalendar::Calendar.new
         cal.x_wr_calname = 'EGLISE DE BLOIS - Mon Planning'
         @events.each do |ev|

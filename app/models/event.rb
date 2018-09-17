@@ -15,14 +15,21 @@ class Event < ActiveRecord::Base
   end
 
   def self.get_personnal_events(user_id, begin_at = nil, end_at = nil, team_id = nil)
-    if begin_at && end_at
-      assignments = Assignment.where(user_id: user_id).joins(:event).where('events.end_at BETWEEN ? AND ?', begin_at, end_at)
-      if team_id
-        assignments = assignments.where('events.organizer_type = ? AND events.organizer_id = ?', 'Team', team_id)
-      end
-    else
-      assignments = Assignment.where(user_id: user_id).joins(:event)
+
+    assignments = Assignment.where(user_id: user_id).joins(:event)
+
+    if begin_at
+      assignments = assignments.where('events.begin_at > ?', begin_at)
     end
+
+    if end_at
+      assignments = assignments.where('events.end_at < ?', end_at)
+    end
+
+    if team_id
+      assignments = assignments.where('events.organizer_type = ? AND events.organizer_id = ?', 'Team', team_id)
+    end
+
     events = []
     assignments.each do |a|
       a.event.label = a.event.label + " - " + a.description
