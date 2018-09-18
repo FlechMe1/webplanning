@@ -12,7 +12,7 @@ class Teams::MembershipsController < ApplicationController
     @membership = @team.memberships.build(membership_params)
 
     if @membership.save
-      redirect_to [@team, :memberships], notice: "Membre ajouté à l\'équipe"
+      redirect_to @team, notice: "Membre ajouté à l\'équipe"
     else
       render :edit
     end
@@ -22,7 +22,7 @@ class Teams::MembershipsController < ApplicationController
     membership = @team.memberships.where(user_id: params[:id]).first
 
     membership.destroy
-    redirect_to [@team, :memberships], notice: "Membre supprimé à l\'équipe"
+    redirect_to @team, notice: "Membre supprimé à l\'équipe"
   end
 
   def promute
@@ -30,7 +30,7 @@ class Teams::MembershipsController < ApplicationController
     membership.is_leader = true
 
     if membership.save
-      redirect_to [@team, :memberships], notice: "Membre promu"
+      redirect_to @team, notice: "Membre promu"
     else
       render :edit
     end
@@ -41,15 +41,11 @@ class Teams::MembershipsController < ApplicationController
     membership.is_leader = false
 
     if membership.save
-      redirect_to [@team, :memberships], notice: "Membre destitué"
+      redirect_to @team, notice: "Membre destitué"
     else
       render :edit
     end
   end
-
-
-
-
 
   private
     def set_team
