@@ -1,29 +1,48 @@
-= form_for event do |f|
-  - if event.errors.any?
-    .callout.callout-danger
-      %h4= "#{pluralize(event.errors.count, "erreur")}"
-      %ul
-        - event.errors.full_messages.each do |msg|
-          %li= msg
-  .form-group
-    %label Nom
-    = f.text_field :label, class: "form-control"
-    %span.help-block Exemple : "Ecole du dimanche 18/09", "Louange 25/09"...
+.modal-header
+  - if event.new_record?
+    %h4.modal-title.pull-left Ajouter un événement
+  - else
+    %h4.modal-title.pull-left Modifier un événement
+  %button.close{type: 'button', data:{dismiss: 'modal'}, aria:{label: 'Close'}}
+    = icon "times"
 
-  .form-group
-    %label Date et heure de début
-    = f.datetime_field :begin_at, class: "form-control datetimepicker", value: "#{l event.begin_at unless event.begin_at.blank? }"
+= form_for event, remote: true do |f|
+  = f.hidden_field :organizer_type
+  = f.hidden_field :organizer_id
+  .modal-body
+    - if event.errors.any?
+      .callout.callout-danger
+        %h4= "#{pluralize(event.errors.count, "erreur")}"
+        %ul
+          - event.errors.full_messages.each do |msg|
+            %li= msg
+    .form-group
+      %label Nom
+      = f.text_field :label, class: "form-control"
+      %span.help-block Exemple : "Ecole du dimanche 18/09", "Louange 25/09"...
 
-  .form-group
-    %label Date et heure de fin
-    = f.datetime_field :end_at, class: "form-control datetimepicker", value: "#{l event.end_at unless event.end_at.blank? }"
+    .form-group
+      %label Date et heure de début
+      = f.datetime_field :begin_at, class: "form-control datetimepicker", value: "#{l event.begin_at unless event.begin_at.blank? }"
 
-  .form-group
-    %label Description
-    = f.text_area :description, class: "form-control", rows: 3
+    .form-group
+      %label Date et heure de fin
+      = f.datetime_field :end_at, class: "form-control datetimepicker", value: "#{l event.end_at unless event.end_at.blank? }"
 
-  .form-actions
-    = f.hidden_field :organizer_type
-    = f.hidden_field :organizer_id
+    .form-group
+      %label Description
+      = f.text_area :description, class: "form-control", rows: 3
+
+      %h3 Affectations
+      #assignments
+        = f.fields_for :assignments do |assignment|
+          = render 'events/assignment_fields', f: assignment
+        .links
+          = link_to_add_association 'Ajouter une affectation', f, :assignments, partial: 'events/assignment_fields'
+
+
+  .modal-footer
     %button.btn.btn-success{type: :submit}
       Enregistrer
+    %button.btn.btn-danger{data:{dismiss: 'modal'}}
+      Annuler

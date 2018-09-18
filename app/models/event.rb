@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
 
   belongs_to :organizer, polymorphic: true
   has_many :assignments, dependent: :destroy
+
   accepts_nested_attributes_for :assignments, reject_if: :all_blank, allow_destroy: true
 
   validates :label, :begin_at, :end_at, :organizer_id, :organizer_type, presence: true

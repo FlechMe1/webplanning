@@ -12,20 +12,13 @@
 
 
 %section.content
-  .row
-    .col-md-8
-      .box
-        .box-content
-          #team-planning.calendar
+  .box
+    .box-content
+      #team-planning.calendar{data:{url: new_team_event_path(format: :js)}}
 
-    - if can? :update, @team
-      .col-md-4
-        .box.box-success
-          .box-header.with-border
-            Ajouter un événement
-          .box-body
-            = render "form", event: @event, team: @team
-
+#event.modal.fade{tabindex: '-1', role: "dialog"}
+  .modal-dialog{role: "document"}
+    .modal-content
 
 - content_for :scripts do
   = render "teams/events/scripts"

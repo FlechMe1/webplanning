@@ -17,6 +17,16 @@ class Teams::EventsController < ApplicationController
     end
   end
 
+  def new
+    @event = @team.events.build(begin_at: params[:start_at], end_at: params[:end_at])
+    @members = @team.users.order('firstname ASC')
+
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  end
+
   def create
     @event = @team.events.build(event_params)
     @members = @team.users.order('firstname ASC')
@@ -31,6 +41,11 @@ class Teams::EventsController < ApplicationController
   def edit
     @event = Event.find(params[:id])
     @members = @team.users.order('firstname ASC')
+
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def update

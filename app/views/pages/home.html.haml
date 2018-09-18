@@ -3,30 +3,14 @@
     Mon planning
 
 %section.content
-  .row
-    .col-md-8
-      .box
-        .box-body
-          #calendar
+  .box
+    .box-body
+      #calendar
 
-          .form-group
-            %label Importer mon calendrier dans Google Agenda
-            = text_field_tag :import, :import, value: user_events_url(current_user.id, format: :ics), class: "form-control readonly"
-    .col-md-4
-      .box.box-success
-        .box-header.with-border Ajouter un événement
-        .box-body
-          %p.alert.alert-info
-            En utilisant ce formulaire, vous ajouterez un événement à votre planning personnel.
-            %br
-            Il ne sera pas vu par les autres utilisateurs
+      .form-group
+        %label Importer mon calendrier dans Google Agenda
+        = text_field_tag :import, :import, value: user_events_url(current_user.id, format: :ics), class: "form-control readonly"
 
-          %p.alert.alert-info
-            Pour ajouter un évenement à votre équipe,
-            = link_to teams_url do
-              consultez vos équipes
-            , puis cliquez sur "Gérer le planning"
-          = render "events/form", event: @event
 
 - content_for :scripts do
   = render "pages/scripts"

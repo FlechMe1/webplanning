@@ -1,0 +1,5 @@
+if (<%= !@event.errors.blank? %>) {
+  $('#modal-body').html('<%= j render "events/form", event: @event %>');
+}else{
+  $('#event').modal('toggle');
+}

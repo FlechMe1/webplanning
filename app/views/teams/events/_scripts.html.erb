@@ -2,6 +2,7 @@
   $(document).ready(function(){
     $('#team-planning').fullCalendar({
       lang: 'fr',
+      selectable: true,
       header: {
         left: 'prev, next, today',
         center: 'title',
@@ -12,6 +13,18 @@
       eventSources: {
         url: "<%= request.url %>.json",
         color: "<%= @team.color %>"
+      },
+      select: function(startDate, endDate){
+        $.ajax({
+          url: "/teams/<%= @team.id %>/events/new.js",
+          data: {start_at: startDate.format(), end_at: endDate.format()}
+        });
+      },
+      eventClick: function(calEvent, jsEvent, view) {
+        jsEvent.preventDefault();
+        $.ajax({
+          url: calEvent.url
+        });
       }
     });
   })

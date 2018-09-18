@@ -12,12 +12,12 @@
       eventSources: [
         <% @teams.each do |team| %>
           {
-            url: "/teams/<%=team.id%>/events.json?user_id=<%=current_user.id%>",
+            url: "/teams/<%=team.id%>/events.json?user_id=<%=user.id%>",
             color: "<%= (team.color.blank?) ? '#f5fef1' : team.color %>"
           },
         <% end %>
         {
-          url: "/users/<%= current_user.id %>/events.json",
+          url: "/users/<%= user.id %>/events.json",
           color: "#55dd55"
         }
       ]

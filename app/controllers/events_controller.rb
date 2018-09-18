@@ -23,14 +23,12 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
+    if @event.organizer_type == 'Team'
+      @members = @event.organizer.users.order('firstname ASC')
+    end
+    @event.update(event_params)
     respond_to do |format|
-      if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
-        format.json { render :show, status: :ok, location: @event }
-      else
-        format.html { render :edit }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
+      format.js
     end
   end
 
@@ -52,6 +50,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:label, :description, :begin_at, :end_at, :organizer_id, :organizer_type)
+      params.required(:event).permit(:label, :description, :begin_at, :end_at, :organizer_id, :organizer_type,
+                                      assignments_attributes: [:id, :user_id, :description, :_destroy])
     end
 end
