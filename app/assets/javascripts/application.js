@@ -48,3 +48,30 @@ $(document).ready(function(){
 
 
 });
+
+function init_fullCalendar(selector, sources, selectable = true, new_event_link = ''){
+  $(selector).fullCalendar({
+    lang: 'fr',
+    selectable: selectable,
+    header: {
+      left: 'prev, next, today',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay,listWeek'
+    },
+    navLinks: true,
+    eventLimit: true,
+    eventSources: sources,
+    select: function(startDate, endDate){
+      $.ajax({
+        url: new_event_link,
+        data: {start_at: startDate.format(), end_at: endDate.format()}
+      });
+    },
+    eventClick: function(calEvent, jsEvent, view) {
+      jsEvent.preventDefault();
+      $.ajax({
+        url: calEvent.url
+      });
+    }
+  });
+}

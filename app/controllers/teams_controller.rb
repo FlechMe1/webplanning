@@ -5,7 +5,12 @@ class TeamsController < ApplicationController
   # GET /teams.json
   def index
     @teams = Team.order('label ASC').includes(:users).paginate(:page => params[:page], :per_page => 25)
-    @team = Team.new
+  end
+
+  def show
+    @members = @team.users.order('firstname ASC').paginate(:page => params[:page], :per_page => 25)
+    @membership = @team.memberships.build
+    @users = User.where('id NOT IN (?)', [0] + @members.map{|m| m.id}).order('lastname ASC')
   end
 
   def new

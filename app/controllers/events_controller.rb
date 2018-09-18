@@ -6,6 +6,12 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
+    if @event.organizer_type == 'Team'
+      @members = @event.organizer.users.order('firstname ASC')
+    end
+    respond_to do |format|
+      format.js
+    end
   end
 
   # POST /events

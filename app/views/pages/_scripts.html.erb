@@ -1,26 +1,14 @@
 <script type="text/javascript">
   $(document).ready(function(){
-    $('#calendar').fullCalendar({
-      lang: 'fr',
-      header: {
-        left: 'prev, next, today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay,listWeek'
-      },
-      navLinks: true,
-      eventLimit: true,
-      eventSources: [
-        <% @teams.each do |team| %>
-          {
-            url: "/teams/<%=team.id%>/events.json?user_id=<%=current_user.id%>",
-            color: "<%= (team.color.blank?) ? '#f5fef1' : team.color %>"
-          },
-        <% end %>
+    var sources = [
+      <% @teams.each do |team| %>
         {
-          url: "/users/<%= current_user.id %>/events.json",
-          color: "#55dd55"
-        }
-      ]
-    });
+          url: "/teams/<%=team.id%>/events.json?user_id=<%=current_user.id%>",
+          color: "<%= (team.color.blank?) ? '#f5fef1' : team.color %>"
+        },
+      <% end %>
+    ];
+
+    init_fullCalendar('#calendar', sources, false)
   })
 </script>

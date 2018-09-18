@@ -1,20 +1,29 @@
 %section.content-header
-  %h1
-    Equipes
-    %small
-      = icon "angle-right"
-      = link_to teams_url do
-        Mes équipes
-      = icon "angle-right"
-      = @team.label
-      = icon "angle-right"
-      Liste des membres
+  = link_to teams_url, class: 'btn btn-sm btn-info pull-right' do
+    = icon "angle-left"
+    Mes équipes
 
+  %h1.pull-left
+    = @team.label
+    %small= @team.description
+
+  .clearfix
 
 %section.content
   .row
-    .col-md-8
+    .col-md-6
       .box
+        .box-header.with-border
+          = icon 'calendar'
+          Planning
+        .box-body
+          #team-planning.calendar{data:{url: new_team_event_path(@team, format: :js)}}
+
+    .col-md-6
+      .box
+        .box-header.with-border
+          = icon 'users'
+          Membres
         .box-body
           %table.table.table-bordered.table-striped
             %thead
@@ -34,22 +43,21 @@
                   %td
                     = link_to team_membership_path(@team, user), method: :delete, data:{confirm: "Êtes vous sûr de vouloir supprimer ce membre de l'équipe ?"}, class: "btn btn-flat btn-danger btn-xs" do
                       = icon "trash"
-                      Supprimer
 
                     - if @team.is_leader?(user.id)
                       = link_to team_destitute_membership_path(@team, user), class: "btn btn-flat btn-xs btn-danger" do
                         = icon "minus"
-                        Destituer
                     - else
                       = link_to team_promute_membership_path(@team, user), class: "btn btn-flat btn-xs btn-info" do
                         = icon "plus"
-                        Promouvoir
 
 
           = will_paginate @members, renderer: BootstrapPagination::Rails, next_label: ">", previous_label: "<"
-    .col-md-4
+
       .box.box-success
-        .box-header.with-border Ajouter un membre à l'équipe
+        .box-header.with-border
+          = icon "plus"
+          Ajouter un membre à l'équipe
         .box-body
           = form_for [@team, @membership] do |f|
             .form-group
@@ -68,3 +76,9 @@
               = f.hidden_field :team_id
               %button.btn.btn-success{type: :submit}
                 Ajouter
+#event.modal.fade{tabindex: '-1', role: "dialog"}
+  .modal-dialog{role: "document"}
+    .modal-content
+
+- content_for :scripts do
+  = render "teams/script"
