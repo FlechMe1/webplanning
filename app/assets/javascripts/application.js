@@ -49,7 +49,7 @@ $(document).ready(function(){
 
 });
 
-function init_fullCalendar(selector, sources, selectable = true, new_event_link = ''){
+function init_fullCalendar(selector, sources, selectable, new_event_link){
   $(selector).fullCalendar({
     lang: 'fr',
     selectable: selectable,
