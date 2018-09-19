@@ -1,8 +1,1 @@
-<%= @events.each do |event| %>
-  <%= @calendar.event do %>
-    <%= dtstart(event.start_time) %>
-    <%= dtend(event.end_time) %>
-    <%= summary(event.title) %>
-    <%= description(event.description) %>
-  <%- end %>
-<%- end %>
+<%= @cal.to_ical %>

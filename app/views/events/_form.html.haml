@@ -6,7 +6,7 @@
   %button.close{type: 'button', data:{dismiss: 'modal'}, aria:{label: 'Close'}}
     = fa_icon "times"
 
-= form_for event, remote: true do |f|
+= form_for event do |f|
   = f.hidden_field :organizer_type
   = f.hidden_field :organizer_id
   .modal-body
@@ -42,6 +42,10 @@
 
 
   .modal-footer
+    - unless event.new_record?
+      = link_to event, method: :delete, data:{confirm: 'Voulez vous suppimer cet événement ?'}, class: 'btn btn-danger pull-left' do
+        = fa_icon 'trash'
+        Supprimer l'événement
     %button.btn.btn-success{type: :submit}
       Enregistrer
     %button.btn.btn-danger{data:{dismiss: 'modal'}}

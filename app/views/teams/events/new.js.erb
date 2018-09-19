@@ -1,2 +1,7 @@
 jQuery('#event .modal-content').html('<%= j render "events/form", event: @event %>');
 jQuery('#event').modal('toggle');
+
+// INIT COCOON DELETE FIELD
+jQuery('a.remove_fields').on('click', function(e) {
+  jQuery(this).parents('.form-inline').fadeOut();
+});

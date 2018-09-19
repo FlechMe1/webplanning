@@ -1,4 +1,4 @@
-class EventsController < ApplicationController
+      class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def show
@@ -35,15 +35,32 @@ class EventsController < ApplicationController
     @event.update(event_params)
     respond_to do |format|
       format.js
+      format.html{
+        if @event.organizer_type == 'Team'
+          redirect_to team_path(@event.organizer_id), notice: 'Event was successfully created.'
+        else
+          redirect_to :back
+        end
+      }
     end
   end
 
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
+    if @event.organizer_type == 'Team'
+      team_id = @event.organizer_id
+    end
+
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to home_url, notice: 'Event was successfully destroyed.' }
+      format.html {
+        if !team_id.blank?
+          redirect_to team_path(@event.organizer_id), notice: 'Evénement supprimé'
+        else
+          redirect_to :back, notice: 'Evénement supprimé'
+        end
+      }
       format.json { head :no_content }
     end
   end

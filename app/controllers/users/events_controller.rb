@@ -11,18 +11,17 @@ class Users::EventsController < ApplicationController
       }
       format.ics{
         @events = Event.get_personnal_events(@user.id, DateTime.now)
-        cal = Icalendar::Calendar.new
-        cal.x_wr_calname = 'EGLISE DE BLOIS - Mon Planning'
+        @cal = Icalendar::Calendar.new
+        @cal.x_wr_calname = 'EGLISE DE BLOIS - Mon Planning'
         @events.each do |ev|
-          cal.event do |e|
+          @cal.event do |e|
             e.dtstart     = ev.begin_at.utc
             e.dtend       = ev.end_at.utc
             e.summary     = ev.label
             e.description = ev.label
           end
         end
-        cal.publish
-        send_data plain: cal.to_ical
+        @cal.publish
       }
     end
   end
