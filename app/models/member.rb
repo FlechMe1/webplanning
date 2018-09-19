@@ -1,7 +1,7 @@
 class Member < ActiveRecord::Base
 
   belongs_to :user
-  has_one :sibling
+  has_one :sibling, :dependent => :destroy
   has_one :family, through: :sibling
   accepts_nested_attributes_for :sibling
 
