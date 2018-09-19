@@ -7,7 +7,7 @@ class Member < ActiveRecord::Base
 
   delegate :name, :id, :to => :family, :prefix => true, allow_nil: true
 
-  validates :gender, :lastname, :firstname, :email, :phone_1, presence: true
+  validates :gender, :lastname, :firstname, presence: true
 
   def name
     lastname + " " + firstname

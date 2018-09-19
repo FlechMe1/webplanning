@@ -12,7 +12,6 @@ class MembersController < ApplicationController
 
   def create
     @member = Member.new(member_params)
-    @member.family_id = @family.id if @family
 
     if @member.save
       redirect_to :members, notice: 'Un nouveau membre a été ajouté'
@@ -44,8 +43,8 @@ class MembersController < ApplicationController
     end
 
     def create_family
-      if params[:member] && params[:member][:sibling] && params[:member][:sibling][:family_id] == 'new_family'
-        @family = Family.find_or_create_by(name: params[:member][:lastname])
+      if params[:member] && params[:member][:sibling_attributes] && params[:member][:sibling_attributes][:family_id] == 'new_family'
+        @family = Family.new(name: params[:member][:lastname])
         @family.email = params[:member][:email]
         @family.phone_1 = params[:member][:phone_1]
         @family.address_1 = params[:member][:address_1]
@@ -54,7 +53,9 @@ class MembersController < ApplicationController
         @family.town = params[:member][:town]
         @family.save
 
-        params[:member][:sibling][:family_id] = @family.id
+        puts @family.inspect
+
+        params[:member][:sibling_attributes][:family_id] = @family.id
       end
     end
 end
