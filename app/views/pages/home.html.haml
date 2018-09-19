@@ -11,7 +11,7 @@
 
           .form-group
             %label Importer mon calendrier dans Google Agenda
-            = text_field_tag :import, :import, value: user_events_url(current_user.id, format: :ics), class: "form-control readonly"
+            = text_field_tag :import, :import, value: schedule_url(current_user.id, format: :ics), class: "form-control readonly"
 
 
 - content_for :scripts do

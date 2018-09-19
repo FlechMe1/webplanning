@@ -24,6 +24,8 @@ Rails.application.routes.draw do
       resources :events, controller: 'users/events'
     end
   end
+
+  get '/mon-planning/:user_id', to: 'schedules#index', as: :schedule
   root to: redirect('/users/sign_in')
 
 end
