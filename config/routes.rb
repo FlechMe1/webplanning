@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
     resources :events
     resources :members
+    resources :families
     resources :teams do
       resources :memberships, controller: 'teams/memberships'
       resources :events, controller: 'teams/events'

@@ -1,0 +1,61 @@
+%section.content-header
+  %h1
+    Membres
+    %small Ajoute un membre
+
+%section.content
+  .box
+    .box-body
+      = form_for @member do |f|
+        - if @member.errors.any?
+          .callout.callout-danger
+            %h4= "#{pluralize(@member.errors.count, "erreur")}"
+            %ul
+              - @member.errors.full_messages.each do |msg|
+                %li= msg
+
+
+        %fieldset
+          .row
+            .col-md-6
+              .form-group
+                = f.label :firstname
+                = f.text_field :firstname, :autofocus => true, class: 'form-control'
+            .col-md-6
+              .form-group
+                = f.label :lastname
+                = f.text_field :lastname, class: 'form-control'
+
+        .form-group
+          = f.label :email
+          = f.email_field :email, class: 'form-control'
+
+        .form-group
+          = f.label :phone_1
+          = f.email_field :phone_1, class: 'form-control'
+        .form-group
+          = f.label :phone_2
+          = f.email_field :phone_2, class: 'form-control'
+
+        .form-group
+          = f.label :address_1
+          = f.text_field :address_1, class: 'form-control'
+
+        .form-group
+          = f.label :address_2
+          = f.text_field :address_2, class: 'form-control'
+
+        %fieldset
+          .row
+            .col-md-6
+              .form-group
+                = f.label :zipcode
+                = f.text_field :zipcode, class: 'form-control'
+            .col-md-6
+              .form-group
+                = f.label :town
+                = f.text_field :town, class: 'form-control'
+
+        .form-group
+          %button.btn.btn-success{type: :submit}
+            Enregistrer

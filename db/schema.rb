@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180918154644) do
+ActiveRecord::Schema.define(version: 20180919135800) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -37,6 +37,19 @@ ActiveRecord::Schema.define(version: 20180918154644) do
 
   add_index "events", ["organizer_id", "organizer_type"], name: "index_events_on_organizer_id_and_organizer_type", using: :btree
 
+  create_table "families", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "address_1",  limit: 255
+    t.string   "address_2",  limit: 255
+    t.string   "zipcode",    limit: 255
+    t.string   "town",       limit: 255
+    t.string   "phone_1",    limit: 255
+    t.string   "phoness_2",  limit: 255
+    t.string   "email",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "members", force: :cascade do |t|
     t.string   "firstname",  limit: 255
     t.string   "lastname",   limit: 255
@@ -50,6 +63,7 @@ ActiveRecord::Schema.define(version: 20180918154644) do
     t.integer  "user_id",    limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.string   "gender",     limit: 255
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -73,6 +87,17 @@ ActiveRecord::Schema.define(version: 20180918154644) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "siblings", force: :cascade do |t|
+    t.integer  "member_id",  limit: 4
+    t.integer  "family_id",  limit: 4
+    t.string   "status",     limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "siblings", ["family_id"], name: "index_siblings_on_family_id", using: :btree
+  add_index "siblings", ["member_id"], name: "index_siblings_on_member_id", using: :btree
 
   create_table "teams", force: :cascade do |t|
     t.string   "label",       limit: 255
@@ -130,4 +155,6 @@ ActiveRecord::Schema.define(version: 20180918154644) do
   add_foreign_key "assignments", "users"
   add_foreign_key "memberships", "teams"
   add_foreign_key "memberships", "users"
+  add_foreign_key "siblings", "families"
+  add_foreign_key "siblings", "members"
 end

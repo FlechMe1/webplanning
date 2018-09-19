@@ -18,7 +18,19 @@
           %span Bénévoles
 
     - if can? :read, Member
-      %li{class: "#{'active' if params[:controller].match(/members/)}"}
-        = link_to members_url do
+      %li.treeview{class: "#{'active menu-open' if params[:controller].match(/members|families/)}"}
+        = link_to '#' do
           = fa_icon "user"
           %span Membres
+          %span.pull-right-container
+            = fa_icon 'angle-left pull-right'
+
+        %ul.treeview-menu
+          %li{class: "#{'active' if params[:controller].match(/members/)}"}
+            = link_to members_url do
+              = fa_icon 'male'
+              Toutes les personnes
+          %li{class: "#{'active' if params[:controller].match(/families/)}"}
+            = link_to families_url do
+              = fa_icon 'sitemap'
+              Toutes les familles

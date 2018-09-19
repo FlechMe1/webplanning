@@ -11,20 +11,30 @@
 %section.content
   .box
     .box-body
-      %table.table.table-bordered.table-striped
+      %table.table.table-bordered.table-striped.table-condensed.table-xs
         %thead
           %tr
             %th Nom
             %th Téléphone
             %th Email
+            %th Adresse
+            %th Famille
             %th
 
         %tbody
           - @members.each do |member|
             %tr
+              %td
+                = fa_icon "#{member.gender}"
+                = member.get_gender
               %td= member.name
-              %td= member.phone_1
+              %td= [member.phone_1, member.phone_2].reject { |c| c.blank? }.join(', ')
               %td= member.email
+              %td= member.full_address
+              %td
+                - unless member.family_id.blank?
+                  = link_to family_path(member.family_id) do
+                    = member.family_name
               %td
                 - if can? :update, member
                   = link_to edit_member_path(member), class: "btn btn-flat btn-success btn-xs" do

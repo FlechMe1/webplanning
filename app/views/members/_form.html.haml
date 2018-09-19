@@ -1,0 +1,74 @@
+= form_for member do |f|
+  .row
+    .col-md-6
+      - if member.errors.any?
+        .callout.callout-danger
+          %h4= "#{pluralize(member.errors.count, "erreur")}"
+          %ul
+            - member.errors.full_messages.each do |msg|
+              %li= msg
+
+      .form-group
+        %label.radio-inline
+          = f.radio_button :gender, :male
+          Mr
+        %label.radio-inline
+          = f.radio_button :gender, :female
+          Mme
+
+      %fieldset
+        .row
+          .col-md-6
+            .form-group
+              = f.label :firstname
+              = f.text_field :firstname, :autofocus => true, class: 'form-control'
+          .col-md-6
+            .form-group
+              = f.label :lastname
+              = f.text_field :lastname, class: 'form-control'
+
+      .form-group
+        = f.label :email
+        = f.email_field :email, class: 'form-control'
+
+      .form-group
+        = f.label :phone_1
+        = f.text_field :phone_1, class: 'form-control'
+
+      .form-group
+        = f.label :phone_2
+        = f.text_field :phone_2, class: 'form-control'
+
+      .form-group
+        = f.label :address_1
+        = f.text_field :address_1, class: 'form-control'
+
+      .form-group
+        = f.label :address_2
+        = f.text_field :address_2, class: 'form-control'
+
+      %fieldset
+        .row
+          .col-md-6
+            .form-group
+              = f.label :zipcode
+              = f.text_field :zipcode, class: 'form-control'
+          .col-md-6
+            .form-group
+              = f.label :town
+              = f.text_field :town, class: 'form-control'
+
+    .col-md-6
+      %h3 Info sur la famille
+      = f.fields_for :sibling do |family_form|
+        .form-group
+          %label Role familial :
+          = family_form.select :status, family_roles, {include_blank: '-- Non renseigné --'}, class: "form-control"
+        .form-group
+          %label Famille :
+          = family_form.select :family_id, families_options, {include_blank: '-- Non attribué --', :disabled => ['--']}, class: 'form-control', size: 8
+
+
+  .form-group
+    %button.btn.btn-success{type: :submit}
+      Enregistrer
