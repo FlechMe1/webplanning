@@ -17,7 +17,7 @@ gem 'haml-rails'
 gem 'high_voltage'
 gem 'mysql2', '~> 0.3.18'
 gem 'therubyracer', :platform=>:ruby
-gem "font-awesome-rails", github: "bokmann/font-awesome-rails", branch: "master"
+gem "font-awesome-rails"
 gem 'toastr-rails'
 gem "cancan"
 gem 'fullcalendar-rails'
