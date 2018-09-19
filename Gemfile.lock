@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/bokmann/font-awesome-rails.git
+  revision: 8ffeaf32fdcf5402c81ee254874e3a69af50c90d
+  branch: master
+  specs:
+    font-awesome-rails (4.7.0.4)
+      railties (>= 3.2, < 6.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -101,8 +109,6 @@ GEM
     faker (1.6.6)
       i18n (~> 0.5)
     ffi (1.9.14)
-    font-awesome-sass (4.6.2)
-      sass (>= 3.2)
     fullcalendar-rails (2.8.0.0)
       jquery-rails (>= 4.0.5, < 5.0.0)
       jquery-ui-rails (>= 5.0.2)
@@ -305,7 +311,7 @@ DEPENDENCIES
   devise_invitable
   factory_girl_rails
   faker
-  font-awesome-sass
+  font-awesome-rails!
   fullcalendar-rails
   haml-rails
   high_voltage

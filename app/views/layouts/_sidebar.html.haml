@@ -2,39 +2,23 @@
   %ul.sidebar-menu
     %li{class: "#{'active' if params[:controller].match(/pages/)}"}
       = link_to root_url do
-        = icon "dashboard"
+        = fa_icon "dashboard"
         %span Mon planning
 
     - if can? :read, Team || current_user.is_leader?
       %li{class: "#{'active' if params[:controller].match(/teams/)}"}
         = link_to teams_url do
-          = icon "users"
+          = fa_icon "users"
           %span Mes équipes
 
     - if can? :read, User
       %li{class: "#{'active' if params[:controller].match(/users/)}"}
         = link_to users_url do
-          = icon "user"
-          %span Membres
+          = fa_icon "leaf"
+          %span Bénévoles
 
-    -# %li.treeview{class: "#{'active' if params[:controller].match(/continents|countries|towns/)}"}
-    -#   %a{:href => "#"}
-    -#     %i.fa.fa-globe
-    -#     %span Geolocalisation
-    -#     %i.fa.fa-angle-left.pull-right
-    -#   %ul.treeview-menu
-    -#     - if can?(:read, :continent)
-    -#       %li{class: "#{'active' if params[:controller].match(/continents/)}"}
-    -#         = link_to admin_continents_path do
-    -#           %i.fa.fa-globe
-    -#           Continents
-    -#     - if can?(:read, :country)
-    -#       %li{class: "#{'active' if params[:controller].match(/countries/)}"}
-    -#         = link_to admin_countries_path do
-    -#           %i.fa.fa-globe
-    -#           Pays
-    -#     - if can?(:read, :town)
-    -#       %li{class: "#{'active' if params[:controller].match(/towns/)}"}
-    -#         = link_to admin_towns_path do
-    -#           %i.fa.fa-globe
-    -#           Villes
+    - if can? :read, Member
+      %li{class: "#{'active' if params[:controller].match(/members/)}"}
+        = link_to members_url do
+          = fa_icon "user"
+          %span Membres

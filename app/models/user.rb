@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :assignments, dependent: :destroy
   has_many :assigned_events, through: :assignments
 
+  has_one :member
+
   before_create :set_default_role
 
   after_initialize :set_default_role, :if => :new_record?

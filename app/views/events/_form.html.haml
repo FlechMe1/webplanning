@@ -4,7 +4,7 @@
   - else
     %h4.modal-title.pull-left Modifier un événement
   %button.close{type: 'button', data:{dismiss: 'modal'}, aria:{label: 'Close'}}
-    = icon "times"
+    = fa_icon "times"
 
 = form_for event, remote: true do |f|
   = f.hidden_field :organizer_type

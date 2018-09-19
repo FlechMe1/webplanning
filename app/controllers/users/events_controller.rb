@@ -22,7 +22,7 @@ class Users::EventsController < ApplicationController
           end
         end
         cal.publish
-        render plain: cal.to_ical
+        send_data plain: cal.to_ical
       }
     end
   end

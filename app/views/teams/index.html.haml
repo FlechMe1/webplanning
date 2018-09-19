@@ -4,7 +4,7 @@
     %small Liste des équipes
   .actions
     = link_to new_team_path, class: "btn btn-flat btn-primary" do
-      = icon "plus"
+      = fa_icon "plus"
       Ajouter
 
 %section.content
@@ -23,17 +23,17 @@
               %tr
                 %td
                   = link_to team do
-                    = icon "square", style: "color: #{team.color}"
+                    = fa_icon "square", style: "color: #{team.color}"
                     = team.label
                 %td= team.users.count
                 %td
                   - if can? :edit, team
                     = link_to edit_team_path(team), class: "btn btn-flat btn-success btn-xs" do
-                      = icon "edit"
+                      = fa_icon "edit"
                       Modifier
                   - if can? :delete, team
                     = link_to team, method: :delete, data:{confirm: "Êtes vous sûr de vouloir supprimer cette équipe ?"}, class: "btn btn-flat btn-danger btn-xs" do
-                      = icon "trash"
+                      = fa_icon "trash"
                       Supprimer
 
       = will_paginate @teams, renderer: BootstrapPagination::Rails, next_label: ">", previous_label: "<"

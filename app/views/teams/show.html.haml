@@ -1,6 +1,6 @@
 %section.content-header
   = link_to teams_url, class: 'btn btn-sm btn-info pull-right' do
-    = icon "angle-left"
+    = fa_icon "angle-left"
     Mes équipes
 
   %h1.pull-left
@@ -14,7 +14,7 @@
     .col-md-6
       .box
         .box-header.with-border
-          = icon 'calendar'
+          = fa_icon 'calendar'
           Planning
         .box-body
           #team-planning.calendar{data:{url: new_team_event_path(@team, format: :js)}}
@@ -22,7 +22,7 @@
     .col-md-6
       .box
         .box-header.with-border
-          = icon 'users'
+          = fa_icon 'users'
           Membres
         .box-body
           %table.table.table-bordered.table-striped
@@ -39,24 +39,24 @@
                   %td= user.name
                   %td= user.email
                   %td
-                    = icon "#{(@team.is_leader?(user.id)) ? 'check text-success' : 'times text-danger'}"
+                    = fa_icon "#{(@team.is_leader?(user.id)) ? 'check text-success' : 'times text-danger'}"
                   %td
                     = link_to team_membership_path(@team, user), method: :delete, data:{confirm: "Êtes vous sûr de vouloir supprimer ce membre de l'équipe ?"}, class: "btn btn-flat btn-danger btn-xs" do
-                      = icon "trash"
+                      = fa_icon "trash"
 
                     - if @team.is_leader?(user.id)
                       = link_to team_destitute_membership_path(@team, user), class: "btn btn-flat btn-xs btn-danger" do
-                        = icon "minus"
+                        = fa_icon "minus"
                     - else
                       = link_to team_promute_membership_path(@team, user), class: "btn btn-flat btn-xs btn-info" do
-                        = icon "plus"
+                        = fa_icon "plus"
 
 
           = will_paginate @members, renderer: BootstrapPagination::Rails, next_label: ">", previous_label: "<"
 
       .box.box-success
         .box-header.with-border
-          = icon "plus"
+          = fa_icon "plus"
           Ajouter un membre à l'équipe
         .box-body
           = form_for [@team, @membership] do |f|

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160915114053) do
+ActiveRecord::Schema.define(version: 20180918154644) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -36,6 +36,21 @@ ActiveRecord::Schema.define(version: 20160915114053) do
   end
 
   add_index "events", ["organizer_id", "organizer_type"], name: "index_events_on_organizer_id_and_organizer_type", using: :btree
+
+  create_table "members", force: :cascade do |t|
+    t.string   "firstname",  limit: 255
+    t.string   "lastname",   limit: 255
+    t.string   "email",      limit: 255
+    t.string   "address_1",  limit: 255
+    t.string   "address_2",  limit: 255
+    t.string   "zipcode",    limit: 255
+    t.string   "town",       limit: 255
+    t.string   "phone_1",    limit: 255
+    t.string   "phone_2",    limit: 255
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id",    limit: 4

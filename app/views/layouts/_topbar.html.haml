@@ -17,7 +17,7 @@
       - unless current_user.blank?
         %li.dropdown.user.user-menu
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-            = icon "user"
+            = fa_icon "user"
             %span.hidden-xs= current_user.name
           %ul.dropdown-menu
             / Menu Footer
