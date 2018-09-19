@@ -22,6 +22,8 @@ class Users::EventsController < ApplicationController
           end
         end
         @cal.publish
+
+        render body: @cal.to_ical, , mime_type: Mime::Type.lookup("text/calendar")
       }
     end
   end
