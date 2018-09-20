@@ -47,8 +47,10 @@
                 = link_to "http://maps.google.com/?q=#{@member.full_address}", target: "_blank" do
                   = @member.full_address
             %li
-              = fa_icon 'calendar fa-li'
-              Date de naissance: 26/06/1990 (28 ans) TODO
+              = fa_icon 'birthday-cake fa-li'
+              Date de naissance:
+              = "#{l @member.birthdate} (#{@member.age} ans)" unless @member.birthdate.blank?
+
             %li
               = fa_icon 'phone fa-li'
               Téléphone:

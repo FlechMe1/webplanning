@@ -15,6 +15,7 @@ class MembersController < ApplicationController
 
   def new
     @member = Member.new
+    @member.build_sibling
   end
 
   def create
@@ -45,7 +46,7 @@ class MembersController < ApplicationController
     end
 
     def member_params
-      params.required(:member).permit(:gender, :firstname, :lastname, :email, :phone_1, :phone_2, :address_1,
+      params.required(:member).permit(:gender, :firstname, :lastname, :birthdate, :email, :phone_1, :phone_2, :address_1,
                                        :user_id, :address_2, :zipcode, :town, sibling_attributes: [:family_id, :status])
     end
 

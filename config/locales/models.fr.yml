@@ -11,12 +11,31 @@ fr:
         current_password: "Mot de passe actuel"
         password: "Mot de passe"
         password_confirmation: "Confirmer le mot de passe"
+      member:
+        firstname: "Prénom"
+        lastname: "Nom"
+        email: "Email"
+        birthdate: "Date d'Anniversaire"
+        phone_1: Téléphone principal
+        phone_2: Téléphone secondaire
+        address_1: Adresse
+        address_2: Complément d'adresse
+        zipcode: Code postal
+        town: Ville
       sibling:
         status: Statut familial
         available_status:
           father: Père
           mother: Mère
           child: Enfant
+      family:
+        name: Nom de famille
+        email: Email
+        phone_1: Téléphone principal
+        address_1: Adresse
+        address_2: Complément d'adresse
+        zipcode: Code postal
+        town: Ville
     errors:
       models:
         user:

@@ -30,12 +30,6 @@
           = f.label :email
           = f.email_field :email, class: 'form-control'
 
-        .form-group
-          = f.label :birthdate
-          = f.text_field :birthdate, class: "form-control", value: "#{l @user.birthdate unless @user.birthdate.blank?}"
-          %span.help-block Format 'jj/mm/aaaa'
-
-
         %fieldset
           %p Si vous ne souhaitez pas changer votre mot de passe, laisser ces champs vides
 

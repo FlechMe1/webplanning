@@ -34,4 +34,8 @@ class Member < ActiveRecord::Base
   def has_user?
     !user.blank?
   end
+
+  def age
+    ((Time.zone.now - birthdate.to_time) / 1.year.seconds).floor
+  end
 end

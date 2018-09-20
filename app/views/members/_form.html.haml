@@ -28,6 +28,11 @@
               = f.text_field :lastname, class: 'form-control'
 
       .form-group
+        = f.label :birthdate
+        = f.date_field :birthdate, class: "form-control", value: "#{l member.birthdate unless member.birthdate.blank?}"
+        %span.help-block Format 'jj/mm/aaaa'
+
+      .form-group
         = f.label :email
         = f.email_field :email, class: 'form-control'
 
