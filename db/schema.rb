@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180920162107) do
+ActiveRecord::Schema.define(version: 20180920191310) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -61,12 +61,13 @@ ActiveRecord::Schema.define(version: 20180920162107) do
     t.string   "phone_1",    limit: 255
     t.string   "phone_2",    limit: 255
     t.integer  "user_id",    limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.string   "gender",     limit: 255
     t.date     "bithdate"
     t.date     "birthdate"
     t.boolean  "cgu"
+    t.string   "category",   limit: 255, default: "contact"
   end
 
   create_table "memberships", force: :cascade do |t|

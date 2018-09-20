@@ -28,6 +28,10 @@ class Member < ActiveRecord::Base
     end
   end
 
+  def get_category
+    I18n.t("activerecord.attributes.member.categories.#{category}")
+  end
+
   def has_family?
     !family.blank?
   end

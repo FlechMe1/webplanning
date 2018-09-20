@@ -14,11 +14,13 @@
       %table.table.table-bordered.table-striped.table-condensed.table-xs
         %thead
           %tr
+            %th Civilité
             %th Nom
             %th Téléphone
             %th Email
             %th Adresse
             %th Famille
+            %th Catégorie
             %th
 
         %tbody
@@ -38,6 +40,8 @@
                 - unless member.family_id.blank?
                   = link_to family_path(member.family_id) do
                     = member.family_name
+              %td
+                = select_tag :category, options_for_select(categories_options, member.category), class: "form-control input-sm"
               %td
                 - if can? :update, member
                   = link_to edit_member_path(member), class: "btn btn-flat btn-success btn-xs" do

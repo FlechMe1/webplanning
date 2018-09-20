@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   authenticated :user do
     root to: 'pages#home', as: :home
 
-
     resources :events
     resources :members
     resources :families
@@ -27,7 +26,7 @@ Rails.application.routes.draw do
   end
 
   namespace :public do
-    root to: 'pages#home'
+    root to: 'pages#home', as: :public
     resources :members
   end
 
