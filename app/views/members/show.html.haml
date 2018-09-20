@@ -12,21 +12,20 @@
   .row
     .col-md-4
       .box.box-primary
-        .box-body
-          .box-body.box-profile
-            %h3.profile-username.text-center
-              = fa_icon "#{@member.gender}"
-              = @member.get_gender
-              = @member.name
-            - if @member.has_family?
-              %p.text-muted.text-center
-                = @member.sibling_get_status
-                de la famille
-                = link_to @member.family do
-                  = @member.family_name
+        .box-body.box-profile
+          %h3.profile-username.text-center
+            = fa_icon "#{@member.gender}"
+            = @member.get_gender
+            = @member.name
+          - if @member.has_family?
+            %p.text-muted.text-center
+              = @member.sibling_get_status
+              de la famille
+              = link_to @member.family do
+                = @member.family_name
 
-            = link_to edit_member_path(@member), class: "btn btn-block btn-flat btn-primary" do
-              %b Editer
+          = link_to edit_member_path(@member), class: "btn btn-block btn-flat btn-primary" do
+            %b Editer
 
       .box.box-primary
         .box-header.with-border
@@ -97,7 +96,7 @@
               = form_for @member do |f|
                 = f.hidden_field :user_id, value: @match.id
                 %button.btn.btn-warning.btn-flat{type: :submit}
-                  Associer ce membre à ce bénévole
+                  Associer ce membre et ce bénévole
             - else
               = form_for :user, :as => :user, :url => invitation_path(User), :html => {:method => :post} do |f|
                 = f.hidden_field :firstname, value: @member.firstname

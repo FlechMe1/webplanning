@@ -1,0 +1,74 @@
+%section.content-header
+  %h1
+    Bénévoles
+    %small Profil du bénévole
+  - if can? :update, @user
+    .actions
+      = link_to edit_user_path(@user), class: "btn btn-flat btn-success" do
+        = fa_icon "edit"
+        Modifier
+
+%section.content
+  .row
+    .col-md-4
+      .box.box-primary
+        .box-body
+          - if !@member.blank?
+            %h3.profile-username.text-center
+              = fa_icon "#{@member.gender}"
+              = @member.get_gender
+              = @member.name
+            - if @member.has_family?
+              %p.text-muted.text-center
+                = @member.sibling_get_status
+                de la famille
+                = link_to @member.family do
+                  = @member.family_name
+
+          - else
+            %p Le bénévole n'a pas encore de fiche membre
+            - if @match
+              %p
+                Il semble qu'un membre utilise la même adresse email :
+                = link_to @match do
+                  = "#{@match.name} (#{@match.email})"
+
+              = form_for @match do |f|
+                = f.hidden_field :user_id, value: @user.id
+                %button.btn.btn-warning.btn-flat{type: :submit}
+                  Associer ce membre et ce bénévole
+
+            - else
+              = form_for Member.new do |f|
+                = f.hidden_field :firstname, value: @user.firstname
+                = f.hidden_field :lastname, value: @user.lastname
+                = f.hidden_field :email, value: @user.email
+                = f.hidden_field :user_id, value: @user.id
+
+                %button.btn.btn-warning.btn-flat{type: :submit}
+                  Créer sa fiche membre
+
+
+
+
+    .col-md-8
+      .box.box-success
+        .box-header.with-border
+          %h3.box-title.text-center Fiche bénévole
+
+        .box-body
+          - if @user
+            .row
+              .col-md-8
+                #calendar
+              .col-md-4
+                %h3.page-header Ses équipes
+                - @user.teams.each do |team|
+                  %p
+                    = link_to team do
+                      = fa_icon "square", style: "color: #{team.color}"
+                      = team.label
+
+
+- content_for :scripts do
+  = render "scripts"

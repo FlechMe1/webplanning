@@ -25,10 +25,10 @@
           - @users.each do |user|
             %tr
               %td
-                = user.name
-                \-
-                = link_to [user, :events], class: 'text-small' do
-                  Consulter son planning
+                = link_to user do
+                  = fa_icon 'eye'
+                  = user.name
+
               %td= user.email
               - if can? :update, User
                 %td

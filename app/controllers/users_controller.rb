@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @member = @user.member
+    @match = Member.find_by_email(@user.email) if @member.blank?
   end
 
   # GET /users/1/edit
