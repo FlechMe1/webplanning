@@ -6,6 +6,7 @@ class Member < ActiveRecord::Base
   accepts_nested_attributes_for :sibling
 
   delegate :name, :id, :to => :family, :prefix => true, allow_nil: true
+  delegate :get_status, :to => :sibling, :prefix => true, allow_nil: true
 
   validates :gender, :lastname, :firstname, presence: true
 
@@ -24,5 +25,13 @@ class Member < ActiveRecord::Base
     when 'female'
       "Mme"
     end
+  end
+
+  def has_family?
+    !family.blank?
+  end
+
+  def has_user?
+    !user.blank?
   end
 end

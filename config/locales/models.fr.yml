@@ -11,6 +11,12 @@ fr:
         current_password: "Mot de passe actuel"
         password: "Mot de passe"
         password_confirmation: "Confirmer le mot de passe"
+      sibling:
+        status: Statut familial
+        available_status:
+          father: Père
+          mother: Mère
+          child: Enfant
     errors:
       models:
         user:

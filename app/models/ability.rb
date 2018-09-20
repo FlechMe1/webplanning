@@ -15,7 +15,7 @@ class Ability
       can :read, Team, id: team_member_ids
       can [:read, :update], Team, id: team_leader_ids
       can [:read,], Event, id: events_ids
-      can [:read, :create], User
+      can [:read, :create], User unless team_leader_ids.blank?
     end
   end
 end

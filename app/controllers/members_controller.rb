@@ -6,6 +6,13 @@ class MembersController < ApplicationController
     @members = Member.order('lastname ASC').paginate(:page => params[:page], :per_page => 25)
   end
 
+  def show
+    @user = @member.user
+    if @user.blank?
+      @match = User.find_by_email(@member.email) if @member.email?
+    end
+  end
+
   def new
     @member = Member.new
   end
@@ -26,7 +33,7 @@ class MembersController < ApplicationController
 
   def update
     if @member.update(member_params)
-      redirect_to :members, notice: 'Membre mis à jour'
+      redirect_to @member, notice: 'Membre mis à jour'
     else
       render :edit
     end
@@ -39,7 +46,7 @@ class MembersController < ApplicationController
 
     def member_params
       params.required(:member).permit(:gender, :firstname, :lastname, :email, :phone_1, :phone_2, :address_1,
-                                        :address_2, :zipcode, :town, sibling_attributes: [:family_id, :status])
+                                       :user_id, :address_2, :zipcode, :town, sibling_attributes: [:family_id, :status])
     end
 
     def create_family

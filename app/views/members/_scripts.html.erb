@@ -1,0 +1,14 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+    var sources = [
+      <% @user.teams.each do |team| %>
+        {
+          url: "/teams/<%=team.id%>/events.json?user_id=<%=@user.id%>",
+          color: "<%= (team.color.blank?) ? '#f5fef1' : team.color %>"
+        },
+      <% end %>
+    ];
+
+    init_fullCalendar('#calendar', sources, false)
+  })
+</script>

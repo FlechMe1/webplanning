@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
 
 
   def name
-    if !firstname.blank? && !lastname.blank?
+    if firstname? && lastname?
       "#{firstname} #{lastname}"
     else
       email

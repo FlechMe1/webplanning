@@ -1,0 +1,110 @@
+%section.content-header
+  %h1
+    Membres
+    %small Profil de la personne
+  - if can? :update, @member
+    .actions
+      = link_to edit_member_path(@member), class: "btn btn-flat btn-success" do
+        = fa_icon "edit"
+        Modifier
+
+%section.content
+  .row
+    .col-md-4
+      .box.box-primary
+        .box-body
+          .box-body.box-profile
+            %h3.profile-username.text-center
+              = fa_icon "#{@member.gender}"
+              = @member.get_gender
+              = @member.name
+            - if @member.has_family?
+              %p.text-muted.text-center
+                = @member.sibling_get_status
+                de la famille
+                = link_to @member.family do
+                  = @member.family_name
+
+            = link_to edit_member_path(@member), class: "btn btn-block btn-flat btn-primary" do
+              %b Editer
+
+      .box.box-primary
+        .box-header.with-border
+          %h3.box-title.text-center À propos
+
+        .box-body
+          %ul.fa-ul
+            %li
+              = fa_icon 'sitemap fa-li'
+              Famille:
+              %span
+                = link_to @member.family do
+                  = @member.family_name
+
+            %li
+              = fa_icon 'home fa-li'
+              Adresse:
+              %span
+                = link_to "http://maps.google.com/?q=#{@member.full_address}", target: "_blank" do
+                  = @member.full_address
+            %li
+              = fa_icon 'calendar fa-li'
+              Date de naissance: 26/06/1990 (28 ans) TODO
+            %li
+              = fa_icon 'phone fa-li'
+              Téléphone:
+              %span
+                = link_to @member.phone_1, "tel:#{@member.phone_1}"
+            %li
+              = fa_icon 'envelope fa-li'
+              Email:
+              %span
+                = link_to @member.email, "mailto:#{@member.email}"
+
+
+    .col-md-8
+      .box.box-success
+        .box-header.with-border
+          %h3.box-title.text-center Fiche bénévole
+
+        .box-body
+          - if @user
+            %p
+              = fa_icon 'envelope'
+              Email du bénévole :
+              %small.text-muted (peut être différent de sa fiche membre)
+              %span
+                = link_to @member.email, "mailto:#{@member.email}"
+
+            .row
+              .col-md-8
+                #calendar
+              .col-md-4
+                %h3.page-header Ses équipes
+                - @user.teams.each do |team|
+                  %p
+                    = link_to team do
+                      = fa_icon "square", style: "color: #{team.color}"
+                      = team.label
+          - else
+            %p Ce membre n'a pas encore de fiche bénévole.
+            - if @match
+              %p
+                Il semble qu'un bénévole utilise la même adresse email :
+                = link_to @match do
+                  = "#{@match.name} (#{@match.email})"
+
+              = form_for @member do |f|
+                = f.hidden_field :user_id, value: @match.id
+                %button.btn.btn-warning.btn-flat{type: :submit}
+                  Associer ce membre à ce bénévole
+            - else
+              = form_for :user, :as => :user, :url => invitation_path(User), :html => {:method => :post} do |f|
+                = f.hidden_field :firstname, value: @member.firstname
+                = f.hidden_field :lastname, value: @member.lastname
+                = f.hidden_field :email, value: @member.email
+                %button.btn.btn-warning.btn-flat{type: :submit}
+                  Créer sa fiche bénévole
+- if @user
+  - content_for :scripts do
+    = render "scripts"

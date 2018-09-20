@@ -27,7 +27,10 @@
               %td
                 = fa_icon "#{member.gender}"
                 = member.get_gender
-              %td= member.name
+              %td
+                = link_to member do
+                  = fa_icon 'eye'
+                  = member.name
               %td= [member.phone_1, member.phone_2].reject { |c| c.blank? }.join(', ')
               %td= member.email
               %td= member.full_address
