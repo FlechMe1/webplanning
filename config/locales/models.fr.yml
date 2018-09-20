@@ -12,6 +12,7 @@ fr:
         password: "Mot de passe"
         password_confirmation: "Confirmer le mot de passe"
       member:
+        gender: "Sexe"
         firstname: "Prénom"
         lastname: "Nom"
         email: "Email"
@@ -22,6 +23,7 @@ fr:
         address_2: Complément d'adresse
         zipcode: Code postal
         town: Ville
+        cgu: Protections des données
       sibling:
         status: Statut familial
         available_status:

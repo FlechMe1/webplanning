@@ -26,6 +26,11 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :public do
+    root to: 'pages#home'
+    resources :members
+  end
+
   get '/mon-planning/:user_id', to: 'schedules#index', as: :schedule
   root to: redirect('/users/sign_in')
 

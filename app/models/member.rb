@@ -9,6 +9,7 @@ class Member < ActiveRecord::Base
   delegate :get_status, :to => :sibling, :prefix => true, allow_nil: true
 
   validates :gender, :lastname, :firstname, presence: true
+  validates :cgu, acceptance: {accept: true} , on: :create, allow_nil: false
 
   def name
     lastname + " " + firstname

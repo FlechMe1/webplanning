@@ -1,50 +1,20 @@
-class MembersController < ApplicationController
-  before_action :set_member, only: [:show, :edit, :update, :destroy]
+class Public::MembersController < ApplicationController
+
   before_action :create_family, only: [:create, :update]
 
-  def index
-    @members = Member.order('lastname ASC').paginate(:page => params[:page], :per_page => 25)
-  end
-
-  def show
-    @user = @member.user
-    if @user.blank?
-      @match = User.find_by_email(@member.email) if @member.email?
-    end
-  end
-
-  def new
-    @member = Member.new
-    @member.build_sibling
-  end
+  layout 'public'
 
   def create
     @member = Member.new(member_params)
 
     if @member.save
-      redirect_to :members, notice: 'Un nouveau membre a été ajouté'
+      redirect_to public_home_page, notice: 'Votre inscription a été prise en compte'
     else
-      render :new
-    end
-  end
-
-  def edit
-    @member.build_sibling if @member.sibling.blank?
-  end
-
-  def update
-    if @member.update(member_params)
-      redirect_to @member, notice: 'Membre mis à jour'
-    else
-      render :edit
+      render 'public/pages/home'
     end
   end
 
   private
-    def set_member
-      @member = Member.find params[:id]
-    end
-
     def member_params
       params.required(:member).permit(:gender, :firstname, :lastname, :birthdate, :email, :phone_1, :phone_2, :address_1, :cgu,
                                        :user_id, :address_2, :zipcode, :town, sibling_attributes: [:family_id, :status])
@@ -60,8 +30,6 @@ class MembersController < ApplicationController
         @family.zipcode = params[:member][:zipcode]
         @family.town = params[:member][:town]
         @family.save
-
-        puts @family.inspect
 
         params[:member][:sibling_attributes][:family_id] = @family.id
       end

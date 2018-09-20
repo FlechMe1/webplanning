@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180920131040) do
+ActiveRecord::Schema.define(version: 20180920162107) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20180920131040) do
     t.string   "gender",     limit: 255
     t.date     "bithdate"
     t.date     "birthdate"
+    t.boolean  "cgu"
   end
 
   create_table "memberships", force: :cascade do |t|

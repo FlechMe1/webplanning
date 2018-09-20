@@ -1,0 +1,40 @@
+%head
+  %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+  %title ADD Blois - Plannings
+
+  = stylesheet_link_tag 'application', media: 'all'
+  = csrf_meta_tags
+
+  %body.skin-blue.layout-top-nav{:style => "height: auto; min-height: 100%;"}
+    .wrapper{:style => "height: auto; min-height: 100%;"}
+      %header.main-header
+        %nav.navbar.navbar-static-top
+          .container
+            .navbar-header
+              = link_to public_root_path, class: 'navbar-brand' do
+                Eglise de
+                %b Blois
+              %button.navbar-toggle.collapsed{"data-target" => "#navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+                %i.fa.fa-bars
+
+
+      .content-wrapper
+        .container
+          = yield
+
+
+      %footer.main-footer
+        .container
+          .pull-right.hidden-xs
+            %b Version
+            1.0
+          %strong
+            Copyright ©
+            = Date.today.year
+            = link_to "http://www.eglisedeblois.fr", target: "_blank", rel: :nofollow do
+              Eglise Evangélique de Blois
+          Tous droits réservés.
+
+    = javascript_include_tag 'application'
+    = custom_bootstrap_flash
+    = yield :scripts
