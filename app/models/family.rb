@@ -6,6 +6,12 @@ class Family < ActiveRecord::Base
   validates :name, presence: true
 
   def full_address
-    "#{address_1} #{address_2} - #{zipcode} #{town}"
+    address = ""
+    address += "#{address_1}" if address_1?
+    address += " #{address_2}" if address_2?
+    address += " #{zipcode}" if zipcode?
+    address += " #{town}" if town?
+
+    address
   end
 end
