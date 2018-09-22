@@ -46,8 +46,30 @@ $(document).ready(function(){
     }
   });
 
+  $('.category_select').on('change', function(){
+
+    member_id = $(this).data('member-id');
+    category = $(this).val()
+
+    if(member_id){
+      change_category(member_id, category)
+    }
+
+  });
+
 
 });
+
+function change_category(member_id, category){
+  $.ajax({
+    url: '/members/'+member_id+'.js',
+    method: 'PATCH',
+    data: {'member': {'category': category}},
+    success: function(){
+      toastr.success('Membre mis à jour')
+    }
+  })
+}
 
 function init_fullCalendar(selector, sources, selectable, new_event_link){
   $(selector).fullCalendar({

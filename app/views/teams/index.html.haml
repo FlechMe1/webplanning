@@ -2,10 +2,11 @@
   %h1
     Equipes
     %small Liste des équipes
-  .actions
-    = link_to new_team_path, class: "btn btn-flat btn-primary" do
-      = fa_icon "plus"
-      Ajouter
+  - if can? :create, Team
+    .actions
+      = link_to new_team_path, class: "btn btn-flat btn-primary" do
+        = fa_icon "plus"
+        Ajouter
 
 %section.content
   .box

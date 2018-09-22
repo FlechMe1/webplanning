@@ -41,7 +41,7 @@
                   = link_to family_path(member.family_id) do
                     = member.family_name
               %td
-                = select_tag :category, options_for_select(categories_options, member.category), class: "form-control input-sm"
+                = select_tag :category, options_for_select(categories_options, member.category), class: "form-control input-sm category_select", data:{'member-id' => member.id}
               %td
                 - if can? :update, member
                   = link_to edit_member_path(member), class: "btn btn-flat btn-success btn-xs" do

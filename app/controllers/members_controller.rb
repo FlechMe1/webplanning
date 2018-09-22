@@ -33,10 +33,14 @@ class MembersController < ApplicationController
   end
 
   def update
-    if @member.update(member_params)
-      redirect_to @member, notice: 'Membre mis à jour'
-    else
-      render :edit
+    respond_to do |format|
+      if @member.update(member_params)
+        format.html { redirect_to @member, notice: 'Membre mis à jour' }
+        format.js
+      else
+        format.html { render :edit }
+        format.js
+      end
     end
   end
 
@@ -46,7 +50,8 @@ class MembersController < ApplicationController
     end
 
     def member_params
-      params.required(:member).permit(:gender, :firstname, :lastname, :birthdate, :email, :phone_1, :phone_2, :address_1, :cgu,
+      params.required(:member).permit(:gender, :firstname, :lastname, :birthdate, :email, :phone_1,
+                                      :phone_2, :address_1, :cgu, :category,
                                        :user_id, :address_2, :zipcode, :town, sibling_attributes: [:family_id, :status])
     end
 

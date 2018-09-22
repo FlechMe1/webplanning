@@ -1,4 +1,5 @@
 class Member < ActiveRecord::Base
+  include Tokenable
 
   belongs_to :user
   has_one :sibling, :dependent => :destroy
@@ -10,6 +11,8 @@ class Member < ActiveRecord::Base
 
   validates :gender, :lastname, :firstname, presence: true
   validates :cgu, acceptance: {accept: true} , on: :create, allow_nil: false
+
+  after_create :send_access_link
 
   def name
     lastname + " " + firstname
@@ -42,5 +45,9 @@ class Member < ActiveRecord::Base
 
   def age
     ((Time.zone.now - birthdate.to_time) / 1.year.seconds).floor
+  end
+
+  def send_access_link
+    Mailer.send_access_link(self).deliver
   end
 end

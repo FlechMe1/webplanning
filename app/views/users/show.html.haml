@@ -44,6 +44,7 @@
                 = f.hidden_field :lastname, value: @user.lastname
                 = f.hidden_field :email, value: @user.email
                 = f.hidden_field :user_id, value: @user.id
+                = f.hidden_field :cgu, value: true
 
                 %button.btn.btn-warning.btn-flat{type: :submit}
                   Créer sa fiche membre
