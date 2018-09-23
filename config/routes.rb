@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   namespace :public do
     root to: 'pages#home'
 
-    patch '/members', to: 'members#create', as: :members
+    post '/members', to: 'members#create', as: :members
     get '/informations-personnelles', to: 'members#show', as: :member
     get '/informations-personnelles/modifier', to: 'members#edit', as: :edit_member
     patch '/informations-personnelles/modifier', to: 'members#update', as: :update_member
