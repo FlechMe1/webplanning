@@ -12,7 +12,7 @@ class Public::MembersController < ApplicationController
     @member = Member.new(member_params)
 
     if @member.save
-      redirect_to public_home_page, notice: 'Votre inscription a été prise en compte'
+      redirect_to public_root_page, notice: 'Votre inscription a été prise en compte'
     else
       render 'public/pages/home'
     end
