@@ -44,6 +44,11 @@ class MembersController < ApplicationController
     end
   end
 
+  def destroy
+    @member.destroy
+    redirect_to :members, notice: "Membre supprimé"
+  end
+
   private
     def set_member
       @member = Member.find params[:id]
