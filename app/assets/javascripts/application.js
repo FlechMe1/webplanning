@@ -47,16 +47,13 @@ $(document).ready(function(){
   });
 
   $('.category_select').on('change', function(){
-
     member_id = $(this).data('member-id');
     category = $(this).val()
 
     if(member_id){
       change_category(member_id, category)
     }
-
   });
-
 
 });
 

@@ -33,6 +33,15 @@
       %label Description
       = f.text_area :description, class: "form-control", rows: 3
 
+
+    .form-group
+      .checkbox
+        %label
+          = f.check_box :is_public, class: 'is_public_team'
+          L'évènement concerne tout le groupe ?
+
+
+    #assigns{style: "display: #{(event.is_public)? 'none' : 'block'}"}
       %h3 Affectations
       #assignments
         = f.fields_for :assignments do |assignment|

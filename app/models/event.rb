@@ -16,7 +16,6 @@ class Event < ActiveRecord::Base
   end
 
   def self.get_personnal_events(user_id, begin_at = nil, end_at = nil, team_id = nil)
-
     assignments = Assignment.where(user_id: user_id).joins(:event)
 
     if begin_at
@@ -29,6 +28,7 @@ class Event < ActiveRecord::Base
 
     if team_id
       assignments = assignments.where('events.organizer_type = ? AND events.organizer_id = ?', 'Team', team_id)
+      ev = Event.where('events.organizer_type = ? AND events.organizer_id = ? AND is_public = true', 'Team', team_id)
     end
 
     events = []
@@ -36,6 +36,10 @@ class Event < ActiveRecord::Base
       a.event.label = a.event.label + " - " + a.description
       events << a.event
     end
+    ev.each do |e|
+      events << e
+    end
+
     events
   end
 end

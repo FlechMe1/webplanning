@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180921111545) do
+ActiveRecord::Schema.define(version: 20181105091928) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20180921111545) do
     t.integer  "organizer_id",   limit: 4
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.boolean  "is_public"
   end
 
   add_index "events", ["organizer_id", "organizer_type"], name: "index_events_on_organizer_id_and_organizer_type", using: :btree

@@ -5,3 +5,12 @@ jQuery('#event').modal('toggle');
 jQuery('a.remove_fields').on('click', function(e) {
   jQuery(this).parents('.form-inline').fadeOut();
 });
+
+
+jQuery('.is_public_team').on('click', function(){
+  if (jQuery(this).is(':checked')) {
+    jQuery('#assigns').hide();
+  }else{
+    jQuery('#assigns').show();
+  }
+});

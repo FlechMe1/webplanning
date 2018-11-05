@@ -8,11 +8,12 @@
       .box
         .box-body
           #calendar
-
+    .col-md-4
+      .box
+        .box-body
           .form-group
             %label Importer mon calendrier dans Google Agenda
-            = text_field_tag :import, :import, value: schedule_url(current_user.id, format: :ics), class: "form-control readonly"
-
+            = text_field_tag :import, :import, value: schedule_url(current_user.id, format: :ics), class: "form-control readonly", readonly: true
 
 - content_for :scripts do
   = render "pages/scripts"

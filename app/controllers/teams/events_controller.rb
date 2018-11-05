@@ -73,7 +73,7 @@ class Teams::EventsController < ApplicationController
     end
 
     def event_params
-      params.required(:event).permit(:label, :description, :begin_at, :end_at, :organizer_id, :organizer_type,
+      params.required(:event).permit(:label, :description, :begin_at, :end_at, :organizer_id, :organizer_type, :is_public,
                                       assignments_attributes: [:id, :user_id, :description, :_destroy])
     end
 
