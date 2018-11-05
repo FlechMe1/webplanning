@@ -3,7 +3,7 @@ class EventsController < ApplicationController
 
 
   def index
-
+    @teams = Team.order('label ASC')
     respond_to do |format|
       format.html
       format.json {

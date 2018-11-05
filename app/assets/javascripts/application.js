@@ -88,9 +88,11 @@ function init_fullCalendar(selector, sources, selectable, new_event_link){
     },
     eventClick: function(calEvent, jsEvent, view) {
       jsEvent.preventDefault();
-      $.ajax({
-        url: calEvent.url
-      });
+      if(!$(jsEvent.currentTarget).hasClass('not-editable')){
+        $.ajax({
+          url: calEvent.url
+        });
+      }
     }
   });
 }

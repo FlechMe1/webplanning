@@ -1,6 +1,6 @@
 %section.content-header
   %h1.pull-left
-    Evenements de l'église
+    Plannnig de l'église
 
 
   .clearfix
@@ -15,6 +15,18 @@
         .box-body
           #planning.calendar{data:{url: new_event_path(format: :js)}}
 
+    .col-md-4
+      .box
+        .box-body
+          %h3.page-header Légende
+          %ul.list-unstyled
+            - @teams.each do|team|
+              %li
+                = fa_icon "square", style: "color: #{team.color}"
+                = team.label
+            %li
+              = fa_icon "square", style: "color: #000"
+              Évènements publics
 
 
 #event.modal.fade{tabindex: '-1', role: "dialog"}

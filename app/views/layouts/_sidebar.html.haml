@@ -17,11 +17,10 @@
           = fa_icon "leaf"
           %span Bénévoles
 
-    - if can? :manage, Event
-      %li{class: "#{'active' if params[:controller].match(/events/)}"}
-        = link_to events_url do
-          = fa_icon "calendar"
-          %span Evenements
+    %li{class: "#{'active' if params[:controller].match(/events/)}"}
+      = link_to events_url do
+        = fa_icon "calendar"
+        %span Evenements
 
     - if can? :read, Member
       %li.treeview{class: "#{'active menu-open' if params[:controller].match(/members|families/)}"}

@@ -1,10 +1,20 @@
 <script type="text/javascript">
   $(document).ready(function(){
-    var sources = {
-      url: "/events.json",
-      color: "#000"
-    };
+    var sources = [
+      <% @teams.each do |team| %>
+        {
+          url: "/teams/<%=team.id%>/events.json",
+          color: "<%= (team.color.blank?) ? '#f5fef1' : team.color %>",
+          className: 'not-editable'
+        },
+      <% end %>
+      {
+        url: "/events.json",
+        color: "#000",
+        className: '<%= (can? :manage, Event) ? "editable" : "not-editable" %>'
+      }
+    ];
 
-    init_fullCalendar('#planning', sources, true, "/events/new.js")
+    init_fullCalendar('#planning', sources, <%= can? :manage, Event %>, "/events/new.js");
   })
 </script>
