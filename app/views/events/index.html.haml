@@ -1,0 +1,25 @@
+%section.content-header
+  %h1.pull-left
+    Evenements de l'église
+
+
+  .clearfix
+
+%section.content
+  .row
+    .col-md-8
+      .box
+        .box-header.with-border
+          = fa_icon 'calendar'
+          Planning
+        .box-body
+          #planning.calendar{data:{url: new_event_path(format: :js)}}
+
+
+
+#event.modal.fade{tabindex: '-1', role: "dialog"}
+  .modal-dialog{role: "document"}
+    .modal-content
+
+- content_for :scripts do
+  = render "events/script"

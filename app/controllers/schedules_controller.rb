@@ -6,6 +6,7 @@ class SchedulesController < ApplicationController
     respond_to do |format|
       format.ics{
         @events = Event.get_personnal_events(@user.id, DateTime.now)
+        @public_events = Event.get_public_events
         @cal = Icalendar::Calendar.new
         @cal.x_wr_calname = 'EGLISE DE BLOIS - Mon Planning'
         @cal.timezone do |t|
@@ -19,6 +20,14 @@ class SchedulesController < ApplicationController
           end
         end
         @events.each do |ev|
+          @cal.event do |e|
+            e.dtstart     = ev.begin_at.utc
+            e.dtend       = ev.end_at.utc
+            e.summary     = ev.label
+            e.description = ev.label
+          end
+        end
+        @public_events.each do |ev|
           @cal.event do |e|
             e.dtstart     = ev.begin_at.utc
             e.dtend       = ev.end_at.utc

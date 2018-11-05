@@ -1,5 +1,25 @@
-      class EventsController < ApplicationController
+class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+
+
+  def index
+
+    respond_to do |format|
+      format.html
+      format.json {
+        @events = Event.get_public_events(params[:start], params[:end])
+      }
+    end
+  end
+
+  def new
+    @event = Event.new(begin_at: params[:start_at], end_at: params[:end_at])
+
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  end
 
   def show
   end

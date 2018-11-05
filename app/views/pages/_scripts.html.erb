@@ -7,6 +7,10 @@
           color: "<%= (team.color.blank?) ? '#f5fef1' : team.color %>"
         },
       <% end %>
+      {
+        url: "/events.json?public_events=1",
+        color: "#000"
+      }
     ];
 
     init_fullCalendar('#calendar', sources, false)

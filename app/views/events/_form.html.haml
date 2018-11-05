@@ -7,8 +7,6 @@
     = fa_icon "times"
 
 = form_for event do |f|
-  = f.hidden_field :organizer_type
-  = f.hidden_field :organizer_id
   .modal-body
     - if event.errors.any?
       .callout.callout-danger
@@ -34,20 +32,23 @@
       = f.text_area :description, class: "form-control", rows: 3
 
 
-    .form-group
-      .checkbox
-        %label
-          = f.check_box :is_public, class: 'is_public_team'
-          L'évènement concerne tout le groupe ?
+    - if @event.organizer_type? && @event.organizer_id?
+      = f.hidden_field :organizer_type
+      = f.hidden_field :organizer_id
+      .form-group
+        .checkbox
+          %label
+            = f.check_box :is_public, class: 'is_public_team'
+            L'évènement concerne tout le groupe ?
 
 
-    #assigns{style: "display: #{(event.is_public)? 'none' : 'block'}"}
-      %h3 Affectations
-      #assignments
-        = f.fields_for :assignments do |assignment|
-          = render 'events/assignment_fields', f: assignment
-        .links
-          = link_to_add_association 'Ajouter une affectation', f, :assignments, partial: 'events/assignment_fields'
+      #assigns{style: "display: #{(event.is_public)? 'none' : 'block'}"}
+        %h3 Affectations
+        #assignments
+          = f.fields_for :assignments do |assignment|
+            = render 'events/assignment_fields', f: assignment
+          .links
+            = link_to_add_association 'Ajouter une affectation', f, :assignments, partial: 'events/assignment_fields'
 
 
   .modal-footer
