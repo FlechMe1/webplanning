@@ -1,0 +1,16 @@
+%section.content
+  .row.justify-content-center
+    .col-md-6
+      .box
+        .box-body
+          - if @associations.any?
+            - @associations.each do |association|
+              = link_to association, class: 'btn btn-block btn-primary mb-3' do
+                = fa_icon 'dashboard'
+                = association.name
+          - else
+            %p Vous n'avez pas encore d'association
+
+          = link_to new_association_path, class: 'btn btn-block btn-info mb-3' do
+            = fa_icon 'plus'
+            Créer une assocation

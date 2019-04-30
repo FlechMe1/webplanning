@@ -1,0 +1,49 @@
+%section.content-header
+  %h1
+    Bienvenue
+
+%section.content
+  .row
+    .col-md-3
+      .small-box.bg-aqua
+        .inner
+          %h3= @families
+          %p familles
+        .icon
+          = fa_icon 'users', class: 'ion'
+        = link_to association_families_path, class: 'small-box-footer' do
+          Toutes les familles
+          = fa_icon 'arrow-circle-right'
+
+    .col-md-3
+      .small-box.bg-green
+        .inner
+          %h3= @members
+          %p membres
+        .icon
+          = fa_icon 'user', class: 'ion'
+        = link_to association_members_path, class: 'small-box-footer' do
+          Tous les membres
+          = fa_icon 'arrow-circle-right'
+
+    .col-md-3
+      .small-box.bg-orange
+        .inner
+          %h3= @volunteers
+          %p bénévoles
+        .icon
+          = fa_icon 'child', class: 'ion'
+        = link_to association_users_path, class: 'small-box-footer' do
+          Tous les bénévoles
+          = fa_icon 'arrow-circle-right'
+
+    .col-md-3
+      .small-box.bg-red
+        .inner
+          %h3= @teams
+          %p équipes
+        .icon
+          = fa_icon 'gg', class: 'ion'
+        = link_to association_teams_path, class: 'small-box-footer' do
+          Toutes les équipes
+          = fa_icon 'arrow-circle-right'

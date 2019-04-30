@@ -1,6 +1,6 @@
 class Team < ActiveRecord::Base
 
-  has_many :memberships, dependent: :destroy
+  has_many :memberships, dependent: :destroy, as: :team
   has_many :users, through: :memberships
 
   has_many :events, as: :organizer, dependent: :destroy

@@ -1,0 +1,32 @@
+%section.content
+  .row.justify-content-center
+    .col-md-6
+
+      .box
+        .box-body
+          = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+            = devise_error_messages!
+
+            .form-group
+              = f.label :firstname
+              = f.text_field :firstname, class: "form-control"
+
+            .form-group
+              = f.label :lastname
+              = f.text_field :lastname, class: "form-control"
+
+            .form-group
+              = f.label :email
+              = f.email_field :email, autofocus: true, class: "form-control"
+
+            .form-group
+              = f.label :password
+              = f.password_field :password, autocomplete: "off", class: "form-control"
+
+            .form-group
+              = f.label :password_confirmation
+              = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
+
+            .form-group
+              %button.btn.btn-success{type: :submit}
+                Créer mon compte

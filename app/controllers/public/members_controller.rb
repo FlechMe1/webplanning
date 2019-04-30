@@ -8,6 +8,11 @@ class Public::MembersController < ApplicationController
     @user = @member.user
   end
 
+  def new
+    @member = Member.new
+    @member.build_sibling
+  end
+
   def create
     @member = Member.new(member_params)
 

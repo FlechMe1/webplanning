@@ -1,0 +1,67 @@
+%section.content
+  %p
+    = "Bonjour <b>#{current_user.name}</b>, vous êtes sur le point de créer une association.".html_safe
+
+  %h1.h2.py-3.border-bottom.mb-5 Créer une association
+
+  = form_for @association do |f|
+    .row.justify-content-center
+      .col-md-6
+        .p-3.border
+
+          - if @association.errors.any?
+            .callout.callout-danger
+              %h4= "#{pluralize(@association.errors.count, "erreur")}"
+              %ul
+                - @association.errors.full_messages.each do |msg|
+                  %li= msg
+
+          %h2.h3.py-1.border-bottom.mb-3 Information sur la structure
+
+          .form-group
+            %label Nom de votre association
+            = f.text_field :name, class: "form-control"
+
+
+          .form-group
+            %label Adresse
+            = f.text_field :address_1, class: "form-control"
+
+          .form-group
+            %label Complément
+            = f.text_field :address_2, class: "form-control"
+
+          .row
+            .col-md-6
+              .form-group
+                %label Code Postal
+                = f.text_field :zipcode, class: "form-control"
+            .col-md-6
+              .form-group
+                %label Ville
+                = f.text_field :town, class: "form-control"
+
+      .col-md-6
+        .p-3.border
+          %h2.h3.py-1.border-bottom.mb-3 Information de contact
+
+          .form-group
+            %label Email de contact
+            = f.email_field :email, class: "form-control"
+          .form-group
+            %label Téléphone de contact
+            = f.phone_field :phone, class: "form-control"
+
+          .form-group
+            %label Nom du président
+            = f.text_field :president_name, class: "form-control"
+
+          .form-group
+            %label Nom du DPO
+            = f.text_field :dpo_name, class: "form-control"
+            %span.text-muted Le DPO est la personne en charge de la gestion des données personnelles de votre association.
+
+          .form-group
+            %button.btn.btn-success{type: "submit"}
+              Enregistrer
+

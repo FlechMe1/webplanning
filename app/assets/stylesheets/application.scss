@@ -1,6 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic);
 @import "variables";
-@import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
 @import "toastr";
@@ -17,4 +16,10 @@
   position: absolute;
   top: 15px;
   right: 15px;
+}
+.main-header .sidebar-toggle{
+  padding: 0;
+}
+.small-box .icon{
+  top: 10px;
 }

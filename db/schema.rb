@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181105091928) do
+ActiveRecord::Schema.define(version: 20190430103332) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -23,6 +23,20 @@ ActiveRecord::Schema.define(version: 20181105091928) do
 
   add_index "assignments", ["event_id"], name: "index_assignments_on_event_id", using: :btree
   add_index "assignments", ["user_id"], name: "index_assignments_on_user_id", using: :btree
+
+  create_table "associations", force: :cascade do |t|
+    t.string   "name",           limit: 255
+    t.string   "address_1",      limit: 255
+    t.string   "address_2",      limit: 255
+    t.string   "zipcode",        limit: 255
+    t.string   "town",           limit: 255
+    t.string   "email",          limit: 255
+    t.string   "phone",          limit: 255
+    t.string   "president_name", limit: 255
+    t.string   "dpo_name",       limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "events", force: :cascade do |t|
     t.string   "label",          limit: 255
@@ -39,48 +53,51 @@ ActiveRecord::Schema.define(version: 20181105091928) do
   add_index "events", ["organizer_id", "organizer_type"], name: "index_events_on_organizer_id_and_organizer_type", using: :btree
 
   create_table "families", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "address_1",  limit: 255
-    t.string   "address_2",  limit: 255
-    t.string   "zipcode",    limit: 255
-    t.string   "town",       limit: 255
-    t.string   "phone_1",    limit: 255
-    t.string   "phoness_2",  limit: 255
-    t.string   "email",      limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name",           limit: 255
+    t.string   "address_1",      limit: 255
+    t.string   "address_2",      limit: 255
+    t.string   "zipcode",        limit: 255
+    t.string   "town",           limit: 255
+    t.string   "phone_1",        limit: 255
+    t.string   "phoness_2",      limit: 255
+    t.string   "email",          limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "association_id", limit: 4
   end
 
   create_table "members", force: :cascade do |t|
-    t.string   "firstname",  limit: 255
-    t.string   "lastname",   limit: 255
-    t.string   "email",      limit: 255
-    t.string   "address_1",  limit: 255
-    t.string   "address_2",  limit: 255
-    t.string   "zipcode",    limit: 255
-    t.string   "town",       limit: 255
-    t.string   "phone_1",    limit: 255
-    t.string   "phone_2",    limit: 255
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
-    t.string   "gender",     limit: 255
-    t.date     "bithdate"
+    t.string   "firstname",      limit: 255
+    t.string   "lastname",       limit: 255
+    t.string   "email",          limit: 255
+    t.string   "address_1",      limit: 255
+    t.string   "address_2",      limit: 255
+    t.string   "zipcode",        limit: 255
+    t.string   "town",           limit: 255
+    t.string   "phone_1",        limit: 255
+    t.string   "phone_2",        limit: 255
+    t.integer  "user_id",        limit: 4
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.string   "gender",         limit: 255
     t.date     "birthdate"
     t.boolean  "cgu"
-    t.string   "category",   limit: 255, default: "contact"
-    t.string   "token",      limit: 255
+    t.string   "category",       limit: 255, default: "contact"
+    t.string   "token",          limit: 255
+    t.integer  "association_id", limit: 4
   end
 
   create_table "memberships", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.integer  "team_id",    limit: 4
+    t.integer  "user_id",             limit: 4
+    t.integer  "membershipable_id",   limit: 4
     t.boolean  "is_leader"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "membershipable_type", limit: 255
   end
 
-  add_index "memberships", ["team_id"], name: "index_memberships_on_team_id", using: :btree
+  add_index "memberships", ["membershipable_id", "membershipable_type"], name: "index_memberships_on_membershipable_id_and_membershipable_type", using: :btree
+  add_index "memberships", ["membershipable_id"], name: "index_memberships_on_membershipable_id", using: :btree
   add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
@@ -106,11 +123,12 @@ ActiveRecord::Schema.define(version: 20181105091928) do
   add_index "siblings", ["member_id"], name: "index_siblings_on_member_id", using: :btree
 
   create_table "teams", force: :cascade do |t|
-    t.string   "label",       limit: 255
-    t.string   "description", limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.string   "color",       limit: 255
+    t.string   "label",          limit: 255
+    t.string   "description",    limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "color",          limit: 255
+    t.integer  "association_id", limit: 4
   end
 
   create_table "users", force: :cascade do |t|
@@ -158,7 +176,7 @@ ActiveRecord::Schema.define(version: 20181105091928) do
 
   add_foreign_key "assignments", "events"
   add_foreign_key "assignments", "users"
-  add_foreign_key "memberships", "teams"
+  add_foreign_key "memberships", "teams", column: "membershipable_id"
   add_foreign_key "memberships", "users"
   add_foreign_key "siblings", "families"
   add_foreign_key "siblings", "members"

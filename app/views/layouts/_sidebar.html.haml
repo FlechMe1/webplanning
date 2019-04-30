@@ -3,39 +3,4 @@
     %li{class: "#{'active' if params[:controller].match(/pages/)}"}
       = link_to root_url do
         = fa_icon "dashboard"
-        %span Mon planning
-
-    - if can? :read, Team || current_user.is_leader?
-      %li{class: "#{'active' if params[:controller].match(/teams/)}"}
-        = link_to teams_url do
-          = fa_icon "users"
-          %span Mes équipes
-
-    - if can? :read, User
-      %li{class: "#{'active' if params[:controller].match(/users/)}"}
-        = link_to users_url do
-          = fa_icon "leaf"
-          %span Bénévoles
-
-    %li{class: "#{'active' if params[:controller].match(/events/)}"}
-      = link_to events_url do
-        = fa_icon "calendar"
-        %span Evenements
-
-    - if can? :read, Member
-      %li.treeview{class: "#{'active menu-open' if params[:controller].match(/members|families/)}"}
-        = link_to '#' do
-          = fa_icon "user"
-          %span Membres
-          %span.pull-right-container
-            = fa_icon 'angle-left pull-right'
-
-        %ul.treeview-menu
-          %li{class: "#{'active' if params[:controller].match(/members/)}"}
-            = link_to members_url do
-              = fa_icon 'male'
-              Toutes les personnes
-          %li{class: "#{'active' if params[:controller].match(/families/)}"}
-            = link_to families_url do
-              = fa_icon 'sitemap'
-              Toutes les familles
+        %span Accueil

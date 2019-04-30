@@ -1,144 +1,19 @@
-%section.content-header
-  %h1
-    Prise de contact
-  %ol.breadcrumb
-    %li
-      = link_to '/public' do
-        %i.fa.fa-dashboard
-        Accueil
 
-    %li.active Inscription
-/ Main content
-%section.content
-  .box.box-success
+%section.py-5
+  .row
+    .col-md-6
+      .bg-white.p-5.border
+        %p.text-muted
+          Je souhaiterai inscrire mon association :
+        .text-center
+          = link_to new_association_path, class: "btn btn-success" do
+            Inscrire une association
 
-    .box-body
+    .col-md-6
+      .bg-white.p-5.border
+        %p.text-muted
+          J'ai déjà un compte, je souhaite me connecter :
 
-      .callout
-        %h4 Vous allez vous inscrire à la liste des contacts de l'église
-        %p
-          En remplissant et validant ce formulaire, vous allez être inscrit aux listes des contacts de :
-        %address
-          %b L'Eglise Evangélique de Blois
-          %br
-          16 Rue Sainte Anne
-          %br
-          41000 Blois
-        %p
-          L'église est administrée par un bureau dont le président est
-          %b Patrick Boudehent.
-          %br
-          Toutes les données collectées sont administrées par
-          %b Paul Gruson
-          en qualité de DPO (Délégué à la Protection des données).
-
-
-      = form_for [:public, @member] do |f|
-        .row
-          .col-md-6
-            - if @member.errors.any?
-              .callout.callout-danger
-                %h4= "#{pluralize(@member.errors.count, "erreur")}"
-                %ul
-                  - @member.errors.full_messages.each do |msg|
-                    %li= msg
-
-            .form-group
-              %label.radio-inline
-                = f.radio_button :gender, :male
-                Mr
-              %label.radio-inline
-                = f.radio_button :gender, :female
-                Mme
-
-            %fieldset
-              .row
-                .col-md-6
-                  .form-group
-                    = f.label :firstname
-                    = f.text_field :firstname, :autofocus => true, class: 'form-control'
-                .col-md-6
-                  .form-group
-                    = f.label :lastname
-                    = f.text_field :lastname, class: 'form-control'
-
-            .form-group
-              = f.label :birthdate
-              = f.date_field :birthdate, class: "form-control", value: "#{l @member.birthdate unless @member.birthdate.blank?}"
-              %span.help-block Format 'jj/mm/aaaa'
-
-            .form-group
-              = f.label :email
-              = f.email_field :email, class: 'form-control'
-
-            .form-group
-              = f.label :phone_1
-              = f.text_field :phone_1, class: 'form-control'
-
-            .form-group
-              = f.label :phone_2
-              = f.text_field :phone_2, class: 'form-control'
-
-            .form-group
-              = f.label :address_1
-              = f.text_field :address_1, class: 'form-control'
-
-            .form-group
-              = f.label :address_2
-              = f.text_field :address_2, class: 'form-control'
-
-            %fieldset
-              .row
-                .col-md-6
-                  .form-group
-                    = f.label :zipcode
-                    = f.text_field :zipcode, class: 'form-control'
-                .col-md-6
-                  .form-group
-                    = f.label :town
-                    = f.text_field :town, class: 'form-control'
-
-          .col-md-6
-            .callout.callout-info
-              %h4 Vous pouvez également vous inscrire en famille.
-              %p Pour cela, il vous suffit de selectionner votre famille si elle a déjà été créée ou de sélectionner "Créer une famille" sinon.
-            %h3 Info sur la famille
-            = f.fields_for :sibling do |family_form|
-              .form-group
-                %label Role familial :
-                = family_form.select :status, family_roles, {include_blank: '-- Non renseigné --'}, class: "form-control"
-              .form-group
-                %label Famille :
-                = family_form.select :family_id, families_options, {include_blank: '-- Non attribué --', :disabled => ['--']}, class: 'form-control', size: 8
-
-        .callout.callout-warning
-          %p
-            %b Merci de prendre en compte les informations suivantes :
-          %p En remplissant et validant le formulaire ci-dessus, vous acceptez que l'église évangélique de Blois mémorise et utilise vos données personnelles collectées dans ce formulaire pour :
-          %ul
-            %li Le suivi des fidèles de l'église évangélique de Blois
-            %li Le cas échéant, la gestion des équipes de bénévole
-
-          %p De ce fait, vous acceptez que l'église évangélique de Blois communique régulièrement avec vous via les données collectées, si elle le juge nécessaire.
-
-          %hr
-
-          %p Afin de protéger la confidentialité de vos données pesonnelles, l'église évangélique de Blois s'engage à ne pas divulguer, ne pas transmettre, ni partager vos données personnelles avec d'autres entités conformément à la réglementation pour la protection des données de 2018.
-
-          %p
-            Pour exercer vos droits à la consultation, la modification et la suppression de vos données personnelles, vous recevrez après validation de ce formulair un lien d'accès à vos données personnelles.
-            %br
-            Ce lien pourra vous être communiqué sur simple demande.
-
-          %p
-            Vos données personnelles seront stockées dans nos fichiers pour une durée maximale de 2 ans à la suite desquels elles seront supprimées sauf avis contraire de votre part.
-
-        .form-group
-          .checkbox
-            %label
-              = f.check_box :cgu
-              %b En cochant cette case, j'accepte que les informations saisies dans ce formulaire soient utilisées pour les finalités décrites ci-dessus.
-
-        .form-group
-          %button.btn.btn-success{type: :submit}
-            Enregistrer
+        .text-center
+          = link_to new_user_session_path, class: 'btn btn-primary mx-auto' do
+            Se connecter

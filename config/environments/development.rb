@@ -28,8 +28,8 @@ Rails.application.configure do
   config.assets.debug = true
 
   config.action_mailer.smtp_settings = {
-    address: "smtp-relay.sendinblue.com",
-    port: 587,
+    address: Rails.application.secrets[:smtp_host],
+    port: Rails.application.secrets[:smtp_port],
     domain: "eglisedeblois.fr",
     authentication: "plain",
     enable_starttls_auto: true,

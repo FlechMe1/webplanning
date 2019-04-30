@@ -5,35 +5,41 @@
   = stylesheet_link_tag 'application', media: 'all'
   = csrf_meta_tags
 
-  %body.skin-blue.layout-top-nav{:style => "height: auto; min-height: 100%;"}
-    .wrapper{:style => "height: auto; min-height: 100%;"}
-      %header.main-header
-        %nav.navbar.navbar-static-top
-          .container
-            .navbar-header
-              = link_to '/public', class: 'navbar-brand' do
-                Eglise de
-                %b Blois
-              %button.navbar-toggle.collapsed{"data-target" => "#navbar-collapse", "data-toggle" => "collapse", :type => "button"}
-                %i.fa.fa-bars
-
-
-      .content-wrapper
+  %body
+    %header
+      .bg-dark.collapse#navbarHeader
         .container
-          = yield
+          .row
+            .col-sm-8.col-md-7.py-4
+              %h4.text-white A propos
 
+              %p.text-muted
+                ChurchCRM est une application de gestion d'église conforme aux nouvelles normes RGPD.
 
-      %footer.main-footer
+            .col-sm-4.offset-md-1.py-4
+              %h4.text-white Contact
+              %ul.list-unstyled
+                %li
+                  = link_to 'mailto:p.gruson@gmail.com', class: 'text-white' do
+                    Par email
+
+      .navbar.navbar-dark.bg-dark.shadow-sm
         .container
-          .pull-right.hidden-xs
-            %b Version
-            1.0
-          %strong
-            Copyright ©
-            = Date.today.year
-            = link_to "http://www.eglisedeblois.fr", target: "_blank", rel: :nofollow do
-              Eglise Evangélique de Blois
-          Tous droits réservés.
+          = link_to root_url, class: 'navbar-brand d-flex align-items-center' do
+            Church
+            %b CRM
+
+          %button.navbar-toggler.collapsed{type: "button", 'data-toggle': "collapse", 'data-target': "#navbarHeader", 'aria-controls': "navbarHeader", 'aria-expanded': "false", 'aria-label': "Toggle navigation"}
+            %span.navbar-toggler-icon
+
+    %main{role: :main}
+      .container
+        = yield
+
+
+    %footer.bg-dark.py-3.text-muted
+      .container
+        %p Church CRM &copy; Tous droits réservés
 
     = javascript_include_tag 'application'
     = custom_bootstrap_flash

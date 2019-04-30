@@ -4,7 +4,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :memberships, dependent: :destroy
-  has_many :teams, through: :memberships
+
+  has_many :teams, through: :memberships, source: :membershipable, source_type: 'Team'
+  has_many :associations, through: :memberships, source: :membershipable, source_type: 'Association'
 
 
   has_many :events, as: :organizer, dependent: :destroy
