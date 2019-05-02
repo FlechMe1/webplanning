@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require popper
 //= require bootstrap-sprockets
 //= require toastr
 //= require moment
@@ -59,7 +60,7 @@ $(document).ready(function(){
 
 function change_category(member_id, category){
   $.ajax({
-    url: '/members/'+member_id+'.js',
+    url: '/association/members/'+member_id+'.js',
     method: 'PATCH',
     data: {'member': {'category': category}},
     success: function(){

@@ -4,7 +4,7 @@
     %small Profil de la personne
   - if can? :update, @member
     .actions
-      = link_to edit_member_path(@member), class: "btn btn-flat btn-success" do
+      = link_to [:edit, :association, @member], class: "btn btn-flat btn-success" do
         = fa_icon "edit"
         Modifier
 
@@ -21,11 +21,11 @@
             %p.text-muted.text-center
               = @member.sibling_get_status
               de la famille
-              = link_to @member.family do
+              = link_to [:association, @member.family] do
                 = @member.family_name
 
-          = link_to edit_member_path(@member), class: "btn btn-block btn-flat btn-primary" do
-            %b Editer
+          = link_to [:edit, :association, @member], class: "btn btn-block btn-flat btn-primary" do
+            %b Modifier
 
       .box.box-primary
         .box-header.with-border
@@ -37,7 +37,7 @@
               = fa_icon 'sitemap fa-li'
               Famille:
               %span
-                = link_to @member.family do
+                = link_to [:association, @member.family] do
                   = @member.family_name
 
             %li

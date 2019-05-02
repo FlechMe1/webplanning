@@ -10,10 +10,15 @@ Rails.application.routes.draw do
 
   authenticated :user do
 
+    resources :associations, only: :show
+
     namespace :association do
       root to: 'pages#home'
+      get '/members/preview', to: 'preview#index', as: :members_preview
+
       resources :families
       resources :members
+
       resources :users do
         get '/invite', to: 'users#invite', as: :invite
         resources :events, controller: 'users/events'

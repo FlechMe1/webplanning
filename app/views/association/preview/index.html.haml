@@ -1,0 +1,48 @@
+%section.content-header
+  %h1
+    Gestion des membres
+    %small > Aperçu
+
+%section.content
+
+  .bg-light.p-3.border.mb-3
+    = link_to [:association, :members], class: 'btn btn-app' do
+      = fa_icon 'user'
+      Membres
+
+    = link_to [:new, :association, :member], class: 'btn btn-app' do
+      = fa_icon 'user'
+      Créer un membre
+
+    %br
+
+    = link_to [:association, :families], class: 'btn btn-app' do
+      = fa_icon 'users'
+      Familles
+
+    = link_to [:new, :association, :family], class: 'btn btn-app' do
+      = fa_icon 'users'
+      Créer une famille
+
+  .row
+    .col-md-3
+      .small-box.bg-aqua
+        .inner
+          %h3= @families
+          %p familles
+        .icon
+          = fa_icon 'users', class: 'ion'
+        = link_to association_families_path, class: 'small-box-footer' do
+          Toutes les familles
+          = fa_icon 'arrow-circle-right'
+
+    .col-md-3
+      .small-box.bg-green
+        .inner
+          %h3= @members
+          %p membres
+        .icon
+          = fa_icon 'user', class: 'ion'
+        = link_to association_members_path, class: 'small-box-footer' do
+          Tous les membres
+          = fa_icon 'arrow-circle-right'

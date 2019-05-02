@@ -1,10 +1,10 @@
 %section.content-header
   %h1
-    Familles
-    %small= @family.name
+    Famille
+    %b= @family.name
   - if can? :create, Family
     .actions
-      = link_to edit_family_path(@family), class: "btn btn-flat btn-success" do
+      = link_to [:edit, :association, @family], class: "btn btn-flat btn-success" do
         = fa_icon "edit"
         Modifier
 
@@ -35,7 +35,8 @@
           %table.table.table-bordered.table-striped.table-condensed.table-xs
             %thead
               %tr
-                %th Statut
+                %th
+                %th
                 %th Nom
                 %th Téléphone
                 %th Email

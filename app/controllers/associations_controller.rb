@@ -7,6 +7,11 @@ class AssociationsController < ApplicationController
     @associations = current_user.associations
   end
 
+  def show
+    session[:current_association_id] = params[:id]
+    redirect_to association_root_url, flash:{success: 'Vous êtes maintenant connecté'}
+  end
+
   def new
     @association = current_user.associations.build
   end

@@ -48,6 +48,7 @@ class Member < ActiveRecord::Base
   end
 
   def send_access_link
-    Mailer.send_access_link(self).deliver
+    Mailer.send_access_link(self).deliver unless self.email.blank?
   end
+
 end

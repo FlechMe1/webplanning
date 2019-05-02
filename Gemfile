@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 ruby '2.3.3'
-gem 'rails', '~> 4.2.4', git: "git://github.com/rails/rails.git", branch: '4-2-stable'
+gem 'rails', '~> 4.2.11'
 gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -22,12 +22,13 @@ gem "cancan"
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'will_paginate', '~> 3.0.6'
-gem "will_paginate-bootstrap"
+gem "will_paginate-bootstrap4"
 gem "rolify"
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
 gem 'jquery-minicolors-rails'
 gem "cocoon"
 gem 'icalendar', '~> 2.4', '>= 2.4.1'
+gem 'ransack'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

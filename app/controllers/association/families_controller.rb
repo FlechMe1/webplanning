@@ -1,10 +1,11 @@
-class FamiliesController < ApplicationController
+class Association::FamiliesController < AssociationController
   before_action :set_family, only: [:show, :edit, :update, :destroy]
 
   # GET /families
   # GET /families.json
   def index
-    @families = Family.order('name ASC').paginate(:page => params[:page], :per_page => 25)
+    @q = @association.families.ransack(params[:q])
+    @families = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 25)
   end
 
   # GET /families/1
@@ -14,7 +15,7 @@ class FamiliesController < ApplicationController
 
   # GET /families/new
   def new
-    @family = Family.new
+    @family = @association.families.build
   end
 
   # GET /families/1/edit
@@ -24,11 +25,11 @@ class FamiliesController < ApplicationController
   # POST /families
   # POST /families.json
   def create
-    @family = Family.new(family_params)
+    @family = @association.families.build(family_params)
 
     respond_to do |format|
       if @family.save
-        format.html { redirect_to @family, notice: 'Family was successfully created.' }
+        format.html { redirect_to [:association, @family], notice: 'Family was successfully created.' }
         format.json { render :show, status: :created, location: @family }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class FamiliesController < ApplicationController
   def update
     respond_to do |format|
       if @family.update(family_params)
-        format.html { redirect_to @family, notice: 'Family was successfully updated.' }
+        format.html { redirect_to [:association, @family], notice: 'Family was successfully updated.' }
         format.json { render :show, status: :ok, location: @family }
       else
         format.html { render :edit }
@@ -56,7 +57,7 @@ class FamiliesController < ApplicationController
   def destroy
     @family.destroy
     respond_to do |format|
-      format.html { redirect_to families_url, notice: 'Family was successfully destroyed.' }
+      format.html { redirect_to [:association, :families], notice: 'Family was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

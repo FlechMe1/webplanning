@@ -1,0 +1,75 @@
+%section.content-header
+  %h1
+    Membres
+    %small Liste des membres
+  - if can? :create, User
+    .actions
+      = link_to [:new, :association, :member], class: "btn btn-flat btn-primary" do
+        = fa_icon "plus"
+        Ajouter
+
+%section.content
+  .box
+    .box-body
+      = search_form_for [:association, @q] do |f|
+        .row
+          .col-md-3
+            = f.search_field :firstname_or_lastname_or_email_cont, class: "form-control", placeholder: 'Nom, prénom, email...'
+          .col-md-3
+            = f.search_field :family_name_cont, class: "form-control", placeholder: 'Famille'
+          .col-md-3
+            = f.select :category_eq, options_for_select(categories_options, @q.category_eq), {include_blank: '-- Toutes --'}, class: "form-control"
+          .col-md-3
+            %button.btn.btn-success.btn-block{type: :submit}
+              = fa_icon 'search'
+              Rechercher
+
+
+  .box
+    .box-body
+      %table.table.table-bordered.table-striped.table-condensed.table-sm.mb-3
+        %thead
+          %tr
+            %th= sort_link(@q, :gender, 'Civilité')
+            %th= sort_link(@q, :lastname, 'Nom')
+            %th Téléphone
+            %th Email
+            %th Adresse
+            %th= sort_link(@q, :family_name, 'Famille')
+            %th= sort_link(@q, :category, 'Catégorie')
+            %th= sort_link(@q, :expired_at, 'Fin de validité')
+            %th
+
+        %tbody
+          - @members.each do |member|
+            %tr
+              %td
+                = fa_icon "#{member.gender}"
+                = member.get_gender
+              %td
+                = link_to [:association, member] do
+                  = fa_icon 'eye'
+                  = member.name
+              %td= [member.phone_1, member.phone_2].reject { |c| c.blank? }.join(', ')
+              %td= member.email
+              %td= member.full_address
+              %td
+                - unless member.family_id.blank?
+                  = link_to [:association, member.family] do
+                    = member.family_name
+              %td
+                = select_tag :category, options_for_select(categories_options, member.category), class: "form-control form-control-sm category_select", data:{'member-id' => member.id}
+              %td
+                = expired_at_in_words(member.expired_at)
+                %br
+                %em.text-muted= "(le #{l(member.expired_at)})"
+              %td
+                .btn-group
+                  - if can? :update, member
+                    = link_to [:edit, :association, member], class: "btn btn-flat btn-success btn-sm" do
+                      = fa_icon "edit"
+                  - if can? :delete, member
+                    = link_to [:association, member], method: :delete, data:{confirm: "Êtes vous sûr de vouloir supprimer ce membre ?"}, class: "btn btn-flat btn-danger btn-sm" do
+                      = fa_icon "trash"
+
+      = will_paginate @members, renderer: WillPaginate::ActionView::BootstrapLinkRenderer

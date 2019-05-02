@@ -11,9 +11,20 @@
 
     .col-md-6
       .bg-white.p-5.border
-        %p.text-muted
-          J'ai déjà un compte, je souhaite me connecter :
+        - if current_user
+          %p
+            Bonjour
+            %b= current_user.name
+            , voici vos associations. Cliquez sur l'une d'elles pour y accéder.
 
-        .text-center
-          = link_to new_user_session_path, class: 'btn btn-primary mx-auto' do
-            Se connecter
+          - current_user.associations.each do |association|
+            = link_to association, class: 'btn btn-success btn-block mb-3' do
+              = association.name
+
+        - else
+          %p.text-muted
+            J'ai déjà un compte, je souhaite me connecter :
+
+          .text-center
+            = link_to new_user_session_path, class: 'btn btn-primary mx-auto' do
+              Se connecter

@@ -4,3 +4,24 @@
       = link_to root_url do
         = fa_icon "dashboard"
         %span Accueil
+
+    %li.treeview{class: "#{'active' if params[:controller].match(/members|families|preview/)}"}
+      = link_to association_members_preview_path do
+        = fa_icon 'users'
+        Membres
+        %span.pull-right-container
+          = fa_icon 'angle-right', class: "pull-right"
+
+      %ul.treeview-menu
+        %li{class: "#{'active' if params[:controller].match(/preview/)}"}
+          = link_to association_members_preview_path do
+            = fa_icon 'dashboard'
+            Aperçu
+        %li{class: "#{'active' if params[:controller].match(/members/)}"}
+          = link_to [:association, :members] do
+            = fa_icon 'user'
+            Membres
+        %li{class: "#{'active' if params[:controller].match(/families/)}"}
+          = link_to [:association, :families] do
+            = fa_icon 'users'
+            Familles

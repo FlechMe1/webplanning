@@ -1,4 +1,4 @@
-= form_for family do |f|
+= form_for [:association, family] do |f|
   .row
     .col-md-6
       - if family.errors.any?
@@ -48,7 +48,7 @@
           %th Nom
         - family.siblings.each do |sibling|
           %tr
-            %td= t sibling.status
+            %td= sibling.status
             %td= sibling.member_name
 
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190430103332) do
+ActiveRecord::Schema.define(version: 20190501172611) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20190430103332) do
     t.string   "category",       limit: 255, default: "contact"
     t.string   "token",          limit: 255
     t.integer  "association_id", limit: 4
+    t.date     "expired_at"
   end
 
   create_table "memberships", force: :cascade do |t|

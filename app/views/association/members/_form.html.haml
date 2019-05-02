@@ -1,4 +1,4 @@
-= form_for member do |f|
+= form_for [:association, member] do |f|
   .row
     .col-md-6
       - if member.errors.any?
@@ -73,6 +73,42 @@
           %label Famille :
           = family_form.select :family_id, families_options, {include_blank: '-- Non attribué --', :disabled => ['--']}, class: 'form-control', size: 8
 
+      .callout.callout-warning
+        %p
+          %b Merci de prendre en compte les informations suivantes :
+        %p
+          En remplissant et validant le formulaire ci-dessus, vous acceptez que
+          = "l'association #{@association.name}"
+          mémorise et utilise vos données personnelles collectées dans ce formulaire pour :
+        %ul
+          %li Le suivi des fidèles de l'église évangélique de Blois
+          %li Le cas échéant, la gestion des équipes de bénévole
+
+        %p
+          De ce fait, vous acceptez que
+          = "l'association #{@association.name}"
+          communique régulièrement avec vous via les données collectées, si elle le juge nécessaire.
+
+        %hr
+
+        %p
+          Afin de protéger la confidentialité de vos données pesonnelles,
+          = "l'association #{@association.name}"
+          s'engage à ne pas divulguer, ne pas transmettre, ni partager vos données personnelles avec d'autres entités conformément à la réglementation pour la protection des données de 2018.
+
+        %p
+          Pour exercer vos droits à la consultation, la modification et la suppression de vos données personnelles, vous recevrez après validation de ce formulaire un lien d'accès à vos données personnelles.
+          %br
+          Ce lien pourra vous être communiqué sur simple demande.
+
+        %p
+          Vos données personnelles seront stockées dans nos fichiers pour une durée maximale de 2 ans à la suite desquels elles seront supprimées sauf avis contraire de votre part.
+
+      .form-group
+        .checkbox
+          %label
+            = f.check_box :cgu
+            %b En cochant cette case, j'accepte que les informations saisies dans ce formulaire soient utilisées pour les finalités décrites ci-dessus.
 
   .form-group
     %button.btn.btn-success{type: :submit}
