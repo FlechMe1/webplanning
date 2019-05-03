@@ -1,4 +1,4 @@
-class Teams::EventsController < ApplicationController
+class Association::Teams::EventsController < ApplicationController
 
   before_filter :set_team
 

@@ -1,0 +1,40 @@
+%section.content-header
+  %h1
+    Equipes
+    %small Liste des équipes
+  - if can? :create, Team
+    .actions
+      = link_to [:new, :association, :team], class: "btn btn-flat btn-primary" do
+        = fa_icon "plus"
+        Ajouter
+
+%section.content
+  .box
+    .box-body
+      %table.table.table-bordered.table-striped.table-condensed.table-sm.mb-3
+        %thead
+          %tr
+            %th Nom de l'équipe
+            %th Nombre de membres
+            %th
+
+        %tbody
+          - @teams.each do |team|
+            - if can? :read, team
+              %tr
+                %td
+                  = link_to [:association, team] do
+                    = fa_icon "square", style: "color: #{team.color}"
+                    = team.label
+                %td= team.users.count
+                %td
+                  .btn-group
+                    - if can? :edit, team
+                      = link_to [:edit, :association, team], class: "btn btn-flat btn-success btn-sm" do
+                        = fa_icon "edit"
+                    - if can? :delete, team
+                      = link_to [:association, team], method: :delete, data:{confirm: "Êtes vous sûr de vouloir supprimer cette équipe ?"}, class: "btn btn-flat btn-danger btn-sm" do
+                        = fa_icon "trash"
+
+      = will_paginate @teams, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
+

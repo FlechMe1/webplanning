@@ -1,4 +1,4 @@
-= form_for team do |f|
+= form_for [:association, team] do |f|
   - if team.errors.any?
     .callout.callout-danger
       %h4= "#{pluralize(team.errors.count, "erreur")}"

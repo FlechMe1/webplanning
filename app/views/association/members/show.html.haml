@@ -84,7 +84,7 @@
                 %h3.page-header Ses équipes
                 - @user.teams.each do |team|
                   %p
-                    = link_to team do
+                    = link_to [:association, team] do
                       = fa_icon "square", style: "color: #{team.color}"
                       = team.label
           - else
@@ -92,10 +92,10 @@
             - if @match
               %p
                 Il semble qu'un bénévole utilise la même adresse email :
-                = link_to @match do
+                = link_to [:association, @match] do
                   = "#{@match.name} (#{@match.email})"
 
-              = form_for @member do |f|
+              = form_for [:association, @member] do |f|
                 = f.hidden_field :user_id, value: @match.id
                 %button.btn.btn-warning.btn-flat{type: :submit}
                   Associer ce membre et ce bénévole

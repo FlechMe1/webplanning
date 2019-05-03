@@ -1,0 +1,51 @@
+%section.content-header
+  %h1
+    Bénévoles
+    %small Liste des Bénévoles
+  - if can? :create, User
+    .actions
+      = link_to new_user_invitation_path, class: "btn btn-flat btn-primary" do
+        = fa_icon "plus"
+        Ajouter
+
+%section.content
+  .box
+    .box-body
+      %p.text-muted Pour modifier votre compte, cliquez sur votre nom en haut à droite puis cliquez sur "Mon Compte"
+      %table.table.table-bordered.table-striped.table-condensed.table-sm.mb-3
+        %thead
+          %tr
+            %th Nom
+            %th Email
+            - if can? :update, User
+              %th Invitation acceptée
+            %th
+
+        %tbody
+          - @users.each do |user|
+            %tr
+              %td
+                = link_to [:association, user] do
+                  = fa_icon 'eye'
+                  = user.name
+
+              %td= user.email
+              - if can? :update, User
+                %td
+                  = fa_icon "#{(user.invitation_accepted_at.blank?) ? 'times' : 'check'}"
+              %td
+                .btn-group
+                  - if user.invitation_accepted_at.blank?
+                    = link_to user_invitation_path(user), class: "btn btn-flat btn-info btn-sm" do
+                      = fa_icon "paper-plane"
+                      Envoyer une invitation
+                  - if can? :update, user
+                    = link_to [:edit, :association, user], class: "btn btn-flat btn-success btn-sm" do
+                      = fa_icon "edit"
+                      Modifier
+                  - if can? :delete, user
+                    = link_to [:association, user], method: :delete, data:{confirm: "Êtes vous sûr de vouloir supprimer cette équipe ?"}, class: "btn btn-flat btn-danger btn-sm" do
+                      = fa_icon "trash"
+                      Supprimer
+
+      = will_paginate @users, renderer: WillPaginate::ActionView::BootstrapLinkRenderer

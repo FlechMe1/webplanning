@@ -1,8 +1,10 @@
 class Team < ActiveRecord::Base
 
-  has_many :memberships, dependent: :destroy, as: :team
-  has_many :users, through: :memberships
 
+  belongs_to :organization, foreign_key: :association_id, class_name: "Association"
+
+  has_many :memberships, as: :membershipable, dependent: :destroy
+  has_many :users, through: :memberships
   has_many :events, as: :organizer, dependent: :destroy
 
   validates :label, presence: true

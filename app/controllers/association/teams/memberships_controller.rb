@@ -1,4 +1,4 @@
-class Teams::MembershipsController < ApplicationController
+class Association::Teams::MembershipsController < AssociationController
 
   before_filter :set_team
 
@@ -12,7 +12,7 @@ class Teams::MembershipsController < ApplicationController
     @membership = @team.memberships.build(membership_params)
 
     if @membership.save
-      redirect_to @team, notice: "Membre ajouté à l\'équipe"
+      redirect_to [:association, @team], notice: "Membre ajouté à l\'équipe"
     else
       render :edit
     end
@@ -22,7 +22,7 @@ class Teams::MembershipsController < ApplicationController
     membership = @team.memberships.where(user_id: params[:id]).first
 
     membership.destroy
-    redirect_to @team, notice: "Membre supprimé à l\'équipe"
+    redirect_to [:association, @team], notice: "Membre supprimé à l\'équipe"
   end
 
   def promute

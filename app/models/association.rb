@@ -6,4 +6,5 @@ class Association < ActiveRecord::Base
   has_many :families
   has_many :members
   has_many :teams
+
 end

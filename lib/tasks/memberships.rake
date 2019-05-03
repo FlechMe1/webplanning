@@ -1,4 +1,4 @@
-namespace :memberships do
+  namespace :memberships do
 
   task :set_default_membership, [:file] => :environment do |t, args|
 

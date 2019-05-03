@@ -21,6 +21,7 @@ class AssociationsController < ApplicationController
     @association = current_user.associations.build(association_params)
 
     if @association.save
+      current_user.associations << @association
       session[:current_association_id] = @association.id
       redirect_to association_root_url, flash:{success: 'Votre association a bien été créée'}
     else

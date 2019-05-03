@@ -1,10 +1,10 @@
-class UsersController < ApplicationController
+class Association::UsersController < AssociationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.order('firstname ASC').where('id <> ?', current_user.id).paginate(:page => params[:page], :per_page => 25)
+    @users = @association.users.order('firstname ASC').where('users.id <> ?', current_user.id).paginate(:page => params[:page], :per_page => 25)
   end
 
   # GET /users/1
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     if @user.update(user_params)
-      redirect_to users_url, notice: 'Membre mis à jour.'
+      redirect_to [:association, :users], notice: 'Membre mis à jour.'
     else
       render :edit
     end
@@ -32,13 +32,13 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user.destroy
-    redirect_to users_url, notice: 'Membre supprimé'
+    redirect_to [:association, :users], notice: 'Membre supprimé'
   end
 
   def invite
     @user = User.find(params[:user_id])
     @user.invite!
-    redirect_to users_url, notice: 'Membre invité'
+    redirect_to [:association, :users], notice: 'Membre invité'
   end
 
   private

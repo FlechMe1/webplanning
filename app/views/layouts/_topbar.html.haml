@@ -11,6 +11,15 @@
   / Sidebar toggle button
   %a.sidebar-toggle{"data-toggle" => "offcanvas", :href => "#", :role => "button"}
     %span.sr-only Masquer
+
+  %ul.nav.justify-content-center
+    %li.nav-item
+      .nav-link.h5.text-warning.mb-0
+        = @association.name
+
+    %li.nav-item
+      = link_to root_url, class: 'nav-link' do
+        Changer d'association
   .navbar-custom-menu
     %ul.nav.navbar-nav
       / User Account: style can be found in dropdown.less

@@ -16,4 +16,13 @@ namespace :users do
       puts "Le membre '#{member.firstname} #{member.lastname}' a été créé"
     end
   end
+
+  task :set_default_association, [:file] => :environment do |t, args|
+    puts "*** SET DEFAULT ASSOCIATION FOR USERS ***"
+    association = Association.first
+
+    User.all.each do |u|
+      u.associations << association unless u.associations.pluck(:id).include?(association.id)
+    end
+  end
 end

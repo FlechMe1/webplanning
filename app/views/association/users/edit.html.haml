@@ -6,7 +6,7 @@
 %section.content
   .box
     .box-body
-      = form_for @user do |f|
+      = form_for [:association, @user] do |f|
         - if @user.errors.any?
           .callout.callout-danger
             %h4= "#{pluralize(@user.errors.count, "erreur")}"

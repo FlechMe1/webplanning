@@ -1,10 +1,10 @@
-class TeamsController < ApplicationController
+class Association::TeamsController < AssociationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
 
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.order('label ASC').includes(:users).paginate(:page => params[:page], :per_page => 25)
+    @teams = @association.teams.order('label ASC').paginate(:page => params[:page], :per_page => 25)
   end
 
   def show
@@ -14,7 +14,7 @@ class TeamsController < ApplicationController
   end
 
   def new
-    @team = Team.new
+    @team = @association.teams.build
   end
 
   # GET /teams/1/edit
@@ -24,10 +24,10 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
-    @team = Team.new(team_params)
+    @team = @association.teams.build(team_params)
 
     if @team.save
-      redirect_to :teams, notice: 'Equipe créée.'
+      redirect_to [:association, :teams], notice: 'Equipe créée.'
     else
       render :new
     end
@@ -37,7 +37,7 @@ class TeamsController < ApplicationController
   # PATCH/PUT /teams/1.json
   def update
     if @team.update(team_params)
-      redirect_to :teams, notice: 'Equipe mise à jour'
+      redirect_to [:association, :teams], notice: 'Equipe mise à jour'
     else
       render :edit
     end
@@ -47,7 +47,7 @@ class TeamsController < ApplicationController
   # DELETE /teams/1.json
   def destroy
     @team.destroy
-    redirect_to teams_url, notice: 'Equipe supprimée'
+    redirect_to [:association, :teams], notice: 'Equipe supprimée'
   end
 
   private
