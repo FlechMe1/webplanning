@@ -1,46 +1,77 @@
-%head
-  %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
-  %title ADD Blois - Plannings
+!!!
+%html
+  %head
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+    %title Eglise CRM - Gérer les membres de votre église
 
-  = stylesheet_link_tag 'application', media: 'all'
-  = csrf_meta_tags
+    = stylesheet_link_tag 'public', media: 'all'
+    = csrf_meta_tags
 
   %body
-    %header
-      .bg-dark.collapse#navbarHeader
-        .container
-          .row
-            .col-sm-8.col-md-7.py-4
-              %h4.text-white A propos
-
-              %p.text-muted
-                ChurchCRM est une application de gestion d'église conforme aux nouvelles normes RGPD.
-
-            .col-sm-4.offset-md-1.py-4
-              %h4.text-white Contact
-              %ul.list-unstyled
-                %li
-                  = link_to 'mailto:p.gruson@gmail.com', class: 'text-white' do
-                    Par email
-
-      .navbar.navbar-dark.bg-dark.shadow-sm
-        .container
-          = link_to root_url, class: 'navbar-brand d-flex align-items-center' do
-            Church
-            %b CRM
-
-          %button.navbar-toggler.collapsed{type: "button", 'data-toggle': "collapse", 'data-target': "#navbarHeader", 'aria-controls': "navbarHeader", 'aria-expanded': "false", 'aria-label': "Toggle navigation"}
-            %span.navbar-toggler-icon
-
-    %main{role: :main}
+    %nav.navbar.navbar-dark.bg-dark.navbar-expand-lg.sticky-top
       .container
-        = yield
+        = link_to root_url, class: "navbar-brand" do
+          Eglise CRM
+
+        %button.navbar-toggler.ml-auto{"aria-controls" => "probootstrap-navbar", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#probootstrap-navbar", "data-toggle" => "collapse", :type => "button"}
+          %span
+            %i.ion-navicon
+        .collapse.navbar-collapse
+          %ul.navbar-nav.ml-auto
+            %li.nav-item
+              = link_to root_url, class: 'nav-link' do
+                Accueil
+
+            %li.nav-item.mx-3
+              = link_to new_association_path, class: "nav-link btn btn-outline-success" do
+                %span.pb_rounded-4.px-4 Inscrire mon association
 
 
-    %footer.bg-dark.py-3.text-muted
+            - unless current_user.blank?
+              %li.dropdown.nav-item
+                %a#user-menu.nav-link.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                  = current_user.name
+                .dropdown-menu{'aria-labelledby' => "user-menu"}
+                  = link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do
+                    Se déconnecter
+
+
+    = yield
+
+    %footer.pb_footer.bg-light{:role => "contentinfo"}
       .container
-        %p Church CRM &copy; Tous droits réservés
+        .row.text-center
+          .col
+            %ul.list-inline
+              %li.list-inline-item
+                = link_to 'https://www.facebook.com/flechme', class: 'p-2', target: '_blank' do
+                  %i.fa.fa-facebook
 
-    = javascript_include_tag 'application'
+              %li.list-inline-item
+                = link_to 'https://twitter.com/pgruson', class: 'p-2', target: '_blank' do
+                  %i.fa.fa-twitter
+
+              %li.list-inline-item
+                = link_to 'https://www.instagram.com/flechme/', class: 'p-2', target: '_blank' do
+                  %i.fa.fa-instagram
+        .row
+          .col.text-center
+            %p.pb_font-14
+              © 2019
+              = link_to root_url do
+                Eglise CRM
+              Tous droit réservés.
+              %br
+              Créé et développé par
+              = link_to 'https://flech.me', target: '_blank' do
+                FlechMe
+
+    #pb_loader.show.fullscreen
+      %svg.circular{:height => "48px", :width => "48px"}
+        %circle.path-bg{:cx => "24", :cy => "24", :fill => "none", :r => "22", :stroke => "#eeeeee", "stroke-width" => "4"}
+        %circle.path{:cx => "24", :cy => "24", :fill => "none", :r => "22", :stroke => "#1d82ff", "stroke-miterlimit" => "10", "stroke-width" => "4"}
+
+
+    = javascript_include_tag 'public'
     = custom_bootstrap_flash
     = yield :scripts

@@ -1,31 +1,46 @@
-%section.content-header
-  %h1
-    Mon planning
+%section#section-home.pb_cover_v3.overflow-hidden.cover-bg-indigo.cover-bg-opacity.text-left.pb_gradient_v1.pb_slant-light
+  .container
+    .row.align-items-center.justify-content-center
+      .col-md-6
+        %h2.heading.mb-3 Une application pour votre association
+        .sub-heading
+          %p.mb-4
+            Gérez vos membres, vos bénévoles et vos plannings avec un seul outils
+          %p.mb-5
+            = link_to new_association_path, class: 'btn btn-success btn-lg pb_btn-pill smoothscroll' do
+              %span.pb_font-14.text-uppercase.pb_letter-spacing-1 Inscrire mon association
 
-%section.content
-  .row
-    .col-md-8
-      .box
-        .box-body
-          #calendar
-    .col-md-4
-      .box
-        .box-body
-          %h3.page-header Légende
-          %ul.list-unstyled
-            - @teams.each do|team|
-              %li
-                = fa_icon "square", style: "color: #{team.color}"
-                = team.label
-            %li
-              = fa_icon "square", style: "color: #000"
-              Évènements publics
+      .col-md-1
 
-          %hr
+      .col-md-5.relative.align-self-center
+        %form.bg-white.rounded.pb_form_v1{:action => "#"}
 
-          .form-group
-            %label Importer mon calendrier dans Google Agenda
-            = text_field_tag :import, :import, value: schedule_url(current_user.id, format: :ics), class: "form-control readonly", readonly: true
+          - if current_user
+            %h2.mb-4.mt-0.text-center
+              Bonjour
+              %b= current_user.name
 
-- content_for :scripts do
-  = render "pages/scripts"
+            - if current_user.associations.blank?
+              %p Vous n'êtes inscrit dans aucune association pour le moment.
+              = link_to new_association_path, class: 'btn btn-success btn-lg pb_btn-pill smoothscroll' do
+                %span.pb_font-14.text-uppercase.pb_letter-spacing-1 Créer une association
+
+            - else
+              %p Voici vos associations. Cliquez sur l'une d'elles pour y accéder.
+              - current_user.associations.each do |association|
+                = link_to association, class: 'btn btn-success btn-lg pb_btn-pill smoothscroll mb-3 btn-block' do
+                  = association.name
+
+          - else
+            %h2.mb-4.mt-0.text-center
+              Bonjour
+
+            %p Pour aller plus loin dans l'utilisation de cette application, vous devez créer un compte :
+
+            = link_to new_user_registration_path, class: 'btn btn-success btn-lg pb_btn-pill smoothscroll mb-3 btn-block' do
+              S'inscrire
+
+            %p J'ai déjà un compte
+
+            = link_to new_user_session_path, class: 'btn btn-success btn-lg pb_btn-pill smoothscroll mb-3 btn-block' do
+              Se connecter
