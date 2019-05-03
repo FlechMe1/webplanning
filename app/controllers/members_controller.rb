@@ -65,13 +65,14 @@ class MembersController < ApplicationController
 
     def create_family
       if params[:member] && params[:member][:sibling_attributes] && params[:member][:sibling_attributes][:family_id] == 'new_family'
-        @family = Family.new(name: params[:member][:lastname])
+        @family = @association.families.build(name: params[:member][:lastname])
         @family.email = params[:member][:email]
         @family.phone_1 = params[:member][:phone_1]
         @family.address_1 = params[:member][:address_1]
         @family.address_2 = params[:member][:address_2]
         @family.zipcode = params[:member][:zipcode]
         @family.town = params[:member][:town]
+        @family.association_id = params[:member][:association_id]
         @family.save
 
         params[:member][:sibling_attributes][:family_id] = @family.id
