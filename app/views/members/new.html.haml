@@ -1,0 +1,29 @@
+%section.bg-gradient-light
+  .container
+    .py-5
+      %h2.h4.mb-3
+        Inscription aux membres de l'association
+        %strong= @association.name
+
+      .alert.alert-info.mb-3
+        %h4 Vous allez vous inscrire à la liste des contacts de l'association
+        %p
+          En remplissant et validant ce formulaire, vous allez être inscrit aux listes des contacts de :
+        %address
+          %b= @association.name
+          %br
+          = @association.address_1
+          - unless @association.address_2.blank?
+            %br
+            = @association.address_2
+          %br
+          = "#{@association.zipcode} #{@association.town}"
+        %p
+          L'association est administrée par un bureau dont le président est
+          %strong= @association.president_name
+          %br
+          Toutes les données collectées sont administrées par
+          %strong= @association.dpo_name
+          en qualité de DPO (Délégué à la Protection des données).
+
+      = render 'form', member: @member, url: members_path

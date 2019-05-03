@@ -47,3 +47,8 @@
         = link_to association_teams_path, class: 'small-box-footer' do
           Toutes les équipes
           = fa_icon 'arrow-circle-right'
+
+%section.content
+  %h2.h3 Inviter vos membres à s'inscrire en utilisant ce lien :
+
+  = text_field_tag :url, :url, class: "form-control readonly", value: new_member_url(token: @association.token), disabled: true

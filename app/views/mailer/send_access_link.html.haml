@@ -20,7 +20,7 @@
 
 %p{style: "font-size:14px;line-height:18px;"}
   %span{:style => "display:block;padding:10px 15px;background:#dedede;"}
-    = link_to public_member_url(token: @token), style:"text-decoration:none;color:#000" do
+    = link_to member_url(token: @token), style:"text-decoration:none;color:#000" do
       %strong Accéder à mon espace personnel
 
 %p{style: "font-size:14px;line-height:18px;"}
@@ -28,8 +28,8 @@
 
 %p{style: "font-size:14px;line-height:18px;"}
   %span{:style => "display:block;padding:10px 15px;background:#dedede;"}
-    = link_to public_member_url(token: @token), style:"text-decoration:none;color:#000" do
-      = public_member_url(token: @token)
+    = link_to member_url(token: @token), style:"text-decoration:none;color:#000" do
+      = member_url(token: @token)
 
 %p{style: "font-size:14px;line-height:18px;"}
   Merci de garder précieusement cet email afin de tenir vos informations à jour.

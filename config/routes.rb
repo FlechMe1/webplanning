@@ -39,9 +39,10 @@ Rails.application.routes.draw do
 
   get '/inscription', to: 'members#new', as: :new_member
   post '/members', to: 'members#create', as: :members
+
   get '/informations-personnelles', to: 'members#show', as: :member
-  get '/informations-personnelles/modifier', to: 'members#edit', as: :edit_member
   patch '/informations-personnelles/modifier', to: 'members#update', as: :update_member
+  get '/informations-personnelles/modifier', to: 'members#edit', as: :edit_member
 
 
   get '/mon-planning/:user_id', to: 'schedules#index', as: :schedule

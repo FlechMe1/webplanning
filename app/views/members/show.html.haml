@@ -1,19 +1,9 @@
-%section.content-header
-  %h1
-    Membres
-    %small Mes informations personnelles
-
-  .actions
-    = link_to edit_member_path(token: @member.token), class: "btn btn-flat btn-success" do
-      = fa_icon "edit"
-      Modifier
-
-%section.content
-  .row
-    .col-md-4
-      .box.box-primary
-        .box-body.box-profile
-          %h3.profile-username.text-center
+%section.bg-gradient-light
+  .container.py-5
+    .row
+      .col-md-4
+        .bg-white.border.py-5.px-3.mb-3
+          %h3.text-center
             = fa_icon "#{@member.gender}"
             = @member.get_gender
             = @member.name
@@ -24,14 +14,12 @@
               %b.text-primary
                 = @member.family_name
 
-          = link_to public_edit_member_path(token: @member.token), class: "btn btn-block btn-flat btn-primary" do
+          = link_to edit_member_path(token: @member.token), class: "btn btn-block btn-flat btn-primary" do
             %b Editer
 
-      .box.box-primary
-        .box-header.with-border
-          %h3.box-title.text-center À propos
+        .bg-white.border.mb-3.py-5.px-3
+          %h3.text-center À propos
 
-        .box-body
           %ul.fa-ul
             %li
               = fa_icon 'sitemap fa-li'
@@ -63,29 +51,29 @@
                 = link_to @member.email, "mailto:#{@member.email}"
 
 
-    - if @user
-      .col-md-8
-        .box.box-success
-          .box-header.with-border
-            %h3.box-title.text-center Ma Fiche bénévole
+      - if @user
+        .col-md-8
+          .box.box-success
+            .box-header.with-border
+              %h3.box-title.text-center Ma Fiche bénévole
 
-          .box-body
-            %p
-              = fa_icon 'envelope'
-              Mon email de bénévole :
-              %span
-                = link_to @member.email, "mailto:#{@member.email}"
+            .box-body
+              %p
+                = fa_icon 'envelope'
+                Mon email de bénévole :
+                %span
+                  = link_to @member.email, "mailto:#{@member.email}"
 
-            .row
-              .col-md-8
-                #calendar
-              .col-md-4
-                %h3.page-header Ses équipes
-                - @user.teams.each do |team|
-                  %p
-                    = link_to team do
-                      = fa_icon "square", style: "color: #{team.color}"
-                      = team.label
+              .row
+                .col-md-8
+                  #calendar
+                .col-md-4
+                  %h3.page-header Ses équipes
+                  - @user.teams.each do |team|
+                    %p
+                      = link_to team do
+                        = fa_icon "square", style: "color: #{team.color}"
+                        = team.label
 
 - if @user
   - content_for :scripts do

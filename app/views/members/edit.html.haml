@@ -1,0 +1,8 @@
+%section.bg-gradient-light
+  .container
+    .py-5
+      %h2.h4.mb-3
+        Inscription aux membres de l'association
+        %strong= @association.name
+
+      = render 'form', member: @member, url: update_member_path(token: @member.token)

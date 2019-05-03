@@ -10,9 +10,9 @@ class Mailer < ActionMailer::Base
 
     @to = @member.email
 
-    @from = "webmaster@eglisedeblois.fr"
+    @from = "contact@flech.me"
 
-    mail(to: @to, from: @from, srespond_to: 'p.gruson@gmail.com', subject: "[Eglise de Blois] Votre fiche membre") do |format|
+    mail(to: @to, from: @from, srespond_to: 'p.gruson@gmail.com', subject: "[Eglise CRM] Votre fiche membre") do |format|
       format.html
     end
   end

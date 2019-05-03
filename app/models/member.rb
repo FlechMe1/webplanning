@@ -2,6 +2,7 @@ class Member < ActiveRecord::Base
   include Tokenable
 
   belongs_to :user
+  belongs_to :organization, foreign_key: :association_id, class_name: "Association"
   has_one :sibling, :dependent => :destroy
   has_one :family, through: :sibling
   accepts_nested_attributes_for :sibling
@@ -12,6 +13,7 @@ class Member < ActiveRecord::Base
   validates :gender, :lastname, :firstname, presence: true
   validates :cgu, acceptance: {accept: true} , on: :create, allow_nil: false
 
+  before_save :set_expired_at
   after_create :send_access_link
 
   def name
@@ -49,6 +51,12 @@ class Member < ActiveRecord::Base
 
   def send_access_link
     Mailer.send_access_link(self).deliver unless self.email.blank?
+  end
+
+  def set_expired_at
+    if new_record?
+      self.expired_at = Date.today + 2.years
+    end
   end
 
 end
