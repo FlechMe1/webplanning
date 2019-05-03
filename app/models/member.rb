@@ -3,7 +3,8 @@ class Member < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :organization, foreign_key: :association_id, class_name: "Association"
-  has_one :sibling, :dependent => :destroy
+
+  has_one :sibling, dependent: :destroy
   has_one :family, through: :sibling
   accepts_nested_attributes_for :sibling
 

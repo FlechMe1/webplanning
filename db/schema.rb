@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190503120656) do
+ActiveRecord::Schema.define(version: 20190503202126) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -99,7 +99,6 @@ ActiveRecord::Schema.define(version: 20190503120656) do
   end
 
   add_index "memberships", ["membershipable_id", "membershipable_type"], name: "index_memberships_on_membershipable_id_and_membershipable_type", using: :btree
-  add_index "memberships", ["membershipable_id"], name: "index_memberships_on_membershipable_id", using: :btree
   add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
@@ -178,7 +177,6 @@ ActiveRecord::Schema.define(version: 20190503120656) do
 
   add_foreign_key "assignments", "events"
   add_foreign_key "assignments", "users"
-  add_foreign_key "memberships", "teams", column: "membershipable_id"
   add_foreign_key "memberships", "users"
   add_foreign_key "siblings", "families"
   add_foreign_key "siblings", "members"

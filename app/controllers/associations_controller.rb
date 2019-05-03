@@ -17,11 +17,10 @@ class AssociationsController < ApplicationController
   end
 
   def create
-
     @association = current_user.associations.build(association_params)
 
     if @association.save
-      current_user.associations << @association
+      Membership.create(user_id: current_user.id, membershipable_id: @association.id, membershipable_type: 'Association')
       session[:current_association_id] = @association.id
       redirect_to association_root_url, flash:{success: 'Votre association a bien été créée'}
     else

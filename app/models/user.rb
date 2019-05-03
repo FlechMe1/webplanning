@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_many :assignments, dependent: :destroy
   has_many :assigned_events, through: :assignments
 
-  has_one :member
+  has_one :member, dependent: :destroy
 
   before_create :set_default_role
 

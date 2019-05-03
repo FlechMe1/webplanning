@@ -81,7 +81,7 @@ Rails.application.configure do
     password: Rails.application.secrets[:smtp_password]
   }
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => "http://planning.eglisedeblois.fr" }
+  config.action_mailer.default_url_options = { :host => "https://eglise-crm.flech.me" }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
