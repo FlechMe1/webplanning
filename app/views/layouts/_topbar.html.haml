@@ -7,33 +7,27 @@
     %b Eglise
     CRM
 / Header Navbar: style can be found in header.less
-%nav.navbar.navbar-static-top{:role => "navigation"}
+%nav.navbar.navbar-fixed-top{:role => "navigation"}
   / Sidebar toggle button
   %a.sidebar-toggle{"data-toggle" => "offcanvas", :href => "#", :role => "button"}
     %span.sr-only Masquer
 
-  %ul.nav.justify-content-center
-    %li.nav-item
-      .nav-link.h5.text-warning.mb-0
-        = @association.name
-
-    %li.nav-item
-      = link_to root_url, class: 'nav-link' do
-        Changer d'association
   .navbar-custom-menu
-    %ul.nav.navbar-nav
-      / User Account: style can be found in dropdown.less
+    %ul.nav.navbar-nav.d-block
+      %li.d-none.d-sm-block
+        .h5.text-warning
+          = @association.name
+
+      %li.d-none.d-sm-block
+        = link_to root_url do
+          Changer d'association
       - unless current_user.blank?
         %li.dropdown.user.user-menu
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             = fa_icon "user"
             %span.hidden-xs= current_user.name
-          %ul.dropdown-menu
-            / Menu Footer
-            %li.user-footer
-              .pull-left
-                = link_to edit_user_registration_path, class: "btn btn-primary btn-flat" do
-                  Mon profil
-              .pull-right
-                = link_to destroy_user_session_path, method: :delete, class: "btn btn-danger btn-flat" do
-                  Se déconnecter
+          .dropdown-menu
+            = link_to edit_user_registration_path, class: 'dropdown-item' do
+              Mon profil
+            = link_to destroy_user_session_path, method: :delete, class: 'dropdown-item' do
+              Se déconnecter

@@ -23,3 +23,10 @@
 .small-box .icon{
   top: 10px;
 }
+
+.navbar-custom-menu .nav>li{
+  float: left;
+}
+.navbar-custom-menu .nav>li+li{
+  margin-left: 20px;
+}

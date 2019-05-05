@@ -1,37 +1,30 @@
-%section.content
-  .row.justify-content-center
-    .col-md-6
-      .box
-        .box-body
-          .alert.alert-info
-            Avant de gérer une association merci de vous connecter
-
-          = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f|
-            = devise_error_messages!
-            .form-group
-              %label Email
-              = f.email_field :email, :autofocus => true, class: 'form-control'
+%section.pb_cover_v3.overflow-hidden.cover-bg-indigo.cover-bg-opacity.text-left.pb_gradient_v1.pb_slant-light.text-light.py-5
+  .container
+    .row.justify-content-center
+      .col-md-6
+        %h1.h2.mb-5 Je me connecte
+        = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f|
+          = devise_error_messages!
+          .form-group
+            %label Email
+            = f.email_field :email, :autofocus => true, class: 'form-control'
 
 
-            .form-group
-              %label Mot de passe
-              = f.password_field :password, class: 'form-control'
-              - if devise_mapping.recoverable?
-                = link_to new_password_path(resource_name), class: 'right' do
-                  = fa_icon "question"
-                  J'ai oublié mon mot de passe
+          .form-group
+            %label Mot de passe
+            = f.password_field :password, class: 'form-control'
+            - if devise_mapping.recoverable?
+              = link_to new_password_path(resource_name), class: 'right' do
+                = fa_icon "question"
+                J'ai oublié mon mot de passe
 
-            .form-actions
-              %button.btn.btn-primary{type: :submit, class: "float-left"}
-                Connexion
+          .form-actions.mb-3
+            %button.btn.btn-primary.btn-block.mb-3{type: :submit}
+              Connexion
 
-              - if devise_mapping.registerable? && controller_name != 'registrations'
-                = link_to new_registration_path(resource_name), class: "btn btn-info float-right" do
-                  Créer un compte
+            = link_to new_registration_path(resource_name), class: "btn btn-success btn-block" do
+              Créer un compte
 
-              .clearfix
-              - if devise_mapping.rememberable?
-                .checkbox
-                  %label
-                    = f.check_box :remember_me
-                    Se rappeler de moi
+          .form-group.form-check
+            = f.check_box :remember_me, class: 'form-check-input'
+            = f.label :remember_me, 'Se souvenir de moi', class: 'form-check-label'

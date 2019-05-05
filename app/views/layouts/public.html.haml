@@ -8,15 +8,15 @@
     = csrf_meta_tags
 
   %body
-    %nav.navbar.navbar-dark.bg-dark.navbar-expand-lg.sticky-top
+    %nav.navbar.navbar-expand-lg.navbar-dark.bg-gradient-primary.text-white.fixed-top
       .container
         = link_to root_url, class: "navbar-brand" do
           Eglise CRM
 
-        %button.navbar-toggler.ml-auto{"aria-controls" => "probootstrap-navbar", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#probootstrap-navbar", "data-toggle" => "collapse", :type => "button"}
-          %span
-            %i.ion-navicon
-        .collapse.navbar-collapse
+        %button.navbar-toggler{"aria-controls" => "main-navbar", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#main-navbar", "data-toggle" => "collapse", :type => "button"}
+          %span.navbar-toggler-icon
+
+        #main-navbar.collapse.navbar-collapse
           %ul.navbar-nav.ml-auto
             %li.nav-item
               = link_to root_url, class: 'nav-link' do
