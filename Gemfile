@@ -2,35 +2,41 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-ruby '2.3.3'
-gem 'rails', '4.2.4'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
+ruby '2.7.1'
+gem 'rails', '6.1.1'
+
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'jbuilder', '~> 2.0'
-gem 'bootstrap-sass'
+gem 'jbuilder'
+gem 'sprockets-rails', :require => 'sprockets/railtie'
+
+gem 'bootstrap', '4.6.1'
+
 gem 'devise'
 gem 'devise_invitable'
+
 gem 'haml-rails'
 gem 'high_voltage'
-gem 'mysql2', '~> 0.3.18'
-gem 'therubyracer', :platform=>:ruby
-gem "font-awesome-rails"
+
+gem 'mysql2', '~> 0.5.3'
+
+gem 'font_awesome5_rails'
 gem 'toastr-rails'
 gem "cancan"
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
-gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate'
 gem "will_paginate-bootstrap"
 gem "rolify"
-gem 'sprockets', '2.12.3'
-gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
+
+
 gem 'jquery-minicolors-rails'
 gem "cocoon"
-gem 'rails_email_preview', '~> 2.0.1'
-gem 'icalendar', '~> 2.4', '>= 2.4.1'
+
+gem 'icalendar'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -47,6 +53,7 @@ group :development do
 end
 
 group :development do
+  gem "mini_racer"
   gem 'better_errors'
   gem 'html2haml'
   gem 'rails_apps_pages'
@@ -56,7 +63,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'factory_girl_rails'
   gem 'faker'
   gem 'rspec-rails'
 end

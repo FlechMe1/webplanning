@@ -1,35 +1,98 @@
-%head
-  %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
-  %title ADD Blois - Plannings
+!!!
+%html{:lang => "fr"}
+  %head
+    = csrf_meta_tags
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
+    %meta{:content => "Church Manager - Système de gestion des relations des églises", :name => "description"}/
+    %meta{:content => "FlechMe - Paul Gruson", :name => "author"}/
+    %title Church Manager
 
-  = stylesheet_link_tag 'application', media: 'all'
-  = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all'
 
-  %body.skin-blue.sidebar-mini
-    .wrapper
-      %header.main-header
-        = render "layouts/topbar"
-      / Left side column. contains the logo and sidebar
-      %aside.main-sidebar
-        / sidebar: style can be found in sidebar.less
+  %body#page-top
+    / Page Wrapper
+    #wrapper
+      / Sidebar
+      %ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion
+        / Sidebar - Brand
+        %a.sidebar-brand.d-flex.align-items-center.justify-content-center{:href => "index.html"}
+          .sidebar-brand-icon.rotate-n-15
+            %i.fas.fa-laugh-wink
+          .sidebar-brand-text.mx-3
+            Church Manager
+
         = render "layouts/sidebar"
-        / /.sidebar
-      / Content Wrapper. Contains page content
-      .content-wrapper
-        = yield
-        .clearfix
+      / End of Sidebar
+      / Content Wrapper
+      #content-wrapper.d-flex.flex-column
+        / Main Content
+        #content
+          / Topbar
+          %nav.navbar.navbar-expand.navbar-light.bg-white.topbar.mb-4.static-top.shadow
+            / Sidebar Toggle (Topbar)
+            %button#sidebarToggleTop.btn.btn-link.d-md-none.rounded-circle.mr-3
+              %i.fa.fa-bars
 
-      %footer.main-footer
-        .pull-right.hidden-xs
-          %b Version
-          1.0
-        %strong
-          Copyright ©
-          = Date.today.year
-          = link_to "http://www.eglisedeblois.fr", target: "_blank", rel: :nofollow do
-            Eglise Evangélique de Blois
-        Tous droits réservés.
+
+            / Topbar Navbar
+            %ul.navbar-nav.ml-auto
+
+              .topbar-divider.d-none.d-sm-block
+              / Nav Item - User Information
+              %li.nav-item.dropdown.no-arrow
+                %a#userDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                  %span.mr-2.d-none.d-lg-inline.text-gray-600.small
+                    = current_user.name
+
+                / Dropdown - User Information
+                .dropdown-menu.dropdown-menu-right.shadow.animated--grow-in{"aria-labelledby" => "userDropdown"}
+                  = link_to current_user, class: 'dropdown-item' do
+                    = fa_icon 'user', class: 'fas fa-sm fa-fw mr-2 text-gray-400'
+                    Profile
+                  .dropdown-divider
+                  %a.dropdown-item{"data-target" => "#logoutModal", "data-toggle" => "modal", :href => "#"}
+                    %i.fas.fa-sign-out-alt.fa-sm.fa-fw.mr-2.text-gray-400
+                    Logout
+          / End of Topbar
+          / Begin Page Content
+          .container-fluid
+            / Page Heading
+            = yield
+          / /.container-fluid
+        / End of Main Content
+        / Footer
+        %footer.sticky-footer.bg-white
+          .container.my-auto
+            .copyright.text-center.my-auto
+              %span
+                Copyright ©
+                %strong Church Manager
+                = Date.today.year
+        / End of Footer
+      / End of Content Wrapper
+    / End of Page Wrapper
+    / Scroll to Top Button
+    %a.scroll-to-top.rounded{:href => "#page-top"}
+      %i.fas.fa-angle-up
+    / Logout Modal
+    #logoutModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog{:role => "document"}
+        .modal-content
+          .modal-header
+            %h5#exampleModalLabel.modal-title Prêt à partir ?
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+          .modal-body Cliquez sur "Déconnexion" ci-dessous si vous êtes décidé à partir.
+          .modal-footer
+            %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Annuler
+            = link_to destroy_user_session_path, method: :delete, class: "btn btn-primary" do
+              Déconnexion
+
 
     = javascript_include_tag 'application'
     = custom_bootstrap_flash
     = yield :scripts
+

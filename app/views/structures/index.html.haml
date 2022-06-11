@@ -1,0 +1,13 @@
+.row
+  .col-lg-6.d-none.d-lg-block.bg-login-image
+  .col-lg-6
+    .p-5
+      .text-center
+        %h1.h4.text-gray-900.mb-4
+          Pour quelle église
+          %br
+          travaillez-vous ?
+
+      - @structures.each do |structure|
+        = link_to connect_path(EncryptionService.encrypt(structure.id)), class: 'btn btn-info btn-block' do
+          = structure.name

@@ -1,13 +1,29 @@
 Rails.application.routes.draw do
 
-  mount RailsEmailPreview::Engine, at: 'emails'
+
   devise_for :users, controllers: {
-    invitations: "users/invitations"
+    invitations: "users/invitations",
+    sessions: "users/sessions"
   }
 
+  get '/creer-un-compte', to: 'users/registrations#new', as: :new_registration
+  post '/creer-un-compte', to: 'users/registrations#create', as: :registration
 
   authenticated :user do
-    root to: 'pages#home', as: :home
+    get '/structure/:encrypted_id', to: 'structures#show', as: :connect
+
+    # APP
+    namespace :app, path: '' do
+      constraints(:subdomain => /app/) do
+        root to: 'pages#home', as: :home
+
+      end
+    end
+
+
+    root to: 'structures#index', as: :structures #get user structure
+
+
 
     resources :events
     resources :members
@@ -23,8 +39,12 @@ Rails.application.routes.draw do
       get '/invite', to: 'users#invite', as: :invite
       resources :events, controller: 'users/events'
     end
+
+
+
   end
 
+  # RGPD
   namespace :public do
     root to: 'pages#home'
 

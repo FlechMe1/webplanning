@@ -1,0 +1,45 @@
+.row
+  .col-lg-6.d-none.d-lg-block.bg-login-image
+  .col-lg-6
+    .p-5
+      .text-center
+        %h1.h4.text-gray-900.mb-4
+          Merci d'avoir choisi
+          %br
+          "Church Manager"
+
+      = form_tag registration_path, method: :post do
+        - if @user.errors.any? || @structure.errors.any?
+          .callout.callout-danger
+            %h4= "#{pluralize(@user.errors.count+@structure.errors.count, "erreur")}"
+            %ul
+              - @structure.errors.full_messages.each do |msg|
+                %li= msg
+              - @user.errors.full_messages.each do |msg|
+                %li= msg
+
+        .form-group
+          = text_field_tag 'structure[name]', @structure.name, class: 'form-control', placeholder: "Nom de l'église"
+
+        %hr
+
+        .form-group
+          = text_field_tag 'user[firstname]', @user.firstname, class: 'form-control', placeholder: "Votre prénom"
+        .form-group
+          = text_field_tag 'user[lastname]', @user.lastname, class: 'form-control', placeholder: "Votre nom"
+        .form-group
+          = text_field_tag 'user[email]', @user.email, class: 'form-control', placeholder: "Votre email"
+
+        .form-group
+          = password_field_tag 'user[password]', nil, class: 'form-control', placeholder: "Mot de passe"
+        .form-group
+          = password_field_tag 'user[password_confirmation]', nil, class: 'form-control', placeholder: "Confirmez votre mot de passe"
+
+        %button.btn.btn-primary.btn-user.btn-block{type: :submit}
+          Créer mon compte
+
+
+      %hr
+
+      = link_to user_session_path, class: 'btn btn-info btn-block' do
+        J'ai déjà un compte

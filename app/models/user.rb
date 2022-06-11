@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :assignments, dependent: :destroy
   has_many :assigned_events, through: :assignments
 
+  has_and_belongs_to_many :structures
+
   has_one :member
 
   before_create :set_default_role

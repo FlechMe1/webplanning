@@ -13,9 +13,6 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -27,18 +24,17 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+ config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "smtp-relay.sendinblue.com",
-    port: 587,
-    domain: "eglisedeblois.fr",
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: Rails.application.secrets[:smtp_user],
-    password: Rails.application.secrets[:smtp_password]
+    :user_name => '3a40f564295fbf',
+    :password => '846a19ab4fedde',
+    :address => 'smtp.mailtrap.io',
+    :domain => 'smtp.mailtrap.io',
+    :port => '2525',
+    :authentication => :cram_md5
   }
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'lvh.me:3000' }
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { :host => 'myloc.me:3001' }
   config.action_mailer.raise_delivery_errors = true
   # Send email in development mode?
   config.action_mailer.perform_deliveries = true
@@ -55,4 +51,8 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+
+  config.hosts << "app.myloc.me"
+  config.hosts << "myloc.me"
 end

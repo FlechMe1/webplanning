@@ -1,0 +1,27 @@
+!!!
+%html{:lang => "fr"}
+  %head
+    = csrf_meta_tags
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
+    %meta{:content => "Church Manager - Système de gestion des relations des églises", :name => "description"}/
+    %meta{:content => "FlechMe - Paul Gruson", :name => "author"}/
+    %title Church Manager - Votre compte
+
+    = stylesheet_link_tag 'application', media: 'all'
+
+  %body.bg-gradient-primary
+    .container
+      / Outer Row
+      .row.justify-content-center
+        .col-xl-10.col-lg-12.col-md-9
+          .card.o-hidden.border-0.shadow-lg.my-5
+            .card-body.p-0
+              / Nested Row within Card Body
+              = yield
+
+    = javascript_include_tag 'application'
+    = custom_bootstrap_flash
+    = yield :scripts

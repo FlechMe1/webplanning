@@ -1,41 +1,48 @@
-%section.sidebar
-  %ul.sidebar-menu
-    %li{class: "#{'active' if params[:controller].match(/pages/)}"}
-      = link_to root_url do
-        = fa_icon "dashboard"
-        %span Mon planning
 
-    - if can? :read, Team || current_user.is_leader?
-      %li{class: "#{'active' if params[:controller].match(/teams/)}"}
-        = link_to teams_url do
-          = fa_icon "users"
-          %span Mes équipes
+%hr.sidebar-divider.my-0
 
-    - if can? :read, User
-      %li{class: "#{'active' if params[:controller].match(/users/)}"}
-        = link_to users_url do
-          = fa_icon "leaf"
-          %span Bénévoles
+%li.nav-item{class: "#{'active' if params[:controller].match(/pages/)}"}
+  = link_to root_url, class: "nav-link" do
+    = fa_icon "tachometer-alt", class: "fas fa-fw"
+    %span Mon planning
 
-    %li{class: "#{'active' if params[:controller].match(/events/)}"}
-      = link_to events_url do
-        = fa_icon "calendar"
-        %span Evenements
+%hr.sidebar-divider
 
-    - if can? :read, Member
-      %li.treeview{class: "#{'active menu-open' if params[:controller].match(/members|families/)}"}
-        = link_to '#' do
-          = fa_icon "user"
-          %span Membres
-          %span.pull-right-container
-            = fa_icon 'angle-left pull-right'
 
-        %ul.treeview-menu
-          %li{class: "#{'active' if params[:controller].match(/members/)}"}
-            = link_to members_url do
-              = fa_icon 'male'
-              Toutes les personnes
-          %li{class: "#{'active' if params[:controller].match(/families/)}"}
-            = link_to families_url do
-              = fa_icon 'sitemap'
-              Toutes les familles
+.sidebar-heading
+  Interface
+
+- if can? :read, Team || current_user.is_leader?
+  %li.nav-item{class: "#{'active' if params[:controller].match(/teams/)}"}
+    = link_to teams_url, class: "nav-link" do
+      = fa_icon "users"
+      %span Mes équipes
+
+- if can? :read, User
+  %li.nav-item{class: "#{'active' if params[:controller].match(/users/)}"}
+    = link_to users_url, class: "nav-link" do
+      = fa_icon "leaf"
+      %span Bénévoles
+
+%li.nav-item{class: "#{'active' if params[:controller].match(/events/)}"}
+  = link_to events_url, class: "nav-link" do
+    = fa_icon "calendar"
+    %span Evenements
+
+- if can? :read, Member
+  %li.nav-item{class: "#{'active' if params[:controller].match(/members|families/)}"}
+
+    %a.nav-link{href: "#", 'data-toggle' => "collapse", 'data-target' => "#collapseMembers", 'aria-expanded' => "true", 'aria-controls' => "collapseMembers"}
+      = fa_icon "user"
+      %span Membres
+
+    #collapseMembers.collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordionSidebar"}
+      .bg-white.py-2.collapse-inner.rounded
+        %a.collapse-item{:href => members_url, class: "#{'active' if params[:controller].match(/members/)}"}
+          = fa_icon 'male'
+          Toutes les personnes
+
+        %a.collapse-item{:href => families_url, class: "#{'active' if params[:controller].match(/families/)}"}
+          = fa_icon 'sitemap'
+          Toutes les familles
+

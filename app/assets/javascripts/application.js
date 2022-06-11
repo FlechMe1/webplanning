@@ -12,48 +12,47 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require bootstrap-sprockets
-//= require toastr
+//= require popper
 //= require moment
+//= require bootstrap
+//= require toastr
 //= require fullcalendar
-//= require fullcalendar/lang-all
-//= require bootstrap-datetimepicker
+//= require fullcalendar/locale-all
 //= require jquery.minicolors
 //= require cocoon
-//= require theme
+//= require sb-admin/sb-admin-2
 
 $(document).ready(function(){
 
-  $('.colorpicker').minicolors({
-    theme: 'bootstrap'
-  });
+  // $('.colorpicker').minicolors({
+  //   theme: 'bootstrap'
+  // });
 
-  $('.datetimepicker').datetimepicker({
-    locale: 'fr',
-    format: "DD/MM/YYYY hh:mm A",
-    sideBySide: true,
-    icons: {
-      time: 'fa fa-clock-o',
-      date: 'fa fa-calendar',
-      up: 'fa fa-chevron-up',
-      down: 'fa fa-chevron-down',
-      previous: 'fa fa-chevron-left',
-      next: 'fa fa-chevron-right',
-      today: 'fa fa-crosshairs',
-      clear: 'fa fa-trash',
-      close: 'fa fa-remove'
-    }
-  });
+  // $('.datetimepicker').datetimepicker({
+  //   locale: 'fr',
+  //   format: "DD/MM/YYYY hh:mm A",
+  //   sideBySide: true,
+  //   icons: {
+  //     time: 'fa fa-clock-o',
+  //     date: 'fa fa-calendar',
+  //     up: 'fa fa-chevron-up',
+  //     down: 'fa fa-chevron-down',
+  //     previous: 'fa fa-chevron-left',
+  //     next: 'fa fa-chevron-right',
+  //     today: 'fa fa-crosshairs',
+  //     clear: 'fa fa-trash',
+  //     close: 'fa fa-remove'
+  //   }
+  // });
 
-  $('.category_select').on('change', function(){
-    member_id = $(this).data('member-id');
-    category = $(this).val()
+  // $('.category_select').on('change', function(){
+  //   member_id = $(this).data('member-id');
+  //   category = $(this).val()
 
-    if(member_id){
-      change_category(member_id, category)
-    }
-  });
+  //   if(member_id){
+  //     change_category(member_id, category)
+  //   }
+  // });
 
 });
 

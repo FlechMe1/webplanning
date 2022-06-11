@@ -1,30 +1,34 @@
-%section.content-header
-  %h1
-    Connexion
+.row
+  .col-lg-6.d-none.d-lg-block.bg-login-image
+  .col-lg-6
+    .p-5
+      .text-center
+        %h1.h4.text-gray-900.mb-4 Un plaisir de vous revoir !
 
-%section.content
-  .box
-    .box-body
       = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f|
-        = devise_error_messages!
+        = render "devise/shared/error_messages", resource: resource
         .form-group
-          %label Email
-          = f.email_field :email, :autofocus => true, class: 'form-control'
-
+          = f.email_field :email, :autofocus => true, class: 'form-control form-control-user', "aria-describedby" => "emailHelp", :placeholder => "Votre email..."
 
         .form-group
-          %label Mot de passe
-          = f.password_field :password, class: 'form-control'
-          - if devise_mapping.recoverable?
-            = link_to new_password_path(resource_name), class: 'right' do
-              = fa_icon "question"
-              J'ai oublié mon mot de passe
+          = f.password_field :password, class: 'form-control form-control-user', placeholder: 'Mot de passe'
 
-        .form-actions
-          %button.btn.btn-primary{type: :submit, class: "right"}
-            Connexion
-          - if devise_mapping.rememberable?
-            .checkbox
-              %label
-                = f.check_box :remember_me
-                Se rappeler de moi
+        - if devise_mapping.rememberable?
+          .form-group
+            .custom-control.custom-checkbox.small
+              = f.check_box :remember_me, class: 'custom-control-input'
+              %label.custom-control-label{:for => "customCheck"}
+                Se souvenir de moi !
+
+        %button.btn.btn-primary.btn-user.btn-block{type: :submit}
+          Connexion
+
+      .text-center
+        = link_to new_password_path(resource_name), class: 'small' do
+          J'ai oublié mon mot de passe
+
+
+      %hr/
+
+      = link_to new_registration_path, class: 'btn btn-info btn-block' do
+        Créer un compte
