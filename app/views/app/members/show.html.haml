@@ -4,15 +4,15 @@
     %small Profil de la personne
   - if can? :update, @member
     .actions
-      = link_to edit_member_path(@member), class: "btn btn-flat btn-success" do
+      = link_to edit_app_member_path(@member), class: "btn btn-flat btn-success" do
         = fa_icon "edit"
         Modifier
 
 %section.content
   .row
     .col-md-4
-      .box.box-primary
-        .box-body.box-profile
+      .card.card-primary
+        .card-body.card-profile
           %h3.profile-username.text-center
             = fa_icon "#{@member.gender}"
             = @member.get_gender
@@ -24,14 +24,14 @@
               = link_to @member.family do
                 = @member.family_name
 
-          = link_to edit_member_path(@member), class: "btn btn-block btn-flat btn-primary" do
+          = link_to edit_app_member_path(@member), class: "btn btn-block btn-flat btn-primary" do
             %b Editer
 
-      .box.box-primary
-        .box-header.with-border
-          %h3.box-title.text-center À propos
+      .card.card-primary
+        .card-header.with-border
+          %h3.card-title.text-center À propos
 
-        .box-body
+        .card-body
           %ul.fa-ul
             %li
               = fa_icon 'sitemap fa-li'

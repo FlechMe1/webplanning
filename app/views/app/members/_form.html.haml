@@ -1,4 +1,4 @@
-= form_for member do |f|
+= form_for [:app, member] do |f|
   .row
     .col-md-6
       - if member.errors.any?

@@ -1,9 +1,9 @@
-class MembersController < ApplicationController
+class App::MembersController < AppController
   before_action :set_member, only: [:show, :edit, :update, :destroy]
   before_action :create_family, only: [:create, :update]
 
   def index
-    @members = Member.order('lastname ASC').paginate(:page => params[:page], :per_page => 25)
+    @members = @structure.members.order('lastname ASC').paginate(:page => params[:page], :per_page => 25)
   end
 
   def show
@@ -35,7 +35,7 @@ class MembersController < ApplicationController
   def update
     respond_to do |format|
       if @member.update(member_params)
-        format.html { redirect_to @member, notice: 'Membre mis à jour' }
+        format.html { redirect_to [:app, @member], notice: 'Membre mis à jour' }
         format.js
       else
         format.html { render :edit }

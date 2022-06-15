@@ -18,6 +18,9 @@ class Users::RegistrationsController < ApplicationController
     @user.add_role :admin, @structure
 
     if @user.save && @structure.save
+      @member = Member.new(firstname: @user.firstname, lastname: @user.lastname, email: @user.email, structure_id: @structure.id, user_id: @user.id, cgu: true, gender: params[:user][:gender])
+      @member.save
+
       redirect_to root_url, notice: 'Un email vient de vous être envoyé contenant les informations nécéssaires à votre inscription.'
     else
       render :new

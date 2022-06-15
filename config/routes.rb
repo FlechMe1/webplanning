@@ -12,10 +12,12 @@ Rails.application.routes.draw do
   authenticated :user do
     get '/structure/:church_token', to: 'structures#show', as: :connect
 
+
     # APP
     namespace :app, path: '' do
       constraints(:subdomain => /app/) do
-        root to: 'pages#home', as: :home
+        root to: redirect('/members'), as: :home
+        resources :members
 
       end
     end
@@ -26,7 +28,6 @@ Rails.application.routes.draw do
 
 
     resources :events
-    resources :members
     resources :families
     resources :teams do
       resources :memberships, controller: 'teams/memberships'

@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
     end
   end
 
+
   def is_leader?
     memberships.where(is_leader: true).any?
   end

@@ -3,7 +3,7 @@
   .col-lg-6
     .p-5
       .text-center
-        %h1.h4.text-gray-900.mb-4
+        %h1.h4.mb-4
           Merci d'avoir choisi
           %br
           "Church Manager"
@@ -22,6 +22,16 @@
           = text_field_tag 'structure[name]', @structure.name, class: 'form-control', placeholder: "Nom de l'église"
 
         %hr
+
+        %h2.h5.mb-4 Vos infos
+
+        .form-group.justidy-content-between
+          %label.radio-inline.mr-3
+            = radio_button_tag 'user[gender]', :male
+            = fa_icon "male", class: "fa-2x ml-2"
+          %label.radio-inline
+            = radio_button_tag 'user[gender]', :female
+            = fa_icon "female", class: "fa-2x ml-2"
 
         .form-group
           = text_field_tag 'user[firstname]', @user.firstname, class: 'form-control', placeholder: "Votre prénom"

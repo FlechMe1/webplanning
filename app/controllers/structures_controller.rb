@@ -24,6 +24,8 @@ class StructuresController < ApplicationController
     @structure = current_user.structures.build(structure_params)
 
     if @structure.save
+      Member.create(firstname: current_user.firstname, lastname: current_user.lastname, email: current_user.email, structure_id: @structure.id, user_id: current_user.id)
+
       current_user.structures << @structure
       current_user.save
 
