@@ -1,0 +1,28 @@
+.row
+  .col-lg-6.d-none.d-lg-block.bg-login-image
+  .col-lg-6
+    .p-5
+      .text-center
+        %h1.h4.text-gray-900.mb-4
+          Merci d'avoir choisi
+          %br
+          "Church Manager"
+
+      = form_for @structure, url: '/structures' do |f|
+        - if @structure.errors.any?
+          .callout.callout-danger
+            %h4= "#{pluralize(@structure.errors.count, "erreur")}"
+            %ul
+              - @structure.errors.full_messages.each do |msg|
+                %li= msg
+
+        .form-group
+          = f.text_field :name, class: 'form-control', placeholder: "Nom de l'église"
+
+        %button.btn.btn-primary.btn-user.btn-block{type: :submit}
+          Créer mon compte
+
+        %hr
+
+        = link_to structures_path, class: 'btn btn-info btn-block' do
+          Mon église est déjà inscrite

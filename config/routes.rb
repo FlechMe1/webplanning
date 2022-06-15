@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   post '/creer-un-compte', to: 'users/registrations#create', as: :registration
 
   authenticated :user do
-    get '/structure/:encrypted_id', to: 'structures#show', as: :connect
+    get '/structure/:church_token', to: 'structures#show', as: :connect
 
     # APP
     namespace :app, path: '' do
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
 
     root to: 'structures#index', as: :structures #get user structure
-
+    resources :structures, only: [:new, :create]
 
 
     resources :events

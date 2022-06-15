@@ -9,5 +9,10 @@
           travaillez-vous ?
 
       - @structures.each do |structure|
-        = link_to connect_path(EncryptionService.encrypt(structure.id)), class: 'btn btn-info btn-block' do
+        = link_to connect_path(structure.token), class: 'btn btn-info btn-block' do
           = structure.name
+
+      %hr
+
+      = link_to new_structure_path, class: "btn btn-block btn-primary" do
+        Inscrire mon église

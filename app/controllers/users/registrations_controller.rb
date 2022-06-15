@@ -15,6 +15,8 @@ class Users::RegistrationsController < ApplicationController
 
     @user.structures << @structure
 
+    @user.add_role :admin, @structure
+
     if @user.save && @structure.save
       redirect_to root_url, notice: 'Un email vient de vous être envoyé contenant les informations nécéssaires à votre inscription.'
     else

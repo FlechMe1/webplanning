@@ -9,6 +9,8 @@ class CreateStructures < ActiveRecord::Migration[6.1]
       t.string :website
       t.string :phone
 
+      t.string :token
+
       t.timestamps
     end
 

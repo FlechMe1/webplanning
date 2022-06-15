@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_130834) do
     t.string "town"
     t.string "website"
     t.string "phone"
+    t.string "token"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

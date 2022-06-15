@@ -6,9 +6,11 @@ class AppController < ApplicationController
 
   private
     def set_structure
-      @structure = Structure.find cookies.signed[:structure_id]
+      structure_token = cookies.signed[:church_token]
+      @structure = Structure.find_by token: structure_token
+
       if @structure.blank?
-        redirect_to structures_path
+        redirect_to structures_url(subdomain: '')
       end
     end
 
