@@ -1,10 +1,10 @@
-class FamiliesController < ApplicationController
+class App::FamiliesController < AppController
   before_action :set_family, only: [:show, :edit, :update, :destroy]
 
   # GET /families
   # GET /families.json
   def index
-    @families = Family.order('name ASC').paginate(:page => params[:page], :per_page => 25)
+    @families = @structure.families.order('name ASC').paginate(:page => params[:page], :per_page => 25)
   end
 
   # GET /families/1

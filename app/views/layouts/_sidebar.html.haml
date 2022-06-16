@@ -10,7 +10,24 @@
 
 
 .sidebar-heading
-  Interface
+  Mon église
+
+
+%li.nav-item{class: "#{'active' if params[:controller].match(/members|families/)}"}
+
+  %a.nav-link{href: "#", 'data-toggle' => "collapse", 'data-target' => "#collapseMembers", 'aria-expanded' => "true", 'aria-controls' => "collapseMembers"}
+    = fa_icon "user"
+    %span Membres
+
+  #collapseMembers.collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordionSidebar"}
+    .bg-white.py-2.collapse-inner.rounded
+      %a.collapse-item{:href => app_members_url, class: "#{'active' if params[:controller].match(/members/)}"}
+        = fa_icon 'male'
+        Toutes les personnes
+
+      %a.collapse-item{:href => app_families_url, class: "#{'active' if params[:controller].match(/families/)}"}
+        = fa_icon 'sitemap'
+        Toutes les familles
 
 - if can? :read, Team || current_user.is_leader?
   %li.nav-item{class: "#{'active' if params[:controller].match(/teams/)}"}
@@ -29,20 +46,4 @@
     = fa_icon "calendar"
     %span Evenements
 
-- if can? :read, Member
-  %li.nav-item{class: "#{'active' if params[:controller].match(/members|families/)}"}
-
-    %a.nav-link{href: "#", 'data-toggle' => "collapse", 'data-target' => "#collapseMembers", 'aria-expanded' => "true", 'aria-controls' => "collapseMembers"}
-      = fa_icon "user"
-      %span Membres
-
-    #collapseMembers.collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordionSidebar"}
-      .bg-white.py-2.collapse-inner.rounded
-        %a.collapse-item{:href => members_url, class: "#{'active' if params[:controller].match(/members/)}"}
-          = fa_icon 'male'
-          Toutes les personnes
-
-        %a.collapse-item{:href => families_url, class: "#{'active' if params[:controller].match(/families/)}"}
-          = fa_icon 'sitemap'
-          Toutes les familles
 

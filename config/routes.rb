@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       constraints(:subdomain => /app/) do
         root to: redirect('/members'), as: :home
         resources :members
+        resources :families
 
       end
     end
@@ -28,7 +29,6 @@ Rails.application.routes.draw do
 
 
     resources :events
-    resources :families
     resources :teams do
       resources :memberships, controller: 'teams/memberships'
       resources :events, controller: 'teams/events'

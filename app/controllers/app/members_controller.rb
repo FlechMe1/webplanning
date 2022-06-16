@@ -14,15 +14,15 @@ class App::MembersController < AppController
   end
 
   def new
-    @member = Member.new
+    @member = @structure.members.build
     @member.build_sibling
   end
 
   def create
-    @member = Member.new(member_params)
+    @member = @structure.members.build(member_params)
 
     if @member.save
-      redirect_to :members, notice: 'Un nouveau membre a été ajouté'
+      redirect_to [:app, :members], notice: 'Un nouveau membre a été ajouté'
     else
       render :new
     end
@@ -46,7 +46,7 @@ class App::MembersController < AppController
 
   def destroy
     @member.destroy
-    redirect_to :members, notice: "Membre supprimé"
+    redirect_to [:app, :members], notice: "Membre supprimé"
   end
 
   private
@@ -69,9 +69,9 @@ class App::MembersController < AppController
         @family.address_2 = params[:member][:address_2]
         @family.zipcode = params[:member][:zipcode]
         @family.town = params[:member][:town]
+        @family.structure_id = @structure.id
         @family.save
 
-        puts @family.inspect
 
         params[:member][:sibling_attributes][:family_id] = @family.id
       end

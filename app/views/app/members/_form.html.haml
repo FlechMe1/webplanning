@@ -1,4 +1,5 @@
 = form_for [:app, member] do |f|
+  = f.hidden_field :cgu, value: true
   .row
     .col-md-6
       - if member.errors.any?

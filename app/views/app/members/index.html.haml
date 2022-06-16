@@ -12,46 +12,46 @@
   .card.shadow.mb-4
     .card-header.py-3
       %h6.m-0.font-weight-bold.text-primary Membres
-    .card-body
-      .table-responsive
-        %table.table.table-bordered{:cellspacing => "0", :width => "100%"}
-          %thead
-            %tr
-              %th Civilité
-              %th Nom
-              %th Téléphone
-              %th Email
-              %th Adresse
-              %th Famille
-              %th Catégorie
-              %th
+    .table-responsive
+      %table.table.table-bordered.mb-0{:cellspacing => "0", :width => "100%"}
+        %thead
+          %tr
+            %th Civilité
+            %th Nom
+            %th Téléphone
+            %th Email
+            %th Adresse
+            %th Famille
+            %th Catégorie
+            %th
 
-          %tbody
-            - @members.each do |member|
-              %tr
-                %td
-                  = fa_icon "#{member.gender}"
-                  = member.get_gender
-                %td
-                  = link_to [:app, member] do
-                    = fa_icon 'eye'
-                    = member.name
-                %td= [member.phone_1, member.phone_2].reject { |c| c.blank? }.join(', ')
-                %td= member.email
-                %td= member.full_address
-                %td
-                  - unless member.family_id.blank?
-                    = link_to family_path(member.family_id) do
-                      = member.family_name
-                %td
-                  = select_tag :category, options_for_select(categories_options, member.category), class: "form-control input-sm category_select", data:{'member-id' => member.id}
-                %td
+        %tbody
+          - @members.each do |member|
+            %tr
+              %td
+                = fa_icon "#{member.gender}"
+                = member.get_gender
+              %td
+                = link_to [:app, member] do
+                  = fa_icon 'eye'
+                  = member.name
+              %td= [member.phone_1, member.phone_2].reject { |c| c.blank? }.join(', ')
+              %td= member.email
+              %td= member.full_address
+              %td
+                - unless member.family_id.blank?
+                  = link_to app_family_path(member.family_id) do
+                    = member.family_name
+              %td
+                = select_tag :category, options_for_select(categories_options, member.category), class: "form-control form-control-sm category_select", data:{'member-id' => member.id}
+              %td
+                .btn-group
                   - if can? :update, member
-                    = link_to edit_app_member_path(member), class: "btn btn-flat btn-success btn-xs" do
+                    = link_to edit_app_member_path(member), class: "btn btn-flat btn-success btn-sm" do
                       = fa_icon "edit"
                       Modifier
                   - if can? :delete, member
-                    = link_to [:app, member], method: :delete, data:{confirm: "Êtes vous sûr de vouloir supprimer ce membre ?"}, class: "btn btn-flat btn-danger btn-xs" do
+                    = link_to [:app, member], method: :delete, data:{confirm: "Êtes vous sûr de vouloir supprimer ce membre ?"}, class: "btn btn-flat btn-danger btn-sm" do
                       = fa_icon "trash"
                       Supprimer
 

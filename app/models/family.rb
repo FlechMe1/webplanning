@@ -1,7 +1,10 @@
 class Family < ActiveRecord::Base
 
+  belongs_to :structure
+
   has_many :siblings, dependent: :destroy
   has_many :members, through: :siblings
+
 
   validates :name, presence: true
 

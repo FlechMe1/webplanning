@@ -21,7 +21,7 @@
             %p.text-muted.text-center
               = @member.sibling_get_status
               de la famille
-              = link_to @member.family do
+              = link_to [:app, @member.family] do
                 = @member.family_name
 
           = link_to edit_app_member_path(@member), class: "btn btn-block btn-flat btn-primary" do
@@ -33,12 +33,13 @@
 
         .card-body
           %ul.fa-ul
-            %li
-              = fa_icon 'sitemap fa-li'
-              Famille:
-              %span
-                = link_to @member.family do
-                  = @member.family_name
+            - unless @member.family.blank?
+              %li
+                = fa_icon 'sitemap fa-li'
+                Famille:
+                %span
+                  = link_to [:app, @member.family] do
+                    = @member.family_name
 
             %li
               = fa_icon 'home fa-li'

@@ -24,7 +24,7 @@
           - @families.each do |family|
             %tr
               %td
-                = link_to family do
+                = link_to [:app, family] do
                   = fa_icon 'eye'
                   = family.name
               %td= family.phone_1
@@ -32,11 +32,11 @@
               %td= family.full_address
               %td
                 - if can? :update, family
-                  = link_to edit_family_path(family), class: "btn btn-flat btn-success btn-xs" do
+                  = link_to edit_app_family_path(family), class: "btn btn-flat btn-success btn-xs" do
                     = fa_icon "edit"
                     Modifier
                 - if can? :delete, family
-                  = link_to family, method: :delete, data:{confirm: "Êtes vous sûr de vouloir supprimer cette famille ?"}, class: "btn btn-flat btn-danger btn-xs" do
+                  = link_to [:app, family], method: :delete, data:{confirm: "Êtes vous sûr de vouloir supprimer cette famille ?"}, class: "btn btn-flat btn-danger btn-xs" do
                     = fa_icon "trash"
                     Supprimer
 
