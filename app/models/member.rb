@@ -9,8 +9,12 @@ class Member < ActiveRecord::Base
   delegate :name, :id, :to => :family, :prefix => true, allow_nil: true
   delegate :get_status, :to => :sibling, :prefix => true, allow_nil: true
 
-  validates :gender, :lastname, :firstname, presence: true
+  validates :lastname, :firstname, presence: true
   validates :cgu, acceptance: {accept: true} , on: :create, allow_nil: false
+
+  has_many :categorizations, as: :categorizable
+  has_many :categories, through: :categorizations
+  accepts_nested_attributes_for :categories
 
   after_create :send_access_link
 
@@ -28,11 +32,9 @@ class Member < ActiveRecord::Base
       "Mr"
     when 'female'
       "Mme"
+    else
+      'NR'
     end
-  end
-
-  def get_category
-    I18n.t("activerecord.attributes.member.categories.#{category}")
   end
 
   def has_family?
@@ -50,4 +52,9 @@ class Member < ActiveRecord::Base
   def send_access_link
     Mailer.send_access_link(self).deliver
   end
+
+  def categories_name
+    self.categories.pluck(:name).join(', ')
+  end
+
 end

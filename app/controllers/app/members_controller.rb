@@ -1,6 +1,7 @@
 class App::MembersController < AppController
   before_action :set_member, only: [:show, :edit, :update, :destroy]
   before_action :create_family, only: [:create, :update]
+  before_action :set_categores, only: [:new, :create, :edit, :update]
 
   def index
     @members = @structure.members.order('lastname ASC').paginate(:page => params[:page], :per_page => 25)
@@ -57,7 +58,11 @@ class App::MembersController < AppController
     def member_params
       params.required(:member).permit(:gender, :firstname, :lastname, :birthdate, :email, :phone_1,
                                       :phone_2, :address_1, :cgu, :category,
-                                       :user_id, :address_2, :zipcode, :town, sibling_attributes: [:family_id, :status])
+                                       :user_id, :address_2, :zipcode, :town, sibling_attributes: [:id, :family_id, :status], category_ids: [])
+    end
+
+    def set_categores
+      @categories = @structure.categories.order(name: :asc)
     end
 
     def create_family

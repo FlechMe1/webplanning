@@ -24,11 +24,11 @@ class App::FamiliesController < AppController
   # POST /families
   # POST /families.json
   def create
-    @family = Family.new(family_params)
+    @family = @structure.families.build(family_params)
 
     respond_to do |format|
       if @family.save
-        format.html { redirect_to @family, notice: 'Family was successfully created.' }
+        format.html { redirect_to [:app, @family], notice: 'Famille créée.' }
         format.json { render :show, status: :created, location: @family }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class App::FamiliesController < AppController
   def update
     respond_to do |format|
       if @family.update(family_params)
-        format.html { redirect_to @family, notice: 'Family was successfully updated.' }
+        format.html { redirect_to [:app, @family], notice: 'Famille mise à jours.' }
         format.json { render :show, status: :ok, location: @family }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class App::FamiliesController < AppController
   def destroy
     @family.destroy
     respond_to do |format|
-      format.html { redirect_to families_url, notice: 'Family was successfully destroyed.' }
+      format.html { redirect_to app_families_url, notice: 'Famille supprimée.' }
       format.json { head :no_content }
     end
   end

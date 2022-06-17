@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_10_130834) do
+ActiveRecord::Schema.define(version: 2022_06_16_074606) do
 
   create_table "assignments", id: :integer, charset: "utf8mb3", force: :cascade do |t|
     t.integer "user_id"
@@ -20,6 +20,24 @@ ActiveRecord::Schema.define(version: 2022_06_10_130834) do
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_assignments_on_event_id"
     t.index ["user_id"], name: "index_assignments_on_user_id"
+  end
+
+  create_table "categories", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name"
+    t.bigint "structure_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["structure_id"], name: "index_categories_on_structure_id"
+  end
+
+  create_table "categorizations", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "category_id"
+    t.string "categorizable_type"
+    t.bigint "categorizable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["categorizable_type", "categorizable_id"], name: "index_categorizations_on_categorizable"
+    t.index ["category_id"], name: "index_categorizations_on_category_id"
   end
 
   create_table "events", id: :integer, charset: "utf8mb3", force: :cascade do |t|
@@ -68,7 +86,6 @@ ActiveRecord::Schema.define(version: 2022_06_10_130834) do
     t.string "gender"
     t.date "birthdate"
     t.boolean "cgu"
-    t.string "category", default: "contact"
     t.string "token"
     t.bigint "structure_id"
     t.index ["structure_id"], name: "index_members_on_structure_id"
@@ -179,6 +196,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_130834) do
 
   add_foreign_key "assignments", "events"
   add_foreign_key "assignments", "users"
+  add_foreign_key "categories", "structures"
   add_foreign_key "memberships", "teams"
   add_foreign_key "memberships", "users"
   add_foreign_key "siblings", "families"

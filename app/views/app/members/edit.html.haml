@@ -1,9 +1,10 @@
-%section.content-header
-  %h1
-    Membres
-    %small Modifier un membre
 
-%section.content
-  .card
-    .card-body
-      = render 'form', member: @member
+%h1.h3.mb-2.text-gray-800 Gestion des membres
+
+= render "app/members/navbar"
+
+.card
+  .card-header
+    %h6.font-weight-bold.mb-0 Modifier un membre
+  .card-body
+    = render 'form', member: @member

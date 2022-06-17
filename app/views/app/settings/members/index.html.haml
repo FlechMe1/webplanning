@@ -1,0 +1,27 @@
+%h1.h3.mb-2.text-gray-800 Gestion des membres
+
+= render "app/members/navbar"
+
+.row
+  .col-lg-3
+    .card.shadow.mb-4
+      .card-header.py-3
+        %h6.m-0.font-weight-bold Categories
+      .card-body
+        - @categories.each do |category|
+          .category.d-flex.justify-content-between
+            %span
+              = category.name
+              = "(#{category.categorizations.count})"
+
+            = link_to [:app, category], method: :delete, data:{confirm: 'Êtes-vous sûr de vouloir supprimer cette catégorie ?'}, class: 'text-danger' do
+              = fa_icon 'times'
+
+        %h6.font-weight-bold.my-3 Créer une catégorie
+        = form_for [:app, @category] do |f|
+          = f.hidden_field :structure_id
+          .input-group
+            = f.text_field :name, class: 'form-control form-control-sm', placeholder: 'Nom de la catégorie'
+            .input-group-btn
+              %button.btn.btn-success.btn-sm{type: :submit}
+                = fa_icon 'plus'

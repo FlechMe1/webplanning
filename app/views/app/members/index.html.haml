@@ -1,70 +1,57 @@
-.container-fluid
-  / Page Heading
-  %h1.h3.mb-2.text-gray-800 Gestion des membres
 
-  %ul.nav.justify-content-center.mb-2
-    %li.nav-item
-      = link_to new_app_member_path, class: "nav-link nav-pill" do
-        = fa_icon "plus"
-        Ajouter
+%h1.h3.mb-2.text-gray-800 Gestion des membres
 
-  / DataTales Example
-  .card.shadow.mb-4
-    .card-header.py-3
-      %h6.m-0.font-weight-bold.text-primary Membres
-    .table-responsive
-      %table.table.table-bordered.mb-0{:cellspacing => "0", :width => "100%"}
-        %thead
+= render "app/members/navbar"
+
+/ DataTales Example
+.card.shadow.mb-4
+  .card-header.d-flex.justify-content-between.align-items-center
+    %h6.font-weight-bold.mb-0 Membres
+
+    = link_to new_app_member_path, class: 'btn btn-sm btn-success' do
+      = fa_icon 'plus'
+      Ajouter un membre
+
+  .table-responsive
+    %table.table.table-bordered.table-sm.mb-0
+      %thead
+        %tr
+          %th Civilité
+          %th Nom
+          %th Téléphone
+          %th Email
+          %th Adresse
+          %th Famille
+          %th Catégorie
+          %th
+
+      %tbody
+        - @members.each do |member|
           %tr
-            %th Civilité
-            %th Nom
-            %th Téléphone
-            %th Email
-            %th Adresse
-            %th Famille
-            %th Catégorie
-            %th
+            %td
+              = fa_icon "#{member.gender}"
+              = member.get_gender
+            %td
+              = link_to [:app, member] do
+                = fa_icon 'eye'
+                = member.name
+            %td= [member.phone_1, member.phone_2].reject { |c| c.blank? }.join(', ')
+            %td= member.email
+            %td= member.full_address
+            %td
+              - unless member.family_id.blank?
+                = link_to app_family_path(member.family_id) do
+                  = member.family_name
+            %td
+              = member.categories_name
+            %td
+              .btn-group
+                - if can? :update, member
+                  = link_to edit_app_member_path(member), class: "btn btn-flat btn-success btn-sm" do
+                    = fa_icon "edit"
+                    Modifier
+                - if can? :delete, member
+                  = link_to [:app, member], method: :delete, data:{confirm: "Êtes vous sûr de vouloir supprimer ce membre ?"}, class: "btn btn-flat btn-danger btn-sm" do
+                    = fa_icon "trash"
+                    Supprimer
 
-        %tbody
-          - @members.each do |member|
-            %tr
-              %td
-                = fa_icon "#{member.gender}"
-                = member.get_gender
-              %td
-                = link_to [:app, member] do
-                  = fa_icon 'eye'
-                  = member.name
-              %td= [member.phone_1, member.phone_2].reject { |c| c.blank? }.join(', ')
-              %td= member.email
-              %td= member.full_address
-              %td
-                - unless member.family_id.blank?
-                  = link_to app_family_path(member.family_id) do
-                    = member.family_name
-              %td
-                = select_tag :category, options_for_select(categories_options, member.category), class: "form-control form-control-sm category_select", data:{'member-id' => member.id}
-              %td
-                .btn-group
-                  - if can? :update, member
-                    = link_to edit_app_member_path(member), class: "btn btn-flat btn-success btn-sm" do
-                      = fa_icon "edit"
-                      Modifier
-                  - if can? :delete, member
-                    = link_to [:app, member], method: :delete, data:{confirm: "Êtes vous sûr de vouloir supprimer ce membre ?"}, class: "btn btn-flat btn-danger btn-sm" do
-                      = fa_icon "trash"
-                      Supprimer
-
-
-
-
-%section.content
-  .box
-    .box-body
-      %table.table.table-bordered.table-striped.table-condensed.table-xs
-        %thead
-          %tr
-
-        %tbody
-
-      = will_paginate @members, renderer: BootstrapPagination::Rails, next_label: ">", previous_label: "<"

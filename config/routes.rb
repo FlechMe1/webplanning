@@ -17,9 +17,13 @@ Rails.application.routes.draw do
     namespace :app, path: '' do
       constraints(:subdomain => /app/) do
         root to: redirect('/members'), as: :home
+        namespace :settings do
+          get '/members', to: 'members#index', as: :members
+        end
         resources :members
         resources :families
 
+        resources :categories, only: [:create, :destroy]
       end
     end
 

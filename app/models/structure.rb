@@ -6,7 +6,14 @@ class Structure < ActiveRecord::Base
 
   has_many :members
   has_many :families
+  has_many :categories
 
   validates :name, presence: true
+
+  after_commit :create_default_data, on: :create
+
+  def create_default_data
+    SeedStructureService.call(self.id)
+  end
 
 end

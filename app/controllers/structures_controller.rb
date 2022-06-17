@@ -23,12 +23,7 @@ class StructuresController < ApplicationController
   def create
     @structure = current_user.structures.build(structure_params)
 
-    if @structure.save
-      Member.create(firstname: current_user.firstname, lastname: current_user.lastname, email: current_user.email, structure_id: @structure.id, user_id: current_user.id)
-
-      current_user.structures << @structure
-      current_user.save
-
+    if current_user.save && @structure.save
       cookies.signed[:church_token] = {
         value: @structure.token,
         domain: :all,

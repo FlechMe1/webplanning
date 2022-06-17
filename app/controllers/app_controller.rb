@@ -7,6 +7,7 @@ class AppController < ApplicationController
   private
     def set_structure
       structure_token = cookies.signed[:church_token]
+
       @structure = Structure.find_by token: structure_token
 
       if @structure.blank?

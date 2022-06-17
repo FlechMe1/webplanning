@@ -1,4 +1,4 @@
-= form_for family do |f|
+= form_for [:app, family] do |f|
   .row
     .col-md-6
       - if family.errors.any?

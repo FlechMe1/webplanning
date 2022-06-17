@@ -1,0 +1,13 @@
+%ul.nav.nav-pills.justify-content-end.mb-3
+  %li.nav-item
+    = link_to app_members_path, class: "nav-link #{(params[:controller] == 'app/members') ? 'active' : 'not'}" do
+      = fa_icon "bars"
+      Listing
+  %li.nav-item
+    = link_to app_families_path, class: "nav-link #{(params[:controller] == 'app/families') ? 'active' : 'not'}" do
+      = fa_icon "sitemap"
+      Familles
+  %li.nav-item
+    = link_to app_settings_members_path, class: "nav-link #{(params[:controller] == 'app/settings/members') ? 'active' : 'not'}" do
+      = fa_icon "cogs"
+      Paramètres

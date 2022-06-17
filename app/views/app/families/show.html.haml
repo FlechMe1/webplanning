@@ -1,54 +1,50 @@
-%section.content-header
-  %h1
-    Familles
-    %small= @family.name
-  - if can? :create, Family
-    .actions
-      = link_to edit_family_path(@family), class: "btn btn-flat btn-success" do
-        = fa_icon "edit"
-        Modifier
+%h1.h3.mb-2.text-gray-800 Gestion des membres
 
-%section.content
-  .row
-    .col-md-4
-      .box.box-primary
-        .box-header
-          = fa_icon 'badge'
-          %h3.box-title Informations de contact
-        .box-body
-          %ul.fa-ul
-            - if @family.phone_1?
-              %li
-                = fa_icon 'phone fa-li'
-                = @family.phone_1
+= render "app/members/navbar"
 
-            - if @family.email?
-              %li
-                = fa_icon 'envelope fa-li'
-                = link_to @family.email, "mailto:#{@family.email}"
-    .col-md-8
-      .box.box-primary
-        .box-header
+.row
+  .col-md-4
+    .card.mb-3
+      .card-header
+        %h6.font-weight-bold.mb-0 Infos
+      .card-body.card-profile
+        %h3.profile-username.text-center= @family.name
+
+        %ul.fa-ul
+          - if @family.phone_1?
+            %li
+              = fa_icon 'phone fa-li'
+              = @family.phone_1
+
+          - if @family.email?
+            %li
+              = fa_icon 'envelope fa-li'
+              = link_to @family.email, "mailto:#{@family.email}"
+
+  .col-md-8
+    .card.mb-3
+      .card-header
+        %h6.font-weight-bold.mb-0
           = fa_icon 'sitemap'
-          %h3.box-title Membres de la famille
-        .box-body
-          %table.table.table-bordered.table-striped.table-condensed.table-xs
-            %thead
-              %tr
-                %th Statut
-                %th Nom
-                %th Téléphone
-                %th Email
-                %th Adresse
+          Membres de la famille
 
-            %tbody
-              - @family.siblings.each do |sibling|
-                %tr
-                  %td= sibling.status
-                  %td
-                    = fa_icon "#{sibling.member_gender}"
-                    = sibling.member_get_gender
-                  %td= sibling.member_name
-                  %td= [sibling.member_phone_1, sibling.member_phone_2].reject { |c| c.blank? }.join(', ')
-                  %td= sibling.member_email
-                  %td= sibling.member_full_address
+      %table.table.table-bordered.table-sm.mb-0
+        %thead
+          %tr
+            %th Statut
+            %th Nom
+            %th Téléphone
+            %th Email
+            %th Adresse
+
+        %tbody
+          - @family.siblings.each do |sibling|
+            %tr
+              %td= sibling.status
+              %td
+                = fa_icon "#{sibling.member_gender}"
+                = sibling.member_get_gender
+              %td= sibling.member_name
+              %td= [sibling.member_phone_1, sibling.member_phone_2].reject { |c| c.blank? }.join(', ')
+              %td= sibling.member_email
+              %td= sibling.member_full_address

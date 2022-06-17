@@ -1,9 +1,14 @@
-%section.content-header
-  %h1
-    Familles
-    %small Modifier une famille
+%h1.h3.mb-2.text-gray-800 Gestion des membres
 
-%section.content
-  .box
-    .box-body
-      = render 'form', family: @family
+= render "app/members/navbar"
+
+.card
+  .card-header.d-flex.justify-content-between.align-items-center
+    %h6.font-weight-bold.mb-0 Modifier une famille
+
+    = link_to app_families_path, class: 'btn btn-sm btn-outline-danger' do
+      = fa_icon 'angle-left'
+      Annuler
+
+  .card-body
+    = render 'form', family: @family
