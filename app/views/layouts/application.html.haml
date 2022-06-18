@@ -18,9 +18,9 @@
       / Sidebar
       %ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion
         / Sidebar - Brand
-        %a.sidebar-brand.d-flex.align-items-center.justify-content-center{:href => "index.html"}
-          .sidebar-brand-icon.rotate-n-15
-            %i.fas.fa-laugh-wink
+        %a.sidebar-brand.d-flex.align-items-center.justify-content-center{:href => app_root_url}
+          .sidebar-brand-icon.p-1
+            = image_tag 'logo_white.png', class: 'img-fluid'
           .sidebar-brand-text.mx-3
             Church Manager
 
@@ -51,11 +51,12 @@
                 .dropdown-menu.dropdown-menu-right.shadow.animated--grow-in{"aria-labelledby" => "userDropdown"}
                   = link_to current_user, class: 'dropdown-item' do
                     = fa_icon 'user', class: 'fas fa-sm fa-fw mr-2 text-gray-400'
-                    Profile
+                    Mon profil
+
                   .dropdown-divider
                   %a.dropdown-item{"data-target" => "#logoutModal", "data-toggle" => "modal", :href => "#"}
                     %i.fas.fa-sign-out-alt.fa-sm.fa-fw.mr-2.text-gray-400
-                    Logout
+                    Déconnexion
           / End of Topbar
           / Begin Page Content
           .container-fluid

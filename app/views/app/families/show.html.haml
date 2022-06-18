@@ -5,8 +5,12 @@
 .row
   .col-md-4
     .card.mb-3
-      .card-header
+      .card-header.d-flex.justify-content-between.align-items-center
         %h6.font-weight-bold.mb-0 Infos
+
+        = link_to edit_app_family_path(@family), class: "btn btn-sm btn-primary" do
+          = fa_icon "edit", class: 'mr-1'
+          Modifer
       .card-body.card-profile
         %h3.profile-username.text-center= @family.name
 
@@ -32,6 +36,7 @@
         %thead
           %tr
             %th Statut
+            %th Genre
             %th Nom
             %th Téléphone
             %th Email
@@ -40,11 +45,14 @@
         %tbody
           - @family.siblings.each do |sibling|
             %tr
-              %td= sibling.status
+              %td= t "activerecord.attributes.sibling.available_status.#{sibling.status}"
               %td
                 = fa_icon "#{sibling.member_gender}"
                 = sibling.member_get_gender
-              %td= sibling.member_name
+              %td
+                = link_to [:app, sibling.member] do
+                  = fa_icon "eye"
+                  = sibling.member_name
               %td= [sibling.member_phone_1, sibling.member_phone_2].reject { |c| c.blank? }.join(', ')
               %td= sibling.member_email
               %td= sibling.member_full_address

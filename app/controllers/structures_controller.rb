@@ -13,7 +13,7 @@ class StructuresController < ApplicationController
       expires: 1.day
     }
 
-    redirect_to app_home_url(subdomain: :app), class: 'Vous êtes arrivé à bon port'
+    redirect_to app_root_url(subdomain: :app), class: 'Vous êtes arrivé à bon port'
   end
 
   def new
@@ -30,7 +30,7 @@ class StructuresController < ApplicationController
         expires: 1.day
       }
 
-      redirect_to app_home_url(subdomain: :app), class: 'Votre église vient d\'être créée. Félicitations !'
+      redirect_to app_root_url(subdomain: :app), class: 'Votre église vient d\'être créée. Félicitations !'
     else
       render :new
     end

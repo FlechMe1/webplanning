@@ -2,11 +2,13 @@
   .col-lg-6.d-none.d-lg-block.bg-login-image
   .col-lg-6
     .p-5
-      .text-center
-        %h1.h4.mb-4
-          Merci d'avoir choisi
-          %br
-          "Church Manager"
+      .text-center.mb-3
+        .d-flex.align-items-center
+          = image_tag 'logo.png', class: "w-50"
+          .welcome
+            Merci d'avoir choisi
+            %br
+            %b ChurchManager
 
       = form_tag registration_path, method: :post do
         - if @user.errors.any? || @structure.errors.any?

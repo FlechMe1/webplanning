@@ -22,7 +22,7 @@
               %p.text-muted.text-center
                 = @member.sibling_get_status
                 de la famille
-                = link_to @member.family do
+                = link_to [:app, @member.family] do
                   = @member.family_name
 
           - else
