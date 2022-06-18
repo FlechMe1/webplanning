@@ -5,7 +5,14 @@ class DeviseMailer < Devise::Mailer
 
   def invitation_instructions(record, token, opts={})
 
-    opts[:subject] = "[ADD Blois] Un utilisateur vient de vous ajouter à l'outils de gestion de planning"
+    opts[:subject] = "[ChurchManager] Un utilisateur vient de vous ajouter à l'outils de gestion de planning"
+
+    super
+  end
+
+  def confirmation_instructions(record, token, opts={})
+
+    opts[:subject] = "[ChurchManager] Bienvenue sur ChurchManager : Confirmez votre email !"
 
     super
   end

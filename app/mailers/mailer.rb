@@ -12,7 +12,7 @@ class Mailer < ActionMailer::Base
 
     @from = "webmaster@eglisedeblois.fr"
 
-    mail(to: @to, from: @from, srespond_to: 'p.gruson@gmail.com', subject: "[Eglise de Blois] Votre fiche membre") do |format|
+    mail(to: @to, from: @from, srespond_to: 'p.gruson@gmail.com', subject: "[ChurchManager] Inscription sur la liste des membres de #{@member.structure_name}") do |format|
       format.html
     end
   end

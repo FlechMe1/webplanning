@@ -15,10 +15,9 @@
 
         - if devise_mapping.rememberable?
           .form-group
-            .custom-control.custom-checkbox.small
-              = f.check_box :remember_me, class: 'custom-control-input'
-              %label.custom-control-label{:for => "customCheck"}
-                Se souvenir de moi !
+            .form-check
+              = f.check_box :remember_me, class: 'form-check-input'
+              = f.label :remember_me, class: 'form-check-label'
 
         %button.btn.btn-primary.btn-user.btn-block{type: :submit}
           Connexion

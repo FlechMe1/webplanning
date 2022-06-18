@@ -2,12 +2,14 @@ class Member < ActiveRecord::Base
   include Tokenable
 
   belongs_to :user
+  belongs_to :structure
   has_one :sibling, :dependent => :destroy
   has_one :family, through: :sibling
   accepts_nested_attributes_for :sibling
 
   delegate :name, :id, :to => :family, :prefix => true, allow_nil: true
   delegate :get_status, :to => :sibling, :prefix => true, allow_nil: true
+  delegate :name, :to => :structure, :prefix => true, allow_nil: true
 
   validates :lastname, :firstname, presence: true
   validates :cgu, acceptance: {accept: true} , on: :create, allow_nil: false

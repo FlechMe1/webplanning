@@ -6,12 +6,12 @@
           %div{:style => "padding: 15px 30px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px; text-align: center; font-family:Raleway, sans-serif"}
             %h3{style: 'font-size: 22px; font-weight:400; margin-bottom:15px;'}
               Bonjour
-              = @member.firstname
+              = @resource.firstname
 
             %p{style: "font-size:18px;line-height:20px;"}
-              Vous venez d'être inscrit dans les listes de
+              Vous avez souhaité ouvrir un compte sur
               %br
-              %b{style: 'color: #555; fonct-size:20px'}= @member.structure_name
+              %b{style: 'color: #333'} ChurchManager
               %br
               et nous vous en remercions.
 
@@ -22,25 +22,13 @@
         %div{:style => "background-color: #ffffff;width: 100% !important;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;"}
           %div{:style => "padding: 15px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;"}
             %p{style: "font-size:14px;line-height:22px;"}
-              Conformément à la
-              %b RGPD,
-              vous avez la possibilité de
-              %b consulter,
-              %b modifier
-              et
-              %b supprimer
-              les données personnelles que vous nous avez transmises.
-
-            %br
-
-            %p{style: "font-size:14px;line-height:18px;"}
-              Pour cela, nous mettons à votre disposition un espace dédié vous permettant de gérer vos informations personnelles :
+              Merci de confirmer votre email en cliquant sur le lien ci-dessous
 
             %br
 
             %p{style: "font-size:14px;line-height:18px;"}
               %span{:style => "display:block;padding:10px 15px;background:#dedede;"}
-                = link_to public_member_url(token: @token), style:"text-decoration:none;color:#333" do
+                = link_to confirmation_url(@resource, confirmation_token: @token), style:"text-decoration:none;color:#333" do
                   %strong Accéder à mon espace personnel
             %br
 
@@ -50,12 +38,9 @@
             %br
             %p{style: "font-size:14px;line-height:18px;"}
               %span{:style => "display:block;padding:10px 15px;background:#dedede;"}
-                = link_to public_member_url(token: @token), style:"text-decoration:none;color:#000" do
-                  = public_member_url(token: @token)
+                = link_to confirmation_url(@resource, confirmation_token: @token), style:"text-decoration:none;color:#000" do
+                  = confirmation_url(@resource, confirmation_token: @token)
             %br
 
             %p{style: "font-size:14px;line-height:18px;"}
-              Merci de garder précieusement cet email afin de tenir vos informations à jour.
-              %br
-              Un nouvel email pourra vous être envoyé sur simple demande.
-
+              Une belle aventure démarre aujourd'hui !

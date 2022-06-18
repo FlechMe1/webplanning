@@ -86,7 +86,3 @@
                     = link_to team do
                       = fa_icon "square", style: "color: #{team.color}"
                       = team.label
-
-- if @user
-  - content_for :scripts do
-    = render "members/scripts"
